@@ -1,0 +1,61 @@
+.rollDiceContainer {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    right: 0px;
+    bottom: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(5px);
+    z-index: 3;
+}
+
+.rollDiceBox {
+    width: 44rem;
+    height: auto;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rollDiceBoxContent {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: right;
+    z-index: 5;
+}
+
+.rollDiceBoxHeader {
+    min-height: 0;
+    
+}
+
+.rollDiceBoxHeader button {
+    min-height: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+}
+
+.rollDiceBoxHeader button:hover svg{
+    fill: var(--red);
+}
+
+
+.rollDiceBox::before {
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    border: 12px solid transparent;
+    border-image: url("../../img/inregularborder.png") 15 stretch;
+    background: var(--white); 
+    filter: brightness(20%);
+    background-clip: content-box;
+    z-index: 4;
+}

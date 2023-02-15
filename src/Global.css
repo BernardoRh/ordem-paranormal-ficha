@@ -1,0 +1,56 @@
+:root {
+    --white: #FFF;
+    --black: #000;
+    --gray-100: #222222;
+    --gray-100-33: #222222a7;
+    --gray-200: #2c2c2c;
+    --gray-300: #343434;
+    --gray-400: #424242;
+    --gray-700: #8e8e8e;
+    --blue: #255bff;
+    --green: #18AD4A;
+    --red: #FA413C;
+    --purpel: #48064a;
+    --dark-blue: #00175d;
+    --blood: #7a0000;
+}
+
+* {
+    font-size: 1rem;
+    color: var(--white);
+    font-family: 'Courier Prime', monospace;
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background: var(--gray-100);
+    background-image: url("./img/OrdoRealitas.png");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    height: 100vh;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--gray-200);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--gray-400);
+    width: 3px;
+}
+
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
+    appearance: none; 
+    margin: 0; 
+}

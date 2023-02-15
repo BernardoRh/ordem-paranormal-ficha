@@ -1,0 +1,83 @@
+.statusContainer {
+    display: grid;
+    max-width: 24rem;
+    max-height: 24rem;
+    grid-template-columns: 6rem 6rem 6rem 6rem;
+    grid-template-rows: 6rem 6rem 6rem 6rem;
+    align-items: center;
+    justify-content: center;
+    background-image: url(https://fichasop.com/assets/img/Atributes.webp);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.statusBox {
+    height: 6rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    overflow: visible;
+}
+
+.dexterity {
+    grid-column-start: 2;
+    grid-column-end: 4;
+} .dexterity input {
+    padding-top: 2rem;
+}
+
+
+.strength {
+    grid-column-start: 1;
+    grid-column-end: 2;
+} .strength input {
+    padding-left: 2.95rem;
+}
+
+.intellect {
+    grid-column-start: 4;
+    grid-column-end: 5;
+} .intellect input {
+    padding-right: 3.05rem;
+}
+
+.presence {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: span 2;
+} .presence input {
+    padding-top: 0.20rem;
+    padding-left: 1.15rem;
+}
+
+.vigor {
+    grid-column-start: 3;
+    grid-column-end: 5;
+    grid-row-start: 3;
+    grid-row-end: span 2;
+} .vigor input {
+    padding-top: 0.20rem;
+    padding-right: 1.40rem;
+}
+
+.statusBox input {
+    color: var(--white);
+    font-size: 2.5rem;
+    background: transparent;
+    font-weight: bolder;
+    width: 6rem;
+    height: 6rem;
+    text-align: center;
+    vertical-align: middle;
+    border: 0;
+    overflow: visible !important;
+}
+
+.statusBox input::content {
+    overflow-y: visible;
+}
+
+.statusBox input::placeholder {
+    overflow: visible;
+}

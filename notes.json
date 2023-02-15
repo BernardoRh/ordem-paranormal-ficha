@@ -1,0 +1,122 @@
+[
+    {
+        "nome": "nomeDoPersonagem",
+        "idade": "numeroIdadeAnos",
+        "origem": "origemPersonagem",
+        "classe": "classePersonagem",
+        "atributos": {
+            "agilidade": 0,
+            "forca": 0,
+            "intelecto": 0,
+            "presenca": 0,
+            "vigor": 0,
+            "nex": 0,
+            "pePorRodada": 0,
+            "deslocamentoEmMetros": 0,
+            "vida": {
+                "vidaMaxima": 0,
+                "vidaAtual": 0
+            },
+            "pontosDeEsforco": {
+                "peMaximo": 0,
+                "peAtual": 0
+            },
+            "sanidade": {
+                "sanidadeMaxima": 0,
+                "sanidadeAtual": 0
+            },
+            "defesa": {
+                "defesaTotal": 0,
+                "defesaEquip": 0,
+                "defesaOutros": 0
+            },
+            "esquiva": 0,
+            "redBloqueio": 0,
+            "protecoes": [
+                "corte"
+            ],
+            "resistencias": [
+                "contusão"
+            ],
+            "pericias": [
+                {
+                    "nome": "Acrobacia",
+                    "levelTreino": "Expert",
+                    "bonus": 15,
+                    "outros": 0
+                }
+            ],
+            "ataques": [
+                {
+                    "nome": "pistoladaaa",
+                    "teste": "2d20+5",
+                    "dano": "2d6",
+                    "critico": 18,
+                    "alcance": "curto",
+                    "especial": "balistico"
+                }
+            ],
+            "habilidades": [
+                {
+                    "nome": "Tecnica Medicinal",
+                    "pagina": 15,
+                    "descricao": "tecnica dem custura os cara"
+                }
+            ],
+            "rituais": [
+                {
+                    "nome": "Perito",
+                    "pagina": 15,
+                    "descricao": "+1d6 na pericia escolhida"
+                }
+            ],
+            "prestigio": 0,
+            "patente": "recruta",
+            "limiteDeItens": {
+                "categoriaUmMax": 2,
+                "categoriaUmAtual": 0,
+                "categoriaDois": 0,
+                "categoriaDoisAtual": 0,
+                "categoriaTres": 0,
+                "categoriaTresAtual": 0,
+                "categoriaQuatro": 0,
+                "categoriaQuatroAtual": 0
+            },
+            "limiteCredito": "Baixo",
+            "carga": {
+                "cargaMax": 5,
+                "cargaAtual": 2
+            },
+            "inventario": [
+                {
+                    "item": "pistola",
+                    "categoria": 1,
+                    "espacos": 1
+                }
+            ],
+            "descricao": {
+                "aparencia": [
+                    "olhos azuis",
+                    "cabelo loiro"
+                ],
+                "personalidade": [
+                    "serio",
+                    "mal",
+                    "protetor"
+                ],
+                "historia": [
+                    {
+                        "titulo": "começo da minha vida na ordem",
+                        "descrição": "uma string grandona de textarea :D" 
+                    }
+                ],
+                "objetivos": [
+                    {
+                        "titulo": "matar meu amigo",
+                        "descrição": "ele foi possuido e esta desaparecido, matou muita gente preciso acabar com seu sofrimento" 
+                    }
+                ]
+            }
+        }
+    }
+]

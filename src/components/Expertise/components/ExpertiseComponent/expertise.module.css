@@ -1,0 +1,55 @@
+.expertise {
+    display: grid;
+    grid-template-columns: 15rem 6rem 4rem 8rem 5rem;
+}
+
+.expertise button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    background: transparent;
+    font-size: 1.15rem;
+    width: auto;
+    text-align: left;
+    border: 0;
+    gap: 0.25rem;
+    cursor: pointer;
+}
+
+.expertise button:hover {
+    filter: drop-shadow(0px 4px 4px var(--gray-700));
+}
+
+.expertise span{
+    font-size: 1.15rem;
+    font-weight: 400 !important;
+}
+
+.expertise input{
+    background: transparent;
+    text-align: center;
+    border: 0;
+    border-bottom: 1px solid var(--white);
+    font-size: 1.15rem;
+}
+
+.skillBonus {
+    border-bottom: 1px solid var(--white);
+}
+
+.skillBonusSelection {
+    border: 0;
+    border-bottom: 1px solid var(--white);
+    background: transparent;
+    text-align: center;
+    appearance: none;
+    font-size: 1.15rem;
+    cursor: pointer;
+}
+
+.skillBonusSelection * {
+    border: 0;
+    background-color: var(--gray-300);
+    font-size: 1.15rem;
+}
