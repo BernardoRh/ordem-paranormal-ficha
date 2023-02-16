@@ -1,14 +1,13 @@
 .historyRollDiceContainer {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 4rem;
     width: 8rem;
     height: 24rem;
     max-height: 24rem;
     z-index: 2;
-}
-
-.historyRollDiceContainer::before {
+    transition: 0.27s;
+} .historyRollDiceContainer::before {
     content:"";
     position:absolute;
     width:100%;
@@ -17,7 +16,32 @@
     border-image: url("../../img/inregularborder.png") 15 stretch;
     border-left: 0;
     background: var(--white); 
-    filter: brightness(20%);
+    filter: brightness(10%);
+    background-clip: content-box;
+    z-index: -1;
+}
+
+.historyRollDiceContainer > .arrowToHover{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 2.25rem;
+    height: 2rem;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    margin-right: -2.25rem;
+    margin-top: 1.5rem;
+} .historyRollDiceContainer > .arrowToHover::before {
+    content:"";
+    position:absolute;
+    width:100%;
+    height:100%;
+    border: 8px solid transparent;
+    border-image: url("../../img/inregularborder.png") 15 stretch;
+    border-left: 0;
+    background: var(--white); 
+    filter: brightness(10%);
     background-clip: content-box;
     z-index: -1;
 }
@@ -25,8 +49,8 @@
 .historyRollDiceContainerContent {
     width: calc(100% - 8px);
     height: calc(100% - 8px);
-    padding: 0.25rem;
-    margin-top: 8px;
+    padding: 0 0.25rem 0.25rem 0.25rem;
+    margin-top: 12px;
     margin-left: 8px;
     display: flex;
     flex-direction: column;
