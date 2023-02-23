@@ -12,8 +12,6 @@ export function LastsRolls() {
         setShowHistory(show)
     }
 
-    console.log(showHistory)
-
     return(
         <div
             onMouseOver={() => {

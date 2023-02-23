@@ -10,8 +10,6 @@ export function Skills() {
         setTestTextarea(event.target.value);
     }
 
-    console.log(testTextarea.length/48)
-
     return(
         <div className={styles.skillsTable}>
             <div className={styles.skillsTableColumHeader}>

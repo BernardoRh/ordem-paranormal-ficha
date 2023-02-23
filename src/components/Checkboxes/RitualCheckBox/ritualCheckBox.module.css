@@ -1,0 +1,17 @@
+.checkBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
+    background: var(--black-10-percent);
+    padding: 0.25rem;
+    border: 0;
+    border-radius: 4px;
+} .checkBox:hover {
+    background: var(--black-70-percent);
+} .checkBox > span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

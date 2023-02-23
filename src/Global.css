@@ -7,12 +7,24 @@
     --gray-300: #343434;
     --gray-400: #424242;
     --gray-700: #8e8e8e;
+    --black-10-percent: #0000007a;
+    --black-70-percent: #000000f2;
     --blue: #255bff;
     --green: #18AD4A;
     --red: #FA413C;
     --purpel: #48064a;
-    --dark-blue: #00175d;
-    --blood: #7a0000;
+    --dark-blue: #021039;
+
+
+    --blood: #200001;
+    --knowledge: #bf9100;
+    --energy: #9a00fd;
+    --death: #000;
+
+    --blood-light: #5e2729;
+    --knowledge-light: #685823;
+    --energy-light: #4b2463;
+    --death-light: #3c3c3c;
 }
 
 * {

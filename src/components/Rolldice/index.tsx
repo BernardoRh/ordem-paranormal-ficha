@@ -7,7 +7,8 @@ interface Rolls {
     diceType: "d4" | "d6" | "d10" | "d12" | "d20" | "d100",
     quantity: number,
     bonus?: number,
-    critical?: number, 
+    critical?: number,
+    damageType?: "Conhecimento" | "Energia" | "Morte" | "Sangue" | "Medo",
 }
 
 export interface RollDiceProps {

@@ -1,0 +1,32 @@
+.ritualsTable {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 27.5rem 27.5rem 27.5rem;
+    justify-content: space-between;
+    row-gap: 1rem;
+}
+
+
+.addRitualCard {
+    width: 27.5rem;
+    max-width: 27.5rem;
+    height: 43rem;
+    background: transparent;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} .addRitualCard > button {
+    border: 3px solid var(--white);
+    width: 13.75rem;
+    height: 21.5rem;
+    background: transparent;
+    filter: opacity(40%);
+    transition: 0.2s;
+    cursor: pointer;
+} .addRitualCard > button:hover {
+    filter: opacity(100%);
+    box-shadow: 4px 4px 6px black;
+}

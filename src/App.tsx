@@ -12,6 +12,8 @@ import { LastsRolls } from "./components/LastRolls"
 import { AllExpertises } from "./components/Expertise"
 import { Skills } from "./components/Skills"
 import { Attacks } from "./components/Atacks"
+import { Rituals } from "./components/Ritauls"
+import { Inventory } from "./components/Inventory"
 
 export function App() {
   return (
@@ -47,6 +49,9 @@ export function App() {
         </div>
         <Attacks/>
         <Skills/>
+        <Inventory/>
+        <Rituals/>
+        <span></span>
       </div>
       <RollDice rolls={[]}/>
       <LastsRolls/>

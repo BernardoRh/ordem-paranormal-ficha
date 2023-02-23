@@ -1,97 +1,128 @@
 import { RollDiceProps } from "../components/Rolldice"
 
 interface ChartersContextProps {
-    nome?: string,
-    idade?: number,
-    origem?: string,
-    classe?: string,
-    atributos: {
-        agilidade?: number,
-        forca?: number,
-        intelecto?: number,
-        presenca?: number,
+    id: Date,
+    name?: string,
+    age?: number,
+    origin?: string,
+    class?: string,
+    attributes: {
+        agility?: number,
+        strength?: number,
+        intellect?: number,
+        presence?: number,
         vigor?: number,
         nex?: number,
-        pePorRodada?: number,
-        deslocamentoEmMetros?: number,
-        vida?: {
-            vidaMaxima?: number,
-            vidaAtual?: number
+        pePerRound?: number,
+        movementInMeters?: number,
+        health?: {
+            maxHealth?: number,
+            actualHealth?: number
         },
-        pontosDeEsforco?: {
-            peMaximo?: number,
-            peAtual?: number
+        pePoints?: {
+            maxPE?: number,
+            actualPE?: number
         },
-        sanidade?: {
-            sanidadeMaxima?: number,
-            sanidadeAtual?: number
+        sanity?: {
+            maxSanity?: number,
+            actualSanity?: number
         },
-        defesa?: {
-            defesaTotal?: number,
-            defesaEquip?: number,
-            defesaOutros?: number
+        defense?: {
+            equippedDefenses?: number,
+            otherDefenses?: number
         },
-        esquiva?: number,
-        redBloqueio?: number,
-        protecoes?: [string],
-        resistencias?: [string],
+        dodge?: number,
+        blockReductionDamage?: number,
+        protections?: [string],
+        resistances?: [string],
     }
-    pericias?: [
+    expertise?: [
         {
-            nome?: string,
-            levelTreino?: "Expert" | "Veterano" | "Treinado",
-            outros?: number
+            name?: string,
+            trainedLevel?: "Expert" | "Veterano" | "Treinado",
+            others?: number
         }
     ],
-    ataques?: [
+    attacks?: [
         {
-            nome?: string,
-            teste?: RollDiceProps,
-            dano?: RollDiceProps,
-            critico?: number,
-            alcance?: string,
+            id: Date,
+            name?: string,
+            rollTest?: RollDiceProps,
+            damage?: RollDiceProps,
+            critical?: number,
+            range?: string,
             especial?: string,
         }
     ],
-    habilidades?: [
+    skills?: [
         {
-            nome?: String,
-            pagina?: number,
-            descricao?: string
+            id: Date,
+            name?: String,
+            page?: number,
+            description?: string,
+            rolls: [RollDiceProps],
         }
     ],
-    rituais?: [
+    rituals?: [
         {
-            nome?: string,
-            pagina?: number,
-            descricao?: string
+            id: Date,
+            name?: string,
+            type?: "none" | "death" | "knowledge" | "blood" | "energy" | "fear",
+            level?: number,
+            execution?: string,
+            range?: string,
+            target?: string,
+            duration?: string,
+            resistance?: string,
+            description?: {
+                principal?: string,
+                subDescriptions?: [
+                    {
+                        id: Date,
+                        name?: string,
+                        description?: string,
+                    }
+                ]
+            },
+            studied?: {
+                additionalCost?: number,
+                additionalEffect?: string,
+            },
+            truly?: {
+                additionalCost?: number,
+                additionalEffect?: string,
+            },
+            rolls?: [RollDiceProps]
         }
     ],
-    prestigio?: number,
-    carga?: {
-        cargaMax?: number,
-        cargaAtual?: number
+    prestige?: number,
+    loadout?: {
+        maxLoadout?: number,
+        actualLoadout?: number
     },
-    inventario?: [
+    inventory?: [
         {
+            id: Date,
             item?: string,
-            categoria?: number,
-            espacos?: number
+            category?: number,
+            spaces?: number
         }
     ],
-    descricao?: {
-        aparencia?: [string],
-        personalidade?: [string],
-        historia?: [
+    description?: {
+        appearance?: [string],
+        personality?: [string],
+        history?: [
             {
-                titulo?: string,
-                descricao?: string 
+                id: Date,
+                title?: string,
+                description?: string 
             }
         ],
-        objetivos?: [
+        objectives?: [
             {
-                titulo?: string,
-                descrição?: string
+                id: Date,
+                title?: string,
+                description?: string
             }
         ]
     }

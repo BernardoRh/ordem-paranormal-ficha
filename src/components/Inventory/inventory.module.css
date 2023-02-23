@@ -1,0 +1,197 @@
+.inventoryContainer {
+    width: 84rem;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: 84rem;
+    row-gap: 0.5rem;
+}
+
+.inventoryHeader {
+    position: relative;
+    width: 84rem;
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.inventoryHeader::before {
+    content:"";
+    position:absolute;
+    width:100%;
+    height: 0.75rem;
+    border: 8px solid transparent;
+    border-image: url("../../img/inregularborder.png") 40 stretch;
+    background: var(--white); 
+    filter: brightness(20%);
+    background-clip: content-box;
+    z-index: -1;
+}
+
+.inventoryHeader > * {
+    font-size: 1.25rem;
+    width: 28rem;
+    padding: 0 1rem;
+    font-weight: 400;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    gap: 0.5rem;
+    width: 28rem;
+} .inventoryHeader > * > input {
+    background: var(--gray-100);
+    border: 0;
+    text-align: center;
+    border: 1px solid var(--gray-300);
+    font-size: 1.25rem;
+    height: 2.5rem;
+} .inventoryHeader > * > input::placeholder {
+    color: var(--white);
+} 
+
+.prestigePointsContainer > input{
+    width: 4rem;
+} .prestigePointsContainer > span{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: help;
+    filter: opacity(50%);
+    transition: 0.2s;
+} .prestigePointsContainer > span:hover {
+    filter: opacity(100%);
+} .prestigePointsContainer > span > svg {
+    fill: var(--white);
+} .prestigePointsContainer > span > p {
+    display: none;
+} .prestigePointsContainer > span:hover > p {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    margin-top: 0.85rem;
+    margin-left: 0.85rem;
+    width: 12rem;
+    padding: 0.25rem;
+    border: 1px solid var(--gray-200);
+    background: var(--gray-100);
+    z-index: -1;
+}
+
+.patentContainer > input{
+    width: 16rem;
+}
+
+.inventoryItemsContainer, .itemsHeader, .itemsLimitContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+} .itemsHeader {
+    width: 84rem;
+    justify-content: center;
+} .itemsHeader > *{
+    width: 28rem;
+}
+
+.itemsLimitContainer {
+    gap: 0.25rem;
+} .itemsLimitContainer > h4 {
+    width: 6rem;
+    text-align: center;
+    font-weight: 400;
+}  .itemsLimitContainer > .itemsLimit {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+} .itemsLimitContainer > .itemsLimit > * {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25rem;
+} .itemsLimitContainer > .itemsLimit > span {
+    position: absolute;
+    filter: opacity(10%);
+    z-index: -1;
+    font-size: 1.25rem;
+} .itemsLimitContainer > .itemsLimit > input {
+    background: transparent;
+    border: 1px solid var(--gray-300);
+    height: 2.5rem;
+    width: 3rem;
+    text-align: center;
+    font-size: 1.25rem;
+} .itemsLimitContainer > .itemsLimit > input::placeholder {
+    color: var(--white);
+}
+
+
+.creditLimit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+} .creditLimit > h4 {
+    width: 6rem;
+    font-weight: 400;
+} .creditLimit > select {
+    background: transparent;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    height: 2.5rem;
+    width: 8rem;
+    text-align: center;
+    appearance: none;
+    cursor: pointer;
+    font-size: 1.25rem;
+} .creditLimit > select > option {
+    background: var(--gray-100);
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.loadout {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+} .loadout > h4 {
+    width: 3rem;
+    font-weight: 400;
+} .loadout > input {
+    background: transparent;
+    border: 1px solid var(--gray-300);
+    height: 2.5rem;
+    width: 3rem;
+    text-align: center;
+    font-size: 1.25rem;
+}
+
+.items {
+    display: grid;
+    grid-template-columns: 40rem 40rem;
+    column-gap: 2rem;
+    row-gap: 0.25rem;
+} .itemsRow {
+    display: grid;
+    grid-template-columns: 20rem 9.75rem 9.75rem;
+    gap: 0.25rem;
+} .itemsRow > h4 {
+    padding: 0 0.25rem;
+    font-weight: 400;
+}  .itemsRow > input {
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--white);
+    padding: 0 0.25rem;
+} .itemsRow > .center {
+    text-align: center;
+}

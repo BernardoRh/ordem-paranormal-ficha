@@ -14,35 +14,7 @@ export function OtherAtributes() {
         <div className={styles.otherAtributesContainer}>
             <div className={`${styles.baseBox} ${styles.originContainer}`}>
                 <h4>ORIGEM</h4>
-                <select name="origem" id="origem">
-                    <option value=""></option>
-                    <option value="Academico">Acadêmico</option>
-                    <option value="AgenteDeSaude">Agente de Saúde</option>
-                    <option value="Amnesico">Amnésico</option>
-                    <option value="Artista">Artista</option>
-                    <option value="Atleta">Atleta</option>
-                    <option value="Chef">Chef</option>
-                    <option value="Criminoso">Criminoso</option>
-                    <option value="CultistaArrependido">Cultista Arrependido</option>
-                    <option value="Desgarrado">Desgarrado</option>
-                    <option value="Engenheiro">Engenheiro</option>
-                    <option value="Executivo">Executivo</option>
-                    <option value="Investigador">Investigador</option>
-                    <option value="Lutador">Lutador</option>
-                    <option value="Magnata">Magnatá</option>
-                    <option value="Mercenario">Mercenário</option>
-                    <option value="Militar">Militar</option>
-                    <option value="Operario">Operário</option>
-                    <option value="Policial">Policial</option>
-                    <option value="Religioso">Religioso</option>
-                    <option value="ServidorPublico">Servidor Público</option>
-                    <option value="TI">T.I.</option>
-                    <option value="TeoricoDaConspiração">Teórioco da Conspiração</option>
-                    <option value="TrabalhadorRural">Trabalhador Rural</option>
-                    <option value="Trambiqueiro">Trambiqueiro</option>
-                    <option value="Universitario">Universitário</option>
-                    <option value="Vitima">Vítima</option>
-                </select>
+                <input type="text" />
             </div>
             <div className={`${styles.baseBox} ${styles.classContainer}`}>
                 <h4>CLASSE</h4>
