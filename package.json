@@ -1,13 +1,12 @@
 {
-  "name": "tech-store",
+  "name": "ordem-paranormal-ficha",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview",
-    "predeploy": "npm run build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.10",
