@@ -20,10 +20,10 @@
 .inventoryHeader::before {
     content:"";
     position:absolute;
-    width:100%;
+    width: 84rem;
     height: 0.75rem;
     border: 8px solid transparent;
-    border-image: url("../../img/inregularborder.png") 40 stretch;
+    border-image: url("../../../../../../img/inregularborder.png") 40 stretch;
     background: var(--white); 
     filter: brightness(20%);
     background-clip: content-box;

@@ -1,23 +1,19 @@
-import styles from "./App.module.css"
-import './Global.css'
+import { Barbell, Sparkle, StarFour } from "phosphor-react";
+import { Attacks } from "./components/Atacks";
+import { BaseAtributes } from "./components/BaseAtributes";
+import { AllExpertises } from "./components/Expertise";
+import { Inventory } from "./components/Inventory";
+import { OtherAtributes } from "./components/OtherAtributes";
+import { Skills } from "./components/Skills";
 
-import { HashRouter } from "react-router-dom"
-import { Router } from "./Router"
+import styles from "./characterInfor.module.css"
 
-export function App() {
-  return (
-    <>
-      <HashRouter>
-        <Router/>
-      </HashRouter>
-      <span style={{height: "8rem", display: "flex"}}/>
-      {/* <div className={styles.principal}>
-        <Header/>
+export function CharacterInfo() {
+    return(
         <div className={styles.content}>
-            
             <div className={styles.containerCharacterAtributes}>
-            <BaseAtributes/>
-            <OtherAtributes/>
+                <BaseAtributes/>
+                <OtherAtributes/>
             </div>
             <div className={styles.expertiseTable}>
             <div>
@@ -37,12 +33,6 @@ export function App() {
             <Attacks/>
             <Skills/>
             <Inventory/>
-            <Rituals/>
-            <span></span>
         </div>
-        <RollDice rolls={[]}/>
-        <LastsRolls/>
-      </div> */}
-    </>
-  )
+    )
 }

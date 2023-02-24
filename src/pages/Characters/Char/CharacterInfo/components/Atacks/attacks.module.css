@@ -13,9 +13,8 @@
     display: grid;
     grid-template-columns: 2rem 18rem 10rem 10rem 6rem 8rem 24.5rem;
     column-gap: 0.5rem;
-    justify-content: center;
+    justify-items: center;
     align-items: center;
-    padding: 0 0.5rem;
 }
 
 .attacksTableColumHeader::before {
@@ -24,7 +23,7 @@
     width:100%;
     height: 0.75rem;
     border: 8px solid transparent;
-    border-image: url("../../img/inregularborder.png") 40 stretch;
+    border-image: url("../../../../../../img/inregularborder.png") 40 stretch;
     background: var(--white); 
     filter: brightness(20%);
     background-clip: content-box;
@@ -51,10 +50,7 @@
     display: grid;
     grid-template-columns: 2rem 18rem 10rem 10rem 6rem 8rem 24.5rem;
     column-gap: 0.5rem;
-    justify-content: center;
     align-items: end;
-    padding: 0 0.5rem;
-    margin-bottom: 2rem;
 }
 
 .attacksTableColum > .center {

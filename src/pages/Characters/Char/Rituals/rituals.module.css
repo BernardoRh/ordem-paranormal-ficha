@@ -1,7 +1,11 @@
-.ritualsTable {
-    grid-column-start: 1;
-    grid-column-end: 3;
+.ritualsContainer {
     width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.ritualsTable {
+    width: 84rem;
     display: grid;
     grid-template-columns: 27.5rem 27.5rem 27.5rem;
     justify-content: space-between;

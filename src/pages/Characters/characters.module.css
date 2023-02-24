@@ -1,0 +1,70 @@
+.charactersContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+} .charactersContainer > nav {
+    margin-top: 2rem;
+    display: block;
+} .charactersContainer > nav > * {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 3rem;
+    width: 18rem;
+    height: 24rem;
+    text-decoration: none;
+    gap: 2rem;
+    transition: 0.2s;
+    float: left;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+} .charactersContainer > nav > *::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 8px solid transparent;
+    border-image: url("../../img/inregularborder.png") 40 stretch;
+    background: var(--white);
+    filter: brightness(20%) opacity(50%);
+    background-clip: content-box;
+    z-index: -1;
+    transition: 0.2s;
+} 
+
+.charactersContainer > nav > div > button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    filter: brightness(70%);
+    border: 0;
+    background: transparent;
+    transition: 0.2s;
+    cursor: pointer;
+    z-index: 2;
+} .charactersContainer > nav > div > button:hover {
+    filter: brightness(100%) drop-shadow(1px 1px 3px var(--gray-700));
+} .charactersContainer > nav > div > a {
+    position: absolute;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.charactersContainer > nav > *:hover::before {
+    box-shadow: 4px 4px 8px var(--gray-400);
+} .charactersContainer > nav > div > * {
+    filter: brightness(10%);
+    font-size: 1.75rem;
+    font-family: 'Special Elite', cursive;
+    transition: 0.2s;
+} .charactersContainer > nav > div:hover > * {
+    font-size: 2rem;
+    filter: brightness(70%);
+}

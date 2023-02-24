@@ -1,6 +1,6 @@
 import { Plus, Trash } from "phosphor-react"
 import styles from "./attacks.module.css"
-import RollDice from "../../img/rollDice.png"
+import RollDice from "../../../../../../img/rollDice.png"
 
 export function Attacks() {
     return(

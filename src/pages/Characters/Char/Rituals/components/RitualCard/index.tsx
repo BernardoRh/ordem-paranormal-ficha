@@ -1,8 +1,8 @@
 import { CheckedState } from '@radix-ui/react-checkbox';
 import { Plus, X } from 'phosphor-react';
 import { ChangeEvent, useState } from 'react'
-import { RitualCheckBox } from '../../../Checkboxes/RitualCheckBox';
-import { RollDiceProps } from '../../../Rolldice';
+import { RitualCheckBox } from '../RitualCheckBox';
+import { RollDiceProps } from '../../../../../../components/Rolldice';
 import styles from './ritualCard.module.css'
 
 const Cards = {

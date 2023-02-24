@@ -13,7 +13,7 @@
     display: grid;
     grid-template-columns: 26rem 6rem 6rem 42rem;
     column-gap: 0.5rem;
-    justify-content: center;
+    justify-items: center;
     align-items: center;
     padding: 0 0.5rem;
 }
@@ -21,10 +21,10 @@
 .skillsTableColumHeader::before {
     content:"";
     position:absolute;
-    width:100%;
+    width: 84rem;
     height: 0.75rem;
     border: 8px solid transparent;
-    border-image: url("../../img/inregularborder.png") 40 stretch;
+    border-image: url("../../../../../../img/inregularborder.png") 40 stretch;
     background: var(--white); 
     filter: brightness(20%);
     background-clip: content-box;
@@ -45,33 +45,14 @@
     font-size: 1.25rem;
 }
 
-.dtRituals{
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    align-items: center;
-    font-size: 1.25rem;
-}
-
-.dtRituals > input{
-    width: 3.25rem;
-    height: 2.5rem;
-    background: var(--gray-100);
-    border: 1px solid var(--gray-300);
-    font-size: 1.25rem;
-    text-align: center;
-}
-
 .skillsTableColum {
     position: relative;
     width: 84rem;
     display: grid;
     grid-template-columns: 26rem 6rem 6rem 42rem;
     column-gap: 0.5rem;
-    justify-content: center;
     align-items: end;
     padding: 0 0.5rem;
-    margin-bottom: 2rem;
 }
 
 .skillsTableColum > .center {

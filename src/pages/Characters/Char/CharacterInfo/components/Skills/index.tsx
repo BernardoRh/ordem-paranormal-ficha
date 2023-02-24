@@ -40,6 +40,22 @@ export function Skills() {
                     <Trash size={18} weight="fill" className={styles.trash} />
                 </button>
             </div>
+            <div className={styles.skillsTableColum}>
+                <input type="text" />
+                <input type="number" className={styles.center} />
+                <input type="number" className={styles.center} />
+                <textarea 
+                    onChange={handleChangeTextArea}
+                    value={testTextarea}
+                    rows={
+                        Math.ceil(testTextarea.length != 0 ? (testTextarea.length)/69 : 1) < 4 ?
+                        Math.ceil(testTextarea.length != 0 ? (testTextarea.length)/69 : 1) : 4
+                    }
+                />
+                <button>
+                    <Trash size={18} weight="fill" className={styles.trash} />
+                </button>
+            </div>
         </div>
     )
 }

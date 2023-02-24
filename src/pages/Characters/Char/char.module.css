@@ -1,0 +1,84 @@
+.characterNavHeader {
+    position: absolute;
+    top: 0;
+    height: calc(6rem - 16px);
+    margin-left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    gap: 2rem;
+    translate: -50%;
+}
+
+.characterNavHeader > a {
+    position: relative;
+    text-decoration: none;
+    font-weight: bolder;
+    display: flex;
+    align-items: center;
+    width: 10rem;
+    height: calc(6rem - 16px);
+    justify-content: center;
+    cursor: pointer;
+}  
+
+.characterNavHeader > a > img {
+    position: absolute;
+    width: 3.5rem;
+    height: 3.5rem;
+    filter: brightness(10%);
+    transition: 0.2s;
+    z-index: -1;
+} .characterNavHeader > a:hover > img {
+    width: 3.75rem;
+    height: 3.75rem;
+    filter: brightness(30%);
+}
+
+.characterNavHeader > a > h4 {
+    position: absolute;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    filter: brightness(10%);
+    font-family: 'Special Elite', cursive;
+    transition: 0.2s;
+} .characterNavHeader > a:hover > h4 {
+    position: absolute;
+    font-size: 1.75rem;
+    filter: brightness(70%);
+}
+
+
+.characterInfo {
+    width: 76rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.characterInfo > span {
+    font-size: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-family: 'Special Elite', cursive;
+    font-weight: bolder;
+} .characterInfo > span > input{
+    background: transparent;
+    border: 0;
+    border-bottom: 1px solid var(--white);
+    font-size: 1.5rem;
+    padding: 0 0.25rem;
+    font-family: 'Special Elite', cursive;
+} .characterInfo > span > input[type="text"]{
+    width: 28rem;
+} .characterInfo > span > input[type="number"]{
+    width: 4rem;
+    text-align: center;
+}
