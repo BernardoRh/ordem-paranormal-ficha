@@ -40,6 +40,9 @@ export function Attacks() {
                     <Trash size={18} weight="fill" className={styles.trash} />
                 </button>
             </div>
+            <button className={styles.addAtacks}>
+                <Plus size={24}/>
+            </button>
         </div>
     )
 }

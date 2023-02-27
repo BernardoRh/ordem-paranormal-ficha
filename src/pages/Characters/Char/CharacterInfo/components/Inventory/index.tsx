@@ -1,4 +1,4 @@
-import { Info } from 'phosphor-react'
+import { Info, Plus } from 'phosphor-react'
 import { ChangeEvent, useEffect, useState } from 'react'
 import styles from './inventory.module.css'
 
@@ -136,6 +136,14 @@ export function Inventory() {
                     <input className={styles.center} type="number" />
                     <input className={styles.center} type="number" />
                 </div>
+                <div className={styles.itemsRow}>
+                    <input type="text" />
+                    <input className={styles.center} type="number" />
+                    <input className={styles.center} type="number" />
+                </div>
+                <button className={styles.addItems}>
+                    <Plus size={24}/>
+                </button>
             </div>
         </div>
     )

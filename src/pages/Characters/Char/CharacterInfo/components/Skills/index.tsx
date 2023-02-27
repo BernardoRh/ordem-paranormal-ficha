@@ -56,6 +56,9 @@ export function Skills() {
                     <Trash size={18} weight="fill" className={styles.trash} />
                 </button>
             </div>
+            <button className={styles.addSkills}>
+                <Plus size={24}/>
+            </button>
         </div>
     )
 }

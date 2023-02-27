@@ -192,6 +192,21 @@
     border: 0;
     border-bottom: 1px solid var(--white);
     padding: 0 0.25rem;
+    height: 1.5rem;
 } .itemsRow > .center {
     text-align: center;
+}
+
+.items > .addItems {
+    background: transparent;
+    border: 1px solid var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: center;
+    width: 4rem;
+    opacity: 0.3;
+    transition: 0.2s;
+} .items > .addItems:hover {
+    opacity: 1;
 }

@@ -1,0 +1,40 @@
+.baseBox {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+} .baseBox h4 {
+    font-size: 1.15rem;
+    font-weight: 400;
+} .baseBox select, .baseBox input{
+    font-size: 1.15rem;
+    width: 30rem;
+    height: 2.5rem;
+    background: var(--gray-100);
+    border: 1px solid var(--gray-300);
+    padding: 0 0.5rem;
+    text-align: left;
+} .baseBox input {
+    padding: 0 0.75rem;
+} .baseBox select option{
+    font-size: 1.15rem;
+    padding: 0 0.5rem;
+}.baseBox::before {
+    content: "";
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border: 6px solid transparent;
+    border-image: url("../../../../../../../../img/inregularborder.png") 15 stretch;
+    background: var(--white); 
+    filter: brightness(20%);
+    background-clip: content-box;
+    z-index:-1;
+}

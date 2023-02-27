@@ -1,0 +1,50 @@
+.barContainer {
+    position: relative;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 32rem;
+    height: 2rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    overflow: hidden;
+    background: transparent;
+}
+.barContainer > input {
+    width: 4rem;
+    border: 0;
+    background: transparent;
+    font-size: 1.5rem;
+}
+
+.barContainer > p {
+    font-size: 1.5rem;
+    width: 4rem;
+    background: transparent;
+}
+
+.barContainer > div {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    z-index: -1;
+}
+
+.barContainer > div > span{
+    height: 100%;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.barContainer > div > span > h4 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+}

@@ -1,0 +1,15 @@
+.sanityContainer {
+    border: 1px solid var(--gray-300);
+} .sanityContainer > div > span {
+    background-image: url(https://p4.wallpaperbetter.com/wallpaper/866/83/733/texture-grunge-abstract-wallpaper-preview.jpg);
+    background-position: center;
+}
+
+.alignRight {
+    text-align: right;
+}
+.alignLeft {
+    text-align: left;
+} .alignLeft::placeholder {
+    color: var(--white);
+}

@@ -34,7 +34,6 @@
     justify-content: center;
 }
 
-
 .attacksTableColumHeader > div {
     width: 100%;
     display: flex;
@@ -129,4 +128,18 @@
 } .attacksTableColum > button:hover > .trash {
     fill: var(--red);
     transition: 0.2s;
+}
+
+.attacksTable > .addAtacks {
+    background: transparent;
+    border: 1px solid var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: right;
+    width: 4rem;
+    opacity: 0.3;
+    transition: 0.2s;
+} .attacksTable > .addAtacks:hover {
+    opacity: 1;
 }

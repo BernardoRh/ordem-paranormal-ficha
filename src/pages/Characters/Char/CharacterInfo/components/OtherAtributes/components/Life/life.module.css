@@ -1,0 +1,14 @@
+.lifeContainer {
+    border: 1px solid var(--blood);
+} .lifeContainer > div > span {
+    background-image: url(https://images.pond5.com/red-blood-and-glitters-grunge-footage-169724827_iconl.jpeg);
+}
+
+.alignRight {
+    text-align: right;
+}
+.alignLeft {
+    text-align: left;
+} .alignLeft::placeholder {
+    color: var(--white);
+}

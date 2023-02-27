@@ -1,0 +1,15 @@
+.peContainer {
+    border: 1px solid var(--dark-blue);
+} .peContainer > div > span {
+    background-image: url(https://images.unsplash.com/photo-1597773150796-e5c14ebecbf5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZGFyayUyMGJsdWUlMjB0ZXh0dXJlfGVufDB8fDB8fA%3D%3D&w=1000&q=80);
+}
+
+
+.alignRight {
+    text-align: right;
+}
+.alignLeft {
+    text-align: left;
+} .alignLeft::placeholder {
+    color: var(--white);
+}

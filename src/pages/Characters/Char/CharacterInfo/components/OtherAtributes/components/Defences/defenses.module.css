@@ -1,0 +1,53 @@
+.defenses {
+    grid-column-start: 1;
+    grid-column-end: 3;
+    width: 38rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.defensesContainer {
+    height: 2rem;
+    width: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} .iconContainer {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} .iconContainer > svg{
+    fill: var(--gray-100);
+    margin-bottom: 0.25rem;
+} .iconContainer > span {
+    position: absolute;
+    font-size: 1.5rem;
+}  .iconContainer > .borderIcon {
+    fill: var(--gray-300);
+    position: absolute;
+    z-index: -1;
+    margin-bottom: 0.25rem;
+}
+
+.block > .titleAboveDefense {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: -2rem;
+} .block > .titleAboveDefense > h4 {
+    margin-bottom: -0.5rem;
+} .block > .titleAboveDefense > div {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+} .damageReduction {
+    position: absolute;
+    font-size: 0.75rem !important;
+    margin-top: 1.75rem;
+}

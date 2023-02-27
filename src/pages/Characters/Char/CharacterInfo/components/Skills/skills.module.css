@@ -93,3 +93,17 @@
     fill: var(--red);
     transition: 0.2s;
 }
+
+.skillsTable > .addSkills {
+    background: transparent;
+    border: 1px solid var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    justify-self: right;
+    width: 4rem;
+    opacity: 0.3;
+    transition: 0.2s;
+} .skillsTable > .addSkills:hover {
+    opacity: 1;
+}
