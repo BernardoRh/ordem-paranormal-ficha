@@ -7,9 +7,12 @@
     background: var(--black-10-percent);
     padding: 0.25rem;
     border: 0;
+    border: 1px solid var(--gray-200);
     border-radius: 4px;
+    transition: 0.2s;
 } .checkBox:hover {
     background: var(--black-70-percent);
+    border: 1px solid var(--gray-700);
 } .checkBox > span {
     display: flex;
     justify-content: center;

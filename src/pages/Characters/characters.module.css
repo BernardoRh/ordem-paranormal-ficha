@@ -38,7 +38,6 @@
 .charactersContainer > nav > div > button {
     position: absolute;
     top: 0;
-    right: 0;
     filter: brightness(70%);
     border: 0;
     background: transparent;
@@ -64,7 +63,30 @@
     font-size: 1.75rem;
     font-family: 'Special Elite', cursive;
     transition: 0.2s;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 3rem;
+    text-decoration: none;
 } .charactersContainer > nav > div:hover > * {
     font-size: 2rem;
     filter: brightness(70%);
+} .charactersContainer > nav > div > * > img {
+    height: 17rem;
+    transition: 0.2s;
+} .charactersContainer > nav > div:hover > * > img {
+    height: 18rem;
+} .addCharacter > svg {
+    height: 4rem;
+    transition: 0.2s;
+} .addCharacter:hover > svg {
+    fill: var(--green);
+    height: 5rem;
+}.addCharacter:disabled > svg {
+    height: 4rem;
+    fill: var(--gray-400);
+} .addCharacter:disabled:hover > svg {
+    fill: var(--gray-400);
+    height: 4rem;
 }
