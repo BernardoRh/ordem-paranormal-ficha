@@ -1,92 +1,46 @@
-import { Expertise } from "./components/ExpertiseComponent";
+import { Barbell, FirstAidKit, Sparkle, StarFour } from "phosphor-react";
+import { ExpertiseRow } from "./components/ExpertiseRow";
 
-export function AllExpertises() {
+import styles from "./allExpertises.module.css"
+import { CharactersSheet } from "../../../../../../reducers/CharactersReducer/charactersSheet";
+
+interface AllExpertisesProps {
+    character?: CharactersSheet
+}
+
+export function AllExpertises({character}: AllExpertisesProps) {
     return(
-        <>
-            <Expertise baseAtribute="AGI" weightPenalty>
-                Acrobacia
-            </Expertise>
-            <Expertise baseAtribute="PRE" onlyWithExpertise>
-                Adestramento
-            </Expertise>
-            <Expertise baseAtribute="PRE" onlyWithExpertise>
-                Artes
-            </Expertise>
-            <Expertise baseAtribute="FOR">
-                Atletismo
-            </Expertise>
-            <Expertise baseAtribute="INT">
-                Atualidades
-            </Expertise>
-            <Expertise baseAtribute="INT" onlyWithExpertise>
-                Ciências
-            </Expertise>
-            <Expertise baseAtribute="AGI" weightPenalty onlyWithExpertise>
-                Crime
-            </Expertise>
-            <Expertise baseAtribute="PRE">
-                Diplomacia
-            </Expertise>
-            <Expertise baseAtribute="PRE">
-                Eganação
-            </Expertise>
-            <Expertise baseAtribute="VIG">
-                Fortitude
-            </Expertise>
-            <Expertise baseAtribute="AGI" weightPenalty>
-                Furtividade
-            </Expertise>
-            <Expertise baseAtribute="AGI">
-                Iniciativa
-            </Expertise>
-            <Expertise baseAtribute="PRE">
-                Intimidação
-            </Expertise>
-            <Expertise baseAtribute="PRE">
-                Intuição
-            </Expertise>
-            <Expertise baseAtribute="INT">
-                Investigação
-            </Expertise>
-            <Expertise baseAtribute="FOR">
-                Luta
-            </Expertise>
-            <Expertise baseAtribute="INT">
-                Medicina
-            </Expertise>
-            <Expertise baseAtribute="INT" onlyWithExpertise>
-                Ocultismo
-            </Expertise>
-            <Expertise baseAtribute="PRE">
-                Percepção
-            </Expertise>
-            <Expertise baseAtribute="AGI" onlyWithExpertise>
-                Pilotagem
-            </Expertise>
-            <Expertise baseAtribute="AGI" onlyWithExpertise>
-                Pontaria
-            </Expertise>
-            <Expertise baseAtribute="INT" special>
-                Profissão
-            </Expertise>
-            <Expertise baseAtribute="AGI">
-                Reflexos
-            </Expertise>
-            <Expertise baseAtribute="PRE" onlyWithExpertise>
-                Religião
-            </Expertise>
-            <Expertise baseAtribute="INT">
-                Sobrevivência
-            </Expertise>
-            <Expertise baseAtribute="INT" onlyWithExpertise>
-                Tática
-            </Expertise>
-            <Expertise baseAtribute="INT" onlyWithExpertise>
-                Tecnologia
-            </Expertise>
-            <Expertise baseAtribute="PRE">
-                Vontade
-            </Expertise>
-        </>
+        <div className={styles.expertiseTable}>
+            <div>
+                <span>PERÍCIA</span>
+                <span>DADOS</span>
+                <span>BÔNUS</span>
+                <span>TREINO</span>
+                <span>OUTROS</span>
+            </div>
+            <>
+                {character?.expertise.map((expertise) => {
+                    return(
+                        <ExpertiseRow 
+                            principalAttribute={expertise.principalAttribute}
+                            key={expertise.name}
+                            kit={expertise.kit}
+                            special={expertise.special}
+                            onlyWithExpertise={expertise.onlyWithExpertise}
+                            weightPenalty={expertise.weightPenalty}
+                            name={expertise.name}
+                            trainedLevel={expertise.trainedLevel}
+                            others={expertise.others}
+                        />
+                    )
+                })}
+            </>
+            <div className={styles.expertiseTableFooter}>
+                <p><Barbell size={18}/> Penalidade de Carga</p>
+                <p><StarFour size={18}/> Apenas Treinado</p>
+                <p><FirstAidKit size={18} weight="fill" />Precisa de Kit</p>
+                <p><Sparkle size={18} weight="fill"/> Especial</p>
+            </div>
+        </div>
     )
 }

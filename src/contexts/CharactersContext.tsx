@@ -2,18 +2,34 @@ import { ReactNode, createContext, useEffect, useReducer, useState } from "react
 import {
     ActionsType, createNewCharacterAction, changeCharacterAgeAction,
     changeCharacterNameAction, deleteCharacterAction, displayCharacterAction,
-    changeAvatarAction
+    changeAvatarAction, changeCharacterAttributesAction, changeCharacterOriginAction,
+    changeCharacterClassAction, changeCharacterNexAction, changeCharacterPePerRoundAction,
+    changeCharacterMovementAction,
+    changeCharacterHealthAction,
+    changeCharacterPeAction,
+    changeCharacterSanityAction
 } from "../reducers/CharactersReducer/actions";
 import { CharactersSheet } from "../reducers/CharactersReducer/charactersSheet";
 import { charactersReducer } from "../reducers/CharactersReducer/reducer";
 
 interface CharactersContextType {
     characters: CharactersSheet[],
-    characterToDisplay: string | null,
+    characterToDisplayId: string | null,
     displayCharacter: (id: string) => void,
     createNewCharacter: () => void,
     deleteCharacter: (id: string) => void,
     changeAvatar: (id: string, avatar: string) => void
+    changeCharacterName: (id: string, name: string) => void
+    changeCharacterAge: (id: string, age: string) => void
+    changeCharacterAttributes: (id: string, attribute: string, value: string) => void
+    changeCharacterOrigin: (id: string, origin: string) => void
+    changeCharacterClass: (id: string, characterClass: "none" | "Combatente" | "Especialista" | "Ocultista") => void
+    changeCharacterNex: (id: string, nex: string) => void
+    changeCharacterPePerRound: (id: string, pePerRound: string) => void
+    changeCharacterMovement: (id: string, movement: string) => void
+    changeCharacterHealth: (id: string, type: "max" | "current", value: string) => void
+    changeCharacterPe: (id: string, type: "max" | "current", value: string) => void
+    changeCharacterSanity: (id: string, type: "max" | "current", value: string) => void
 }
 
 export const CharactersContext = createContext({} as CharactersContextType)
@@ -46,92 +62,345 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         },
     )
 
+
+
+
+
     function createNewCharacter() {
         const newCharacter: CharactersSheet = {
             id: String(new Date()),
             expertise: [
                 {
-                    name: "Acrobacia"
+                    name: "Acrobacia",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "AGI",
+                    weightPenalty: true,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Adestramento"
+                    name: "Adestramento",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "PRE",
+                    weightPenalty: false,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Artes"
+                    name: "Artes",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "PRE",
+                    weightPenalty: false,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Atletismo"
+                    name: "Atletismo",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "FOR",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Atualidades"
+                    name: "Atualidades",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "INT",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Ciências"
+                    name: "Ciências",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "INT",
+                    weightPenalty: false,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Crime"
+                    name: "Crime",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "AGI",
+                    weightPenalty: true,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: true,
                 },
                 {
-                    name: "Diplomacia"
+                    name: "Diplomacia",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "PRE",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Eganação"
+                    name: "Eganação",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "PRE",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: true,
                 },
                 {
-                    name: "Fortitude"
+                    name: "Fortitude",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "VIG",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Furtividade"
+                    name: "Furtividade",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "AGI",
+                    weightPenalty: true,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Iniciativa"
+                    name: "Iniciativa",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "AGI",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Intimidação"
+                    name: "Intimidação",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "PRE",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Investigação"
+                    name: "Intuição",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "PRE",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Luta"
+                    name: "Investigação",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "INT",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Medicina"
+                    name: "Luta",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "FOR",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Ocultismo"
+                    name: "Medicina",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "INT",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: true,
                 },
                 {
-                    name: "Percepção"
+                    name: "Ocultismo",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "INT",
+                    weightPenalty: false,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Pilotagem"
+                    name: "Percepção",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "PRE",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Pontaria"
+                    name: "Pilotagem",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "AGI",
+                    weightPenalty: false,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Profissão"
+                    name: "Pontaria",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "AGI",
+                    weightPenalty: false,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Reflexos"
+                    name: "Profissão",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "INT",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: true,
+                    kit: false,
                 },
                 {
-                    name: "Religião"
+                    name: "Reflexos",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "AGI",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Sobrevivência"
+                    name: "Religião",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "PRE",
+                    weightPenalty: false,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Tática"
+                    name: "Sobrevivência",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "INT",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Tecnologia"
+                    name: "Tática",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "INT",
+                    weightPenalty: false,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: false,
                 },
                 {
-                    name: "Vontade"
+                    name: "Tecnologia",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "INT",
+                    weightPenalty: false,
+                    onlyWithExpertise: true,
+                    special: false,
+                    kit: true,
                 },
-            ]
+                {
+                    name: "Vontade",
+                    trainedLevel: "none",
+                    others: "",
+                    principalAttribute: "PRE",
+                    weightPenalty: false,
+                    onlyWithExpertise: false,
+                    special: false,
+                    kit: false,
+                },
+            ],
+            attributes: {
+                agility: "",
+                intellect: "",
+                presence: "",
+                strength: "",
+                vigor: ""
+            },
+            avatar: "",
+            name: "",
+            age: "",
+            origin: "",
+            class: "none",
+            nex: "",
+            pePerRound: "",
+            movementInMeters: "",
+            health: {
+                maxHealth: "",
+                actualHealth: ""
+            },
+            pePoints: {
+                maxPE: "",
+                actualPE: ""
+            },
+            sanity: {
+                maxSanity: "",
+                actualSanity: ""
+            },
+            defense: "",
+            dodge: "",
+            blockReductionDamage: "",
+            protections: [],
+            resistances: [],
+            attacks: [],
+            skills: [],
+            rituals: [],
+            prestige: "",
+            loadout: {
+                maxLoadout: "",
+                actualLoadout: ""
+            },
+            inventory: [],
+            description: {
+                appearance: [],
+                personality: [],
+                history: [],
+                objectives: []
+            },
+            itemsLimit: [],
+            creditLimit: "none",
+            patent: ""
         }
         dispatch(createNewCharacterAction(newCharacter))
     }
@@ -148,7 +417,53 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         dispatch(changeAvatarAction(avatar, id))
     }
 
-    const {characters, characterToDisplay} = charactersState
+    function changeCharacterName(id: string, name: string) {
+        dispatch(changeCharacterNameAction(name, id))
+    }
+
+    function changeCharacterAge (id: string, age: string) {
+        dispatch(changeCharacterAgeAction(id, age))
+    }
+
+    function changeCharacterAttributes (id: string, attribute: string, value: string) {
+        dispatch(changeCharacterAttributesAction(id, attribute, value))
+    }
+
+    function changeCharacterOrigin (id: string, origin: string) {
+        dispatch(changeCharacterOriginAction(id, origin))
+    }
+
+    function changeCharacterClass (id: string, characterClass: "none" | "Combatente" | "Especialista" | "Ocultista") {
+        dispatch(changeCharacterClassAction(id, characterClass))
+    }
+
+    function changeCharacterNex (id: string, nex: string) {
+        dispatch(changeCharacterNexAction(id, nex))
+    }
+
+    function changeCharacterPePerRound(id: string, pePerRound: string){
+        dispatch(changeCharacterPePerRoundAction(id, pePerRound))
+    }
+
+    function changeCharacterMovement(id: string, movement: string) {
+        dispatch(changeCharacterMovementAction(id, movement))
+    }
+
+    function changeCharacterHealth(id: string, type: "max" | "current", value: string) {
+        dispatch(changeCharacterHealthAction(id, type, value))
+    }
+
+    function changeCharacterPe(id: string, type: "max" | "current", value: string) {
+        dispatch(changeCharacterPeAction(id, type, value))
+    }
+    function changeCharacterSanity(id: string, type: "max" | "current", value: string) {
+        dispatch(changeCharacterSanityAction(id, type, value))
+    }
+
+
+
+
+    const {characters, characterToDisplayId} = charactersState
 
     useEffect(() => {
         const StateJSON = JSON.stringify(charactersState)
@@ -159,11 +474,22 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         <CharactersContext.Provider
             value={{
                 characters,
-                characterToDisplay,
+                characterToDisplayId,
                 createNewCharacter,
                 deleteCharacter,
                 displayCharacter,
                 changeAvatar,
+                changeCharacterName,
+                changeCharacterAge,
+                changeCharacterAttributes,
+                changeCharacterOrigin,
+                changeCharacterClass,
+                changeCharacterNex,
+                changeCharacterPePerRound,
+                changeCharacterMovement,
+                changeCharacterHealth,
+                changeCharacterPe,
+                changeCharacterSanity,
             }}
         >
             {children}

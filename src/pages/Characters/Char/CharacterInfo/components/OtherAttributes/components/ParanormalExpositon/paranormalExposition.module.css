@@ -1,7 +1,7 @@
 
 .nexContainer {
     height: 1.5rem;
-    width: 14.5rem;
+    width: 16rem;
 } .nexContainer > .nexPercentageInput {
     display: flex;
     flex-direction: row;
@@ -32,8 +32,8 @@
     align-items: center;
     position: relative;
     padding-left: 1rem;
-} .pePerRound > span {
-    width: 3rem;
+} .pePerRound > input {
+    width: 3.75rem;
     height: 2.5rem;
     border: 1px solid var(--gray-300);
     background: var(--gray-100);
@@ -42,6 +42,8 @@
     text-align: center;
     justify-content: center;
     align-items: center;
+} .pePerRound > input::placeholder {
+    color: var(--white);
 } .pePerRound > p {
     font-size: 0.75rem;
     position: absolute;

@@ -9,7 +9,7 @@ import { CharacterCard } from "./components/CharacterCard"
 export function Characters() {
 
     const { characters, createNewCharacter } = useContext(CharactersContext)
-    const [isDisablad, setIsDisabled] = useState(false)
+    const [isDisabled, setIsDisabled] = useState(false)
 
     function cooldownButton() {
         setIsDisabled(true)
@@ -22,13 +22,13 @@ export function Characters() {
                 <>
                     {characters ? characters.map((character) => {
                         return(
-                            <CharacterCard id={character.id} avatar={character.avatar} name={character.name}/>
+                            <CharacterCard key={character.id} id={character.id} avatar={character.avatar} name={character.name}/>
                         )
                     }):
                         ""
                     }
                     <button
-                        disabled={isDisablad}
+                        disabled={isDisabled}
                         className={styles.addCharacter}
                         onClick={() => {createNewCharacter(); cooldownButton()}}>
                         <Plus size={128} weight="fill"/>

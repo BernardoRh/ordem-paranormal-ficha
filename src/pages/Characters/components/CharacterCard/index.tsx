@@ -2,12 +2,17 @@ import { Pencil, X } from "phosphor-react"
 import { ChangeEvent, useContext, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { CharactersContext } from "../../../../contexts/CharactersContext"
-import { CharactersSheet } from "../../../../reducers/CharactersReducer/charactersSheet"
 import styles from "./characterCard.module.css"
 
 import PlaceholderAvatar from "../../../../img/silhuetaSenhorVerissimo.webp"
 
-export function CharacterCard({id, avatar, name, ...props}: CharactersSheet) {
+interface CharacterCardProps {
+    id: string,
+    avatar?: string,
+    name?: string,
+}
+
+export function CharacterCard({id, avatar, name, ...props}: CharacterCardProps) {
     
     const [displayInputAvatar, setDisplayInputAvatar] = useState("none")
     const { deleteCharacter, displayCharacter, changeAvatar } = useContext(CharactersContext)

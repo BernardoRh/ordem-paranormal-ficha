@@ -45,9 +45,22 @@
 } .protectionAndResistance > div > span {
     position: relative;
     margin: 0.25rem;
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: min-content;
     border: 1px solid var(--white);
     padding: 0.1rem 0.25rem;
     float: left;
+    gap: 0.25rem;
+} .protectionAndResistance > div > span > button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0;
+    background: transparent;
+}.protectionAndResistance > div > span > button > svg {
+    transition: 0.2s;
+} .protectionAndResistance > div > span > button:hover > svg {
+    fill: var(--red);
 }

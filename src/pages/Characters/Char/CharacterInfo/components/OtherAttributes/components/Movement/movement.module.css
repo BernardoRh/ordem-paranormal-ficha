@@ -1,6 +1,6 @@
 .movementContainer {
     height: 1.5rem;
-    width: 14.5rem;
+    width: 16rem;
 }
 
 .movement {
@@ -14,7 +14,7 @@
 }
 
 .movement input {
-    width: 3rem;
+    width: 3.75rem;
     height: 2.5rem;
     font-size: 1.75rem;
     text-align: center;

@@ -1,130 +1,131 @@
 import { RollDiceProps } from "../../components/Rolldice"
 
-interface Expertise {
+
+export interface Attributes {
+    agility: string,
+    strength: string,
+    vigor: string,
+    presence: string,
+    intellect: string,
+}
+export interface Expertise {
     name: string,
-    trainedLevel?: "Expert" | "Veterano" | "Treinado",
-    others?: number
+    trainedLevel: "none" | "Expert" | "Veterano" | "Treinado",
+    others: string,
+    principalAttribute: "INT" | "FOR" | "AGI" | "PRE" | "VIG",
+    weightPenalty: boolean,
+    onlyWithExpertise: boolean,
+    special: boolean,
+    kit: boolean
 }
 
 interface Attack {
     id: string,
-    name?: string,
-    rollTest?: RollDiceProps,
-    damage?: RollDiceProps,
-    critical?: number,
-    range?: string,
-    especial?: string,
+    name: string,
+    rollTest: RollDiceProps,
+    damage: RollDiceProps,
+    critical: string,
+    range: string,
+    especial: string,
 }
 
 interface Skill {
     id: string,
-    name?: String,
-    page?: number,
-    description?: string,
+    name: string,
+    page: string,
+    description: string,
     rolls: RollDiceProps[],
 }
 
 interface RitualSubDescription {
     id: string,
-    name?: string,
-    description?: string,
+    name: string,
+    description: string,
 }
 
 interface Ritual {
     id: string,
-    name?: string,
-    type?: "none" | "death" | "knowledge" | "blood" | "energy" | "fear",
-    level?: number,
-    execution?: string,
-    range?: string,
-    target?: string,
-    duration?: string,
-    resistance?: string,
-    description?: {
-        principal?: string,
-        subDescriptions?: RitualSubDescription[]
+    name: string,
+    type: "none" | "death" | "knowledge" | "blood" | "energy" | "fear",
+    level: string,
+    execution: string,
+    range: string,
+    target: string,
+    duration: string,
+    resistance: string,
+    description: {
+        principal: string,
+        subDescriptions: RitualSubDescription[]
     },
-    studied?: {
-        additionalCost?: number,
-        additionalEffect?: string,
+    studied: {
+        additionalCost: string,
+        additionalEffect: string,
     },
-    truly?: {
-        additionalCost?: number,
-        additionalEffect?: string,
+    truly: {
+        additionalCost: string,
+        additionalEffect: string,
     },
-    rolls?: RollDiceProps[]
+    rolls: RollDiceProps[]
 }
 
 interface Item {
     id: string,
-    item?: string,
-    category?: number,
-    spaces?: number
+    item: string,
+    category: string,
+    spaces: string
+}
+
+interface HistoryAndObjectives {
+    id: string,
+    title: string,
+    description: string,
 }
 
 export interface CharactersSheet {
     id: string,
-    avatar?: string,
-    name?: string,
-    age?: number,
-    origin?: string,
-    class?: string,
-    attributes?: {
-        agility?: number,
-        strength?: number,
-        intellect?: number,
-        presence?: number,
-        vigor?: number,
-        nex?: number,
-        pePerRound?: number,
-        movementInMeters?: number,
-        health?: {
-            maxHealth?: number,
-            actualHealth?: number
-        },
-        pePoints?: {
-            maxPE?: number,
-            actualPE?: number
-        },
-        sanity?: {
-            maxSanity?: number,
-            actualSanity?: number
-        },
-        defense?: {
-            equippedDefenses?: number,
-            otherDefenses?: number
-        },
-        dodge?: number,
-        blockReductionDamage?: number,
-        protections?: string[],
-        resistances?: string[],
-    }
-    expertise?: Expertise[],
-    attacks?:  Attack[],
-    skills?: Skill[],
-    rituals?: Ritual[],
-    prestige?: number,
-    loadout?: {
-        maxLoadout?: number,
-        actualLoadout?: number
+    avatar: string,
+    name: string,
+    age: string,
+    origin: string,
+    class: "none" | "Combatente" | "Especialista" | "Ocultista",
+    attributes: Attributes,
+    nex: string,
+    pePerRound: string,
+    movementInMeters: string,
+    health: {
+        maxHealth: string,
+        actualHealth: string
     },
-    inventory?: Item[],
-    description?: {
-        appearance?: string[],
-        personality?: string[],
-        history?: [
-            {
-                id: Date,
-                title?: string,
-                description?: string 
-            }
-        ],
-        objectives?: [
-            {
-                id: Date,
-                title?: string,
-                description?: string
-            }
-        ]
+    pePoints: {
+        maxPE: string,
+        actualPE: string
+    },
+    sanity: {
+        maxSanity: string,
+        actualSanity: string
+    },
+    defense: string,
+    dodge: string,
+    blockReductionDamage: string,
+    protections: string[],
+    resistances: string[],
+    expertise: Expertise[],
+    attacks:  Attack[],
+    skills: Skill[],
+    rituals: Ritual[],
+    prestige: string,
+    itemsLimit: string[],
+    creditLimit: "none" | "low" | "medium" | "hight" | "unlimited" ,
+    patent: string,
+    loadout: {
+        maxLoadout: string,
+        actualLoadout: string
+    },
+    inventory: Item[],
+    description: {
+        appearance: string[],
+        personality: string[],
+        history: HistoryAndObjectives[],
+        objectives: HistoryAndObjectives[],
     }
 }

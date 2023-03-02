@@ -17,7 +17,7 @@
     justify-content: center;
     align-items: center;
     width: 18rem;
-    height: 24rem;
+    height: 28rem;
     text-decoration: none;
     gap: 3rem;
     transition: 0.2s;
@@ -48,6 +48,7 @@
 .homeContainer > nav > a > img {
     height: 17rem;
     transition: 0.2s;
+    max-width: 16rem;
 } .homeContainer > nav > a:hover > img {
     height: 18rem;
 }
