@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext, useEffect, useState } from "react"
-import { CharactersContext } from "../../../../../../../../contexts/CharactersContext"
+import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext"
 import { BaseBox } from "../BaseBox"
 import styles from "./paranormalExposition.module.css"
 
@@ -34,6 +34,8 @@ export function ParanormalExposition({nex, pePerRound}: ParanormalExpositionProp
         for(let i = 0; i < nexBulletPointForPePerRound.length - 1; i++) {
             if(nexBulletPointForPePerRound[i] <= Number(nex) && nexBulletPointForPePerRound[i+1] > Number(nex)) {
                 setPePerRoundAutomatic(String(i))
+            } if(Number(nex) >= 100) {
+                setPePerRoundAutomatic("20")
             }
         }
     })
@@ -45,6 +47,8 @@ export function ParanormalExposition({nex, pePerRound}: ParanormalExpositionProp
                 <input
                     type="number"
                     placeholder="0"
+                    max={999}
+                    min={0}
                     value={nex}
                     onChange={handleChangeNex}
                 />
@@ -55,6 +59,7 @@ export function ParanormalExposition({nex, pePerRound}: ParanormalExpositionProp
                     type="number"
                     placeholder={pePerRoundAutomatic}
                     value={pePerRound}
+                    min={0}
                     onChange={handleChangePePerRound}
                 />
                 <p>PE / RODADA</p>

@@ -4,13 +4,14 @@ import {
     changeCharacterNameAction, deleteCharacterAction, displayCharacterAction,
     changeAvatarAction, changeCharacterAttributesAction, changeCharacterOriginAction,
     changeCharacterClassAction, changeCharacterNexAction, changeCharacterPePerRoundAction,
-    changeCharacterMovementAction,
-    changeCharacterHealthAction,
-    changeCharacterPeAction,
-    changeCharacterSanityAction
-} from "../reducers/CharactersReducer/actions";
-import { CharactersSheet } from "../reducers/CharactersReducer/charactersSheet";
-import { charactersReducer } from "../reducers/CharactersReducer/reducer";
+    changeCharacterMovementAction, changeCharacterHealthAction, changeCharacterPeAction,
+    changeCharacterSanityAction,
+    changeCharacterDefensesAction,
+    changeCharacterProtectionAndResistancesAction,
+    changeCharacterExpertiseAction,
+} from "../../reducers/CharactersReducer/actions";
+import { CharactersSheet } from "../../reducers/CharactersReducer/charactersSheet";
+import { charactersReducer } from "../../reducers/CharactersReducer/reducer";
 
 interface CharactersContextType {
     characters: CharactersSheet[],
@@ -30,6 +31,9 @@ interface CharactersContextType {
     changeCharacterHealth: (id: string, type: "max" | "current", value: string) => void
     changeCharacterPe: (id: string, type: "max" | "current", value: string) => void
     changeCharacterSanity: (id: string, type: "max" | "current", value: string) => void
+    changeCharacterDefenses: (id: string, type: "defense" | "dodge" | "block", value: string) => void
+    changeCharacterProtectionAndResistances: (id: string, toDelete: boolean, type: "protection" | "resistances", value: string) => void
+    changeCharacterExpertise: (id: string, name: string, trainedLevel: "none" | "Expert" | "Veterano" | "Treinado", others: string, type: "trainedLevel" | "others") => void
 }
 
 export const CharactersContext = createContext({} as CharactersContextType)
@@ -456,10 +460,28 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
     function changeCharacterPe(id: string, type: "max" | "current", value: string) {
         dispatch(changeCharacterPeAction(id, type, value))
     }
+
     function changeCharacterSanity(id: string, type: "max" | "current", value: string) {
         dispatch(changeCharacterSanityAction(id, type, value))
     }
 
+    function changeCharacterDefenses(id: string, type: "defense" | "dodge" | "block", value: string) {
+        dispatch(changeCharacterDefensesAction(id, type, value))
+    }
+
+    function changeCharacterProtectionAndResistances(id: string, toDelete: boolean, type: "protection" | "resistances", value: string) {
+        dispatch(changeCharacterProtectionAndResistancesAction(id, toDelete, type, value))
+    }
+
+    function changeCharacterExpertise(
+            id: string, 
+            name: string, 
+            trainedLevel: "none" | "Expert" | "Veterano" | "Treinado", 
+            others: string,
+            type: "trainedLevel" | "others"
+        ) {
+        dispatch(changeCharacterExpertiseAction(id, name, trainedLevel, others, type))
+    }
 
 
 
@@ -490,6 +512,9 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                 changeCharacterHealth,
                 changeCharacterPe,
                 changeCharacterSanity,
+                changeCharacterDefenses,
+                changeCharacterProtectionAndResistances,
+                changeCharacterExpertise
             }}
         >
             {children}

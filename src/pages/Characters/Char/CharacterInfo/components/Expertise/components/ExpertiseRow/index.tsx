@@ -3,7 +3,7 @@ import { Barbell, FirstAidKit, Sparkle, StarFour } from 'phosphor-react'
 
 import styles from "./expertise.module.css"
 import { Expertise } from "../../../../../../../../reducers/CharactersReducer/charactersSheet";
-import { CharactersContext } from "../../../../../../../../contexts/CharactersContext";
+import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext";
 
 
 export function ExpertiseRow({
@@ -11,19 +11,19 @@ export function ExpertiseRow({
     onlyWithExpertise, special, kit,
     others, trainedLevel}: Expertise) {
     
-    const {characterToDisplayId} = useContext(CharactersContext)
+    const {characterToDisplayId, changeCharacterExpertise} = useContext(CharactersContext)
 
     function HandleExpertiseChange(event: ChangeEvent<HTMLSelectElement>) {
-        const newTrainedLevel = event.target.value
+        const newTrainedLevel = event.target.value as "none" | "Expert" | "Veterano" | "Treinado"
         if(characterToDisplayId != null) {
-
+            changeCharacterExpertise(characterToDisplayId, name, newTrainedLevel, others, "trainedLevel")
         }
     }
 
     function HandleOthersChange(event: ChangeEvent<HTMLInputElement>) {
         const newOthers = event.target.value
         if(characterToDisplayId != null) {
-            
+            changeCharacterExpertise(characterToDisplayId, name, trainedLevel, newOthers, "others")
         }
     }
 

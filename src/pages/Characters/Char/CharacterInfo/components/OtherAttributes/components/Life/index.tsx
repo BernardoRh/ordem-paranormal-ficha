@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext } from "react"
-import { CharactersContext } from "../../../../../../../../contexts/CharactersContext";
+import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext";
 import { BarContainer } from "../BarContainer";
 import styles from "./life.module.css"
 
@@ -31,7 +31,7 @@ export function Life({health}: LifeProps) {
     return(
         <BarContainer className={styles.lifeContainer}>
             <div>
-                <span style={{width: (Number(health?.actualHealth)*100) / Number(health?.maxHealth) + "%"}}>
+                <span style={{width: (Number(health?.actualHealth ? health?.actualHealth : 0)*100) / Number(health?.maxHealth ? health?.maxHealth : 1) + "%"}}>
                     <h4>PV</h4>
                 </span>
             </div>

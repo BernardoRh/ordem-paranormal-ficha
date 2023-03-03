@@ -8,6 +8,7 @@ export function Header() {
             <nav>
                 <NavLink to="/">
                     <img src={OrdoRealitasIcon} alt="Ordo Realitas Icone" />
+                    <h4>INÍCIO</h4>
                 </NavLink>
             </nav>
         </header>

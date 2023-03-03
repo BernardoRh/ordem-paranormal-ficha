@@ -25,15 +25,11 @@ export function OtherAttributes({character}: OtherAttributesProps) {
             <ParanormalExposition nex={character?.nex} pePerRound={character?.pePerRound}/>
             <Movement movement={character?.movementInMeters}/>
             <Life health={character?.health}/>
-            <EffortPoints />
-            <Sanity />
-            <Defenses />
-            <ResistancesAndProtections resistanceOrProtection={character?.protections}>
-                Proteções:
-            </ResistancesAndProtections>
-            <ResistancesAndProtections resistanceOrProtection={character?.resistances}>
-                Resistências:
-            </ResistancesAndProtections>
+            <EffortPoints effortPoint={character?.pePoints} />
+            <Sanity sanity={character?.sanity}/>
+            <Defenses defense={character?.defense} dodge={character?.dodge} block={character?.blockReductionDamage}/>
+            <ResistancesAndProtections resistanceOrProtection={character?.protections} children="protection"/>
+            <ResistancesAndProtections resistanceOrProtection={character?.resistances} children="resistances"/>
         </div>
     )
 }

@@ -1,29 +1,54 @@
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useContext, useState } from "react"
+import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext";
 import { BarContainer } from "../BarContainer";
 import styles from "./sanity.module.css"
 
-export function Sanity() {
-    const [sanity, setSanity] = useState("");
-    const [maxSanity, setMaxSanity] = useState("100");
+interface SanityProps {
+    sanity?: {
+        maxSanity: string
+        actualSanity: string
+    }
+}
+
+export function Sanity({sanity}: SanityProps) {
+
+    const {characterToDisplayId, changeCharacterSanity} = useContext(CharactersContext)
 
     function changeActualSanity(event: ChangeEvent<HTMLInputElement>) {
-        setSanity(event.target.value)
+        const newCurrentSanity = event.target.value
+        if(characterToDisplayId != null) {
+            changeCharacterSanity(characterToDisplayId, "current", newCurrentSanity)
+        }
     }
 
     function changeActualMaxSanity(event: ChangeEvent<HTMLInputElement>) {
-        setMaxSanity(event.target.value)
+        const newMaxSanity = event.target.value
+        if(characterToDisplayId != null) {
+            changeCharacterSanity(characterToDisplayId, "max", newMaxSanity)
+        }
     }
 
     return(
             <BarContainer className={styles.sanityContainer}>
                 <div>
-                    <span style={{width: (Number(sanity)*100) / Number(maxSanity) + "%"}}>
+                    <span style={{width: (Number(sanity?.actualSanity ? sanity?.actualSanity : 0)*100) / Number(sanity?.maxSanity ? sanity?.maxSanity : 1) + "%"}}>
                         <h4>SAN</h4>
                     </span>
                 </div>
-                <input className={styles.alignRight} onChange={changeActualSanity} value={sanity} type="number" placeholder="0"/>
+                <input
+                    className={styles.alignRight}
+                    onChange={changeActualSanity}
+                    value={sanity?.actualSanity}
+                    type="number"
+                    placeholder="0"
+                />
                 |
-                <input className={styles.alignLeft} onChange={changeActualMaxSanity} value={maxSanity} type="number" placeholder="0"/>
+                <input
+                    className={styles.alignLeft}
+                    onChange={changeActualMaxSanity}
+                    value={sanity?.maxSanity} type="number"
+                    placeholder="0"
+                />
             </BarContainer>
     )
 }

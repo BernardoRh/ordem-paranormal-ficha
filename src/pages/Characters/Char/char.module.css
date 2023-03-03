@@ -40,13 +40,13 @@
     position: absolute;
     font-size: 1.5rem;
     margin-top: 2rem;
-    filter: brightness(10%);
+    filter: brightness(25%);
     font-family: 'Special Elite', cursive;
     transition: 0.2s;
 } .characterNavHeader > a:hover > h4 {
     position: absolute;
     font-size: 1.75rem;
-    filter: brightness(70%);
+    filter: brightness(80%);
 }
 
 

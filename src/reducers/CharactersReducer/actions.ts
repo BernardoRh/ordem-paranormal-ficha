@@ -16,11 +16,8 @@ export enum ActionsType{
     CHANGE_HEALTH = 'CHANGE_HEALTH', /* */
     CHANGE_PE_POINTS = 'CHANGE_PE_POINTS', /* */
     CHANGE_SANITY = 'CHANGE_SANITY', /* */
-    CHANGE_DEFENSE = 'CHANGE_DEFENSE',
-    CHANGE_DODGE = 'CHANGE_DODGE',
-    CHANGE_BLOCK = 'CHANGE_BLOCK',
-    CHANGE_PROTECTIONS = 'CHANGE_PROTECTIONS',
-    CHANGE_RESISTANCES = 'CHANGE_RESISTANCES',
+    CHANGE_DEFENSES = 'CHANGE_DEFENSES', /* */
+    CHANGE_PROTECTIONS_AND_RESISTANCES = 'CHANGE_PROTECTIONS_AND_RESISTANCES', /* */
     CHANGE_EXPERTISE = 'CHANGE_EXPERTISE',
     CHANGE_ATTACKS = 'CHANGE_ATTACKS',
     CHANGE_SKILLS = 'CHANGE_SKILLS',
@@ -178,6 +175,53 @@ export function changeCharacterSanityAction(id: string, type: "max" | "current",
             id,
             type,
             value,
+        }
+    }
+}
+
+export function changeCharacterDefensesAction(id: string, type: "defense" | "dodge" | "block", value: string) {
+    return {
+        type: ActionsType.CHANGE_DEFENSES,
+        payload: {
+            id,
+            type,
+            value,
+        }
+    }
+}
+
+export function changeCharacterProtectionAndResistancesAction(
+        id: string, 
+        toDelete: boolean, 
+        type: "protection" | "resistances", 
+        value: string
+    ) {
+    return {
+        type: ActionsType.CHANGE_PROTECTIONS_AND_RESISTANCES,
+        payload: {
+            id,
+            toDelete,
+            type,
+            value,
+        }
+    }
+}
+
+export function changeCharacterExpertiseAction(
+        id: string,
+        name: string,
+        trainedLevel: "none" | "Expert" | "Veterano" | "Treinado",
+        others: string,
+        type: "trainedLevel" | "others"
+    ) {
+    return{
+        type: ActionsType.CHANGE_EXPERTISE,
+        payload: {
+            id,
+            name,
+            trainedLevel,
+            others,
+            type
         }
     }
 }

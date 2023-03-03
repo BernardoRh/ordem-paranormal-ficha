@@ -3,7 +3,7 @@ import { useContext, useState } from "react"
 import styles from "./characters.module.css"
 
 
-import { CharactersContext } from "../../contexts/CharactersContext"
+import { CharactersContext } from "../../contexts/CaractersContexts/CharactersContext"
 import { CharacterCard } from "./components/CharacterCard"
 
 export function Characters() {

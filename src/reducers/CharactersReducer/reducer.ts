@@ -208,6 +208,88 @@ export function charactersReducer(state: CharactersState, action: any) {
             })
         }
 
+        case ActionsType.CHANGE_DEFENSES: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id) {
+                        switch(action.payload.type) {
+                            case "defense": {
+                                return character.defense= action.payload.value
+                            }
+                            case "dodge": {
+                                return character.dodge = action.payload.value
+                            }
+                            case "block": {
+                                return character.blockReductionDamage = action.payload.value
+                            }
+                        }
+                    }
+                    return character
+                })
+            })
+        }
+
+        case ActionsType.CHANGE_PROTECTIONS_AND_RESISTANCES: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id) {
+                        if(action.payload.toDelete == true) {
+                            switch(action.payload.type) {
+                                case "protection": {
+                                    const newProtections: string[] = []
+                                    character.protections
+                                    .filter((protection) => protection != action.payload.value)
+                                    .map((protection) => {
+                                        newProtections.push(protection)
+                                    })
+                                    return character.protections = newProtections
+                                }
+                                case "resistances": {
+                                    const newResistances: string[] = []
+                                    character.resistances
+                                    .filter((resistance) => resistance != action.payload.value)
+                                    .map((resistance) => {
+                                        newResistances.push(resistance)
+                                    })
+                                    return character.resistances = newResistances
+                                }
+                            }
+                        } else {
+                            switch(action.payload.type) {
+                                case "protection": {
+                                    return character.protections.push(action.payload.value)
+                                }
+                                case "resistances": {
+                                    return character.resistances.push(action.payload.value)
+                                }
+                            }
+                        }
+                    }
+                    return character
+                })
+            })
+        }
+
+        case ActionsType.CHANGE_EXPERTISE: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id) {
+                        character.expertise.map((expertise) => {
+                            if(expertise.name == action.payload.name){
+                                switch(action.payload.type){
+                                    case "trainedLevel":
+                                        return expertise.trainedLevel = action.payload.trainedLevel
+                                    case "others":
+                                        return expertise.others = action.payload.others
+                                }
+                            }
+                        })
+                    }
+                    return character
+                })
+            })
+        }
+
         default:
             console.log("DEFAULT")
             return state

@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext } from "react"
-import { CharactersContext } from "../../../../../../../../contexts/CharactersContext"
+import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext"
 import { BaseBox } from "../BaseBox"
 import styles from "./movement.module.css"
 

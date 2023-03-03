@@ -7,7 +7,7 @@ import { Skills } from "./components/Skills";
 
 import styles from "./characterInfor.module.css"
 import { useContext } from "react";
-import { CharactersContext } from "../../../../contexts/CharactersContext";
+import { CharactersContext } from "../../../../contexts/CaractersContexts/CharactersContext";
 
 export function CharacterInfo() {
 

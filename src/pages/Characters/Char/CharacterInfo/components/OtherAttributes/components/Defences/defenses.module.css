@@ -21,15 +21,20 @@
     justify-content: center;
 } .iconContainer > svg{
     fill: var(--gray-100);
-    margin-bottom: 0.25rem;
 } .iconContainer > span {
     position: absolute;
     font-size: 1.5rem;
+} .iconContainer > input {
+    position: absolute;
+    font-size: 1.5rem;
+    width: 4rem;
+    border: 0;
+    background: transparent;
+    text-align: center;
 }  .iconContainer > .borderIcon {
     fill: var(--gray-300);
     position: absolute;
     z-index: -1;
-    margin-bottom: 0.25rem;
 }
 
 .block > .titleAboveDefense {
@@ -49,5 +54,5 @@
 } .damageReduction {
     position: absolute;
     font-size: 0.75rem !important;
-    margin-top: 1.75rem;
+    margin-top: 2.75rem;
 }
