@@ -1,46 +1,81 @@
-import { Plus, Trash } from "phosphor-react"
+import { CaretDown, CaretUp, Plus, Trash } from "phosphor-react"
 import styles from "./attacks.module.css"
-import RollDice from "../../../../../../img/rollDice.png"
+import { Attack } from "../../../../../../reducers/CharactersReducer/charactersSheet"
+import { AttackRow } from "./components/Attack"
+import { useContext, useEffect, useState } from "react"
+import { CharactersContext } from "../../../../../../contexts/CaractersContexts/CharactersContext"
+import { string } from "zod"
 
-export function Attacks() {
+interface AttacksProps {
+    attacks?: Attack[]
+}
+
+export function Attacks({attacks}: AttacksProps) {
+
+    const {characterToDisplayId, changeCharacterAttacks} = useContext(CharactersContext)
+
+    function handleAddAttacks() {
+        const newAttack: Attack = {
+            id: String(new Date()),
+            name: "",
+            rollTest: {
+                diceType: "20",
+                quantity: "",
+                name: "",
+                bonus: "",
+            },
+            damage: {
+                diceType: "4",
+                quantity: "",
+                name: "",
+                bonus: "",
+            },
+            critical: "",
+            range: "",
+            especial: ""
+        }
+        if(characterToDisplayId != null) {
+            changeCharacterAttacks(characterToDisplayId, "", "addAttack", newAttack)
+        }
+    }
+
+    const [sortAttacks, setSortAttacks] = useState(true)
+
+    function changeAttacksSort() {sortAttacks ? setSortAttacks(false) : setSortAttacks(true)}
+
+    const attacksToDisplay = attacks?.slice()
+
+    useEffect(() => {
+        
+    })
+
     return(
         <div className={styles.attacksTable}>
             <div className={styles.attacksTableColumHeader}>
                 <span></span>
-                <div>ATAQUES</div>
+                <div>
+                    <button onClick={changeAttacksSort}>ATAQUES</button>
+                    {sortAttacks ?
+                        <CaretDown size={16} weight="fill"/> : 
+                        <CaretUp size={16} weight="fill"/>
+                    }
+                </div>
                 <div className={styles.center}>TESTE</div>
                 <div className={styles.center}>DANO</div>
                 <div className={styles.center}>CRITICO</div>
                 <div className={styles.center}>ALCANCE</div>
                 <div>ESPECIAL</div>
             </div>
-            <div className={styles.attacksTableColum}>
-                <button className={styles.rollForAttack}>
-                    <img src={RollDice} alt="Rolling dices" />
-                </button>
-                <input type="text" />
-                <div className={styles.rollsForAtack}>
-                    <input type="number" />
-                    <span>D</span>
-                    <span>20</span>
-                    <span>+</span>
-                    <input type="number" />
-                </div>
-                <div className={styles.rollsForAtack}>
-                    <input type="number" />
-                    <span>D</span>
-                    <input type="number" />
-                    <span>+</span>
-                    <input type="number" />
-                </div>
-                <input className={styles.center} type="number" />
-                <input className={styles.center} type="text" />
-                <textarea rows={1}></textarea>
-                <button>
-                    <Trash size={18} weight="fill" className={styles.trash} />
-                </button>
-            </div>
-            <button className={styles.addAtacks}>
+            <>
+                {
+                    sortAttacks ? attacksToDisplay?.sort((a, b) => a.name > b.name ? 1 : -1).map((attack) => {
+                        return(<AttackRow key={attack.id} attack={attack}/>)
+                    }) : attacksToDisplay?.sort((a, b) => a.name < b.name ? 1 : -1).map((attack) => {
+                        return(<AttackRow key={attack.id} attack={attack}/>)
+                    })
+                }
+            </>
+            <button className={styles.addAtacks} onClick={handleAddAttacks}>
                 <Plus size={24}/>
             </button>
         </div>

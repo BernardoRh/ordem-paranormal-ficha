@@ -2,12 +2,12 @@ import { X } from "phosphor-react";
 import { useState } from "react"
 import styles from "./rolldice.module.css"
 
-interface Rolls {
+export interface Rolls {
     name: string,
-    diceType: "d4" | "d6" | "d10" | "d12" | "d20" | "d100",
-    quantity: number,
-    bonus?: number,
-    critical?: number,
+    diceType: "4" | "6" | "10" | "12" | "20" | "100" ,
+    quantity: string,
+    bonus?: string,
+    critical?: string,
     damageType?: "Conhecimento" | "Energia" | "Morte" | "Sangue" | "Medo",
 }
 

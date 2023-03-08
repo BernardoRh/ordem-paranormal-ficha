@@ -1,31 +1,32 @@
-import { CharactersSheet } from './charactersSheet';
+import { Rolls } from './../../components/Rolldice/index';
+import { Attack, CharactersSheet, Skill } from './charactersSheet';
 
 export enum ActionsType{
-    ADD_NEW_CHARACTER = 'ADD_NEW_CHARACTER', /* */
-    CHANGE_CHARACTER_AGE = 'CHANGE_CHARACTER_AGE', /* */
-    CHANGE_CHARACTER_NAME = 'CHANGE_CHARACTER_NAME', /* */
-    DISPLAY_CHARACTER = 'CHARACTER_TO_DISPLAY', /* */
-    DELETE_CHARACTER = 'DELETE_CHARACTER', /* */
-    CHANGE_AVATAR = 'CHANGE_AVATAR', /* */
-    CHANGE_ATTRIBUTES = 'CHANGE_ATTRIBUTES', /* */
-    CHANGE_ORIGIN = 'CHANGE_ORIGIN', /* */
-    CHANGE_CLASS = 'CHANGE_CLASS', /* */
-    CHANGE_NEX = "CHANGE_NEX", /* */
-    CHANGE_PE_PER_ROUND = 'CHANGE_PE_PER_ROUND', /* */
-    CHANGE_MOVEMENT = 'CHANGE_MOVEMENT', /* */
-    CHANGE_HEALTH = 'CHANGE_HEALTH', /* */
-    CHANGE_PE_POINTS = 'CHANGE_PE_POINTS', /* */
-    CHANGE_SANITY = 'CHANGE_SANITY', /* */
-    CHANGE_DEFENSES = 'CHANGE_DEFENSES', /* */
-    CHANGE_PROTECTIONS_AND_RESISTANCES = 'CHANGE_PROTECTIONS_AND_RESISTANCES', /* */
+    IMPORT_EXPORT_CHARACTER = 'IMPORT_EXPORT_CHARACTER',
+    ADD_NEW_CHARACTER = 'ADD_NEW_CHARACTER',
+    CHANGE_CHARACTER_AGE = 'CHANGE_CHARACTER_AGE',
+    CHANGE_CHARACTER_NAME = 'CHANGE_CHARACTER_NAME',
+    DISPLAY_CHARACTER = 'CHARACTER_TO_DISPLAY',
+    DELETE_CHARACTER = 'DELETE_CHARACTER',
+    CHANGE_AVATAR = 'CHANGE_AVATAR',
+    CHANGE_ATTRIBUTES = 'CHANGE_ATTRIBUTES',
+    CHANGE_ORIGIN = 'CHANGE_ORIGIN',
+    CHANGE_CLASS = 'CHANGE_CLASS',
+    CHANGE_NEX = "CHANGE_NEX",
+    CHANGE_PE_PER_ROUND = 'CHANGE_PE_PER_ROUND',
+    CHANGE_MOVEMENT = 'CHANGE_MOVEMENT',
+    CHANGE_HEALTH = 'CHANGE_HEALTH',
+    CHANGE_PE_POINTS = 'CHANGE_PE_POINTS',
+    CHANGE_SANITY = 'CHANGE_SANITY',
+    CHANGE_DEFENSES = 'CHANGE_DEFENSES',
+    CHANGE_PROTECTIONS_AND_RESISTANCES = 'CHANGE_PROTECTIONS_AND_RESISTANCES',
     CHANGE_EXPERTISE = 'CHANGE_EXPERTISE',
-    CHANGE_ATTACKS = 'CHANGE_ATTACKS',
+    CHANGE_ATTACKS = 'CHANGE_ATTACKS', 
     CHANGE_SKILLS = 'CHANGE_SKILLS',
-    CHANGE_RITUALS = 'CHANGE_RITUALS',
-    CHANGE_PRESTIGE = 'CHANGE_PRESTIGE',
-    CHANGE_LOADOUT = 'CHANGE_LOADOUT',
+    CHANGE_RITUALS = 'CHANGE_RITUALS', /* */
+    IMPORT_EXPORT_RITUALS = 'IMPORT_EXPORT_RITUALS', /* */
     CHANGE_INVENTORY = 'CHANGE_INVENTORY',
-    CHANGE_DESCRIPTION = 'CHANGE_DESCRIPTION',
+    CHANGE_DESCRIPTION = 'CHANGE_DESCRIPTION', /* */
 }
 
 export function createNewCharacterAction(newCharacter: CharactersSheet) {
@@ -222,6 +223,53 @@ export function changeCharacterExpertiseAction(
             trainedLevel,
             others,
             type
+        }
+    }
+}
+
+export function changeCharacterAttacksAction(
+        id: string,
+        attackId: string,
+        type: "delete" | "changeName" | "changeTestDiceQuantity" | "changeTestBonus" | "changeDamageDiceQuantity" | 
+        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack",
+        value: string | Rolls | Attack
+    ) {
+        return {
+            type: ActionsType.CHANGE_ATTACKS,
+            payload: {
+                id, attackId, type, value
+            }
+        }
+}
+
+export function changeCharacterSkillsAction(
+    id: string,
+    skillId: string,
+    type: "delete" | "addSkill" | "changeName" | "changeDescription" | "changeCost" | "changePage",
+    value: string | Skill
+) {
+    return {
+        type: ActionsType.CHANGE_SKILLS,
+        payload: {
+            id, skillId, type, value
+        }
+    }
+}
+
+export function changeInventoryAction(
+        id: string, 
+        itemId: string, 
+        type: "addItem" | "delete" | "changeName" | "changeCategory" | 
+        "changeSpaces" | "prestige" | "itemsLimit" | "patent" | "weight" | "maxWeight" | "credit", 
+        value: string | string[]
+    ) {
+    return {
+        type: ActionsType.CHANGE_INVENTORY,
+        payload: {
+            id,
+            itemId,
+            type,
+            value
         }
     }
 }

@@ -45,55 +45,6 @@
     font-size: 1.25rem;
 }
 
-.skillsTableColum {
-    position: relative;
-    width: 84rem;
-    display: grid;
-    grid-template-columns: 26rem 6rem 6rem 42rem;
-    column-gap: 0.5rem;
-    align-items: end;
-    padding: 0 0.5rem;
-}
-
-.skillsTableColum > .center {
-    text-align: center;
-}
-
-.skillsTableColum > input {
-    height: 100%;
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid var(--white);
-    display: flex;
-    align-items: center;
-    padding: 0 0.25rem;
-}
-
-.skillsTableColum > textarea {
-    background: transparent;
-    border: 0;
-    border-bottom: 1px solid var(--white);
-    resize: none;
-    height: auto;
-    padding: 0 0.25rem;
-}
-
-.skillsTableColum  > button {
-    position: absolute;
-    right: 0;
-    top: 0;
-    margin-right: -0.5rem;
-    width: 1.5rem;
-    border: 0;
-    background: var(--gray-100);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} .skillsTableColum > button:hover > .trash {
-    fill: var(--red);
-    transition: 0.2s;
-}
-
 .skillsTable > .addSkills {
     background: transparent;
     border: 1px solid var(--white);

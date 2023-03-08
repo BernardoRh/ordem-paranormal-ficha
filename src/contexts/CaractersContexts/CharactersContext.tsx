@@ -1,4 +1,6 @@
-import { ReactNode, createContext, useEffect, useReducer, useState } from "react";
+import produce from "immer";
+import { ReactNode, createContext, useEffect, useReducer, useState, ChangeEvent } from "react";
+import { Rolls } from "../../components/Rolldice";
 import {
     ActionsType, createNewCharacterAction, changeCharacterAgeAction,
     changeCharacterNameAction, deleteCharacterAction, displayCharacterAction,
@@ -9,15 +11,21 @@ import {
     changeCharacterDefensesAction,
     changeCharacterProtectionAndResistancesAction,
     changeCharacterExpertiseAction,
+    changeCharacterAttacksAction,
+    changeCharacterSkillsAction,
+    changeInventoryAction,
 } from "../../reducers/CharactersReducer/actions";
-import { CharactersSheet } from "../../reducers/CharactersReducer/charactersSheet";
+import { Attack, CharactersSheet, Skill } from "../../reducers/CharactersReducer/charactersSheet";
 import { charactersReducer } from "../../reducers/CharactersReducer/reducer";
-
+interface AlertProps {
+    alert: "NONE" | "BAD" | "GOOD",
+    value: string
+}
 interface CharactersContextType {
     characters: CharactersSheet[],
     characterToDisplayId: string | null,
     displayCharacter: (id: string) => void,
-    createNewCharacter: () => void,
+    createNewCharacter: (character?: CharactersSheet) => void,
     deleteCharacter: (id: string) => void,
     changeAvatar: (id: string, avatar: string) => void
     changeCharacterName: (id: string, name: string) => void
@@ -32,8 +40,44 @@ interface CharactersContextType {
     changeCharacterPe: (id: string, type: "max" | "current", value: string) => void
     changeCharacterSanity: (id: string, type: "max" | "current", value: string) => void
     changeCharacterDefenses: (id: string, type: "defense" | "dodge" | "block", value: string) => void
-    changeCharacterProtectionAndResistances: (id: string, toDelete: boolean, type: "protection" | "resistances", value: string) => void
-    changeCharacterExpertise: (id: string, name: string, trainedLevel: "none" | "Expert" | "Veterano" | "Treinado", others: string, type: "trainedLevel" | "others") => void
+    changeCharacterProtectionAndResistances: (
+        id: string, 
+        toDelete: boolean, 
+        type: "protection" | "resistances", 
+        value: string
+    ) => void
+    changeCharacterExpertise: (
+        id: string, 
+        name: string, 
+        trainedLevel: "none" | "Expert" | "Veterano" | "Treinado", 
+        others: string, 
+        type: "trainedLevel" | "others"
+    ) => void
+    changeCharacterAttacks: (
+        id: string,
+        attackId: string,
+        type: "delete" | "changeName" | "changeTestDiceQuantity" | "changeTestBonus" | "changeDamageDiceQuantity" | 
+        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack",
+        value: string | Rolls | Attack
+    ) => void
+    changeCharacterSkills: (
+        id: string,
+        skillId: string,
+        type: "delete" | "addSkill" | "changeName" | "changeDescription" | "changeCost" | "changePage",
+        value: string | Skill
+    ) => void
+    exportImportCharacter: (
+        id: string, 
+        type: "exportAllCharacters" | "exportCharacter" | "importCharacter", 
+        event?: ChangeEvent<HTMLInputElement>
+    ) => void
+    changeInventory: (
+        id: string, 
+        itemId: string, 
+        type: "addItem" | "delete" | "changeName" | "changeCategory" | 
+        "changeSpaces" | "prestige" | "itemsLimit" | "patent" | "weight" | "maxWeight" | "credit", 
+        value: string | string[]
+    ) => void
 }
 
 export const CharactersContext = createContext({} as CharactersContextType)
@@ -70,9 +114,9 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
 
 
 
-    function createNewCharacter() {
+    function createNewCharacter(character?: CharactersSheet) {
         const newCharacter: CharactersSheet = {
-            id: String(new Date()),
+            id: String(new Date()) + String(Math.random()),
             expertise: [
                 {
                     name: "Acrobacia",
@@ -390,23 +434,25 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
             attacks: [],
             skills: [],
             rituals: [],
-            prestige: "",
-            loadout: {
-                maxLoadout: "",
-                actualLoadout: ""
+            inventory: {
+                prestige: "",
+                itemsLimit: ["0", "0", "0", "0"],
+                creditLimit: "none",
+                patent: "",
+                loadout: {
+                    maxLoadout: "",
+                    actualLoadout: ""
+                },
+                items: [],
             },
-            inventory: [],
             description: {
                 appearance: [],
                 personality: [],
                 history: [],
                 objectives: []
             },
-            itemsLimit: [],
-            creditLimit: "none",
-            patent: ""
         }
-        dispatch(createNewCharacterAction(newCharacter))
+        dispatch(createNewCharacterAction(character ? character : newCharacter))
     }
 
     function deleteCharacter(id: string) {
@@ -483,7 +529,107 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         dispatch(changeCharacterExpertiseAction(id, name, trainedLevel, others, type))
     }
 
+    function changeCharacterAttacks(
+        id: string,
+        attackId: string,
+        type: "delete" | "changeName" | "changeTestDiceQuantity" | "changeTestBonus" | "changeDamageDiceQuantity" | 
+        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack",
+        value: string | Rolls | Attack
+    ) {
+        dispatch(changeCharacterAttacksAction(id, attackId, type, value))
+    }
 
+    function changeCharacterSkills(
+        id: string,
+        skillId: string,
+        type: "delete" | "addSkill" | "changeName" | "changeDescription" | "changeCost" | "changePage",
+        value: string | Skill
+    ) {
+        dispatch(changeCharacterSkillsAction(id, skillId, type, value))
+    }
+
+    function exportImportCharacter(id: string, type: "exportAllCharacters" | "exportCharacter" | "importCharacter", event?: ChangeEvent<HTMLInputElement>) {
+        let StateJSON = "";
+        let fileName = "characters";
+        switch(type){
+            case "exportAllCharacters": {
+                StateJSON = JSON.stringify(characters)
+                handleCharacterExportation(StateJSON, fileName)
+            }
+            case "exportCharacter": {
+                characters.map((character) => {
+                    if(character.id == id){
+                        StateJSON = JSON.stringify([character])
+                        fileName = character.name ? character.name : "character"
+                        handleCharacterExportation(StateJSON, fileName)
+                    }
+                })
+            }
+            case "importCharacter": {
+                const fileReader = new FileReader();
+                if(event?.target.files) {
+                    fileReader.readAsText(event.target.files[0], "UTF-8");
+                    fileReader.onload = (importedCharacters) => {
+                    if(importedCharacters.target != null){
+                        const toImportCharacters: CharactersSheet[] = JSON.parse(importedCharacters.target.result as string)
+                        toImportCharacters.map((character: CharactersSheet) => {
+                            if(
+                                'id' in character &&
+                                'expertise' in character &&
+                                'attributes' in character &&
+                                'avatar' in character &&
+                                'name' in character &&
+                                'age' in character &&
+                                'origin' in character &&
+                                'class' in character &&
+                                'nex' in character &&
+                                'pePerRound' in character &&
+                                'movementInMeters' in character &&
+                                'health' in character &&
+                                'pePoints' in character &&
+                                'sanity' in character &&
+                                'defense' in character &&
+                                'dodge' in character &&
+                                'blockReductionDamage' in character &&
+                                'protections' in character &&
+                                'resistances' in character &&
+                                'attacks' in character &&
+                                'skills' in character &&
+                                'rituals' in character &&
+                                'inventory' in character &&
+                                'description' in character
+                            ){
+                                const newCharacter = {...character, id: String(new Date()) + String(Math.random())}
+                                createNewCharacter(newCharacter)
+                            }
+                        })
+                    }
+                };
+                }
+                
+            }
+            default: {
+
+            }
+        }
+    }
+
+    function handleCharacterExportation(StateJSON: any, fileName: string) {
+        const blob = new Blob([StateJSON], { type: "application/json" });
+        const href = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = href;
+        link.download = `${fileName}.json`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        URL.revokeObjectURL(href);
+    }
+
+    function changeInventory(id: string, itemId: string, type: "addItem" | "delete" | "changeName" | "changeCategory" | 
+    "changeSpaces" | "prestige" | "itemsLimit" | "patent" | "weight" | "maxWeight" | "credit", value: string | string[]) {
+        dispatch(changeInventoryAction(id, itemId, type, value))
+    }
 
     const {characters, characterToDisplayId} = charactersState
 
@@ -514,7 +660,11 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                 changeCharacterSanity,
                 changeCharacterDefenses,
                 changeCharacterProtectionAndResistances,
-                changeCharacterExpertise
+                changeCharacterExpertise,
+                changeCharacterAttacks,
+                changeCharacterSkills,
+                exportImportCharacter,
+                changeInventory
             }}
         >
             {children}

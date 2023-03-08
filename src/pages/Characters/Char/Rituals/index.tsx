@@ -6,7 +6,7 @@ export function Rituals() {
     return(
         <div className={styles.ritualsContainer}>
             <div className={styles.ritualsTable}>
-                <RitualCard name='awdawdawd'/>
+                <RitualCard name=''/>
                 <div className={styles.addRitualCard}>
                     <button>
                         <Plus size={84} weight="bold"/>

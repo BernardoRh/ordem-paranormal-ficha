@@ -1,4 +1,4 @@
-import { Pencil, X } from "phosphor-react"
+import { ArrowFatLineUp, Pencil, X } from "phosphor-react"
 import { ChangeEvent, useContext, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { CharactersContext } from "../../../../contexts/CaractersContexts/CharactersContext"
@@ -10,13 +10,13 @@ interface CharacterCardProps {
     id: string,
     avatar?: string,
     name?: string,
+    handleExportCharacter: (id: string) => void
 }
 
-export function CharacterCard({id, avatar, name, ...props}: CharacterCardProps) {
+export function CharacterCard({id, avatar, name, handleExportCharacter}: CharacterCardProps) {
     
     const [displayInputAvatar, setDisplayInputAvatar] = useState("none")
     const { deleteCharacter, displayCharacter, changeAvatar } = useContext(CharactersContext)
-
 
     function handleChangeAvatar(event: ChangeEvent<HTMLInputElement>) {
         const avatar = event.target.value
@@ -47,6 +47,11 @@ export function CharacterCard({id, avatar, name, ...props}: CharacterCardProps) 
                 deleteCharacter(id)
             }}>
                 <X size={32} weight="fill"/>
+            </button>
+            <button className={styles.exportCharacters} onClick={() => {
+                handleExportCharacter(id)
+            }}>
+                <ArrowFatLineUp size={32} weight="fill" />
             </button>
             <NavLink to="/Char" onClick={() => {
                 displayCharacter(id)

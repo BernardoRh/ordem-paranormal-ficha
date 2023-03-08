@@ -1,7 +1,7 @@
 import { Attacks } from "./components/Atacks";
 import { BaseAttributes } from "./components/BaseAtributes";
 import { AllExpertises } from "./components/Expertise";
-import { Inventory } from "./components/Inventory";
+import { InventoryComponent } from "./components/Inventory";
 import { OtherAttributes } from "./components/OtherAttributes";
 import { Skills } from "./components/Skills";
 
@@ -14,7 +14,7 @@ export function CharacterInfo() {
     const { characterToDisplayId, characters } = useContext(CharactersContext)
 
     const characterToDisplay = characters.find((character) => {
-        if(character.id == characterToDisplayId){
+        if (character.id == characterToDisplayId){
             return character
         }
     })
@@ -25,10 +25,10 @@ export function CharacterInfo() {
                 <BaseAttributes character={characterToDisplay}/>
                 <OtherAttributes character={characterToDisplay}/>
             </div>
-            <AllExpertises character={characterToDisplay}/>
-            <Attacks/>
-            <Skills/>
-            <Inventory/>
+            <AllExpertises expertises={characterToDisplay?.expertise}/>
+            <Attacks attacks={characterToDisplay?.attacks}/>
+            <Skills skills={characterToDisplay?.skills}/>
+            <InventoryComponent inventory={characterToDisplay?.inventory}/>
         </div>
     )
 }

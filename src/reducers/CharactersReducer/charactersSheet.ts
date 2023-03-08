@@ -1,4 +1,4 @@
-import { RollDiceProps } from "../../components/Rolldice"
+import { Rolls } from "../../components/Rolldice"
 
 
 export interface Attributes {
@@ -19,31 +19,31 @@ export interface Expertise {
     kit: boolean
 }
 
-interface Attack {
+export interface Attack {
     id: string,
     name: string,
-    rollTest: RollDiceProps,
-    damage: RollDiceProps,
+    rollTest: Rolls,
+    damage: Rolls,
     critical: string,
     range: string,
     especial: string,
 }
 
-interface Skill {
+export interface Skill {
     id: string,
     name: string,
     page: string,
     description: string,
-    rolls: RollDiceProps[],
+    cost: string,
 }
 
-interface RitualSubDescription {
+export interface RitualSubDescription {
     id: string,
     name: string,
     description: string,
 }
 
-interface Ritual {
+export interface Ritual {
     id: string,
     name: string,
     type: "none" | "death" | "knowledge" | "blood" | "energy" | "fear",
@@ -58,24 +58,38 @@ interface Ritual {
         subDescriptions: RitualSubDescription[]
     },
     studied: {
+        isActive: boolean,
         additionalCost: string,
         additionalEffect: string,
     },
     truly: {
+        isActive: boolean,
         additionalCost: string,
         additionalEffect: string,
     },
-    rolls: RollDiceProps[]
+    rolls: Rolls[]
 }
 
-interface Item {
+export interface Item {
     id: string,
     item: string,
     category: string,
     spaces: string
 }
 
-interface HistoryAndObjectives {
+export interface Inventory {
+    prestige: string,
+    itemsLimit: string[],
+    creditLimit: "none" | "low" | "medium" | "hight" | "unlimited" ,
+    patent: string,
+    loadout: {
+        maxLoadout: string,
+        actualLoadout: string
+    },
+    items: Item[],
+}
+
+export interface HistoryAndObjectives {
     id: string,
     title: string,
     description: string,
@@ -113,15 +127,7 @@ export interface CharactersSheet {
     attacks:  Attack[],
     skills: Skill[],
     rituals: Ritual[],
-    prestige: string,
-    itemsLimit: string[],
-    creditLimit: "none" | "low" | "medium" | "hight" | "unlimited" ,
-    patent: string,
-    loadout: {
-        maxLoadout: string,
-        actualLoadout: string
-    },
-    inventory: Item[],
+    inventory: Inventory,
     description: {
         appearance: string[],
         personality: string[],

@@ -1,13 +1,29 @@
 import { Pencil, Plus, Trash } from "phosphor-react"
-import { ChangeEvent, useState } from "react"
+import { ChangeEvent, useContext, useState } from "react"
+import { CharactersContext } from "../../../../../../contexts/CaractersContexts/CharactersContext"
+import { Skill } from "../../../../../../reducers/CharactersReducer/charactersSheet"
+import { SkillTableRow } from "./components/SkillTableRow"
 import styles from "./skills.module.css"
 
-export function Skills() {
+interface Skills {
+    skills?: Skill[]
+}
 
-    const [testTextarea, setTestTextarea] = useState("")
+export function Skills({skills}: Skills) {
 
-    function handleChangeTextArea(event: ChangeEvent<HTMLTextAreaElement>) {
-        setTestTextarea(event.target.value);
+    const {characterToDisplayId, changeCharacterSkills} = useContext(CharactersContext)
+
+    function handleAddNewSkill() {
+        const newSkill: Skill = {
+            id: String(new Date()),
+            name: "",
+            page: "",
+            description: "",
+            cost: ""
+        }
+        if(characterToDisplayId != null){
+            changeCharacterSkills(characterToDisplayId, "", "addSkill", newSkill)
+        }
     }
 
     return(
@@ -18,45 +34,12 @@ export function Skills() {
                 <div className={styles.center}>PAGINA</div>
                 <div>
                     DESCRIÇÃO
-                    {/* <div className={styles.dtRituals}>
-                        DT DE RITUAIS
-                        <input type="number" />
-                    </div> */}
                 </div>
             </div>
-            <div className={styles.skillsTableColum}>
-                <input type="text" />
-                <input type="number" className={styles.center} />
-                <input type="number" className={styles.center} />
-                <textarea 
-                    onChange={handleChangeTextArea}
-                    value={testTextarea}
-                    rows={
-                        Math.ceil(testTextarea.length != 0 ? (testTextarea.length)/69 : 1) < 4 ?
-                        Math.ceil(testTextarea.length != 0 ? (testTextarea.length)/69 : 1) : 4
-                    }
-                />
-                <button>
-                    <Trash size={18} weight="fill" className={styles.trash} />
-                </button>
-            </div>
-            <div className={styles.skillsTableColum}>
-                <input type="text" />
-                <input type="number" className={styles.center} />
-                <input type="number" className={styles.center} />
-                <textarea 
-                    onChange={handleChangeTextArea}
-                    value={testTextarea}
-                    rows={
-                        Math.ceil(testTextarea.length != 0 ? (testTextarea.length)/69 : 1) < 4 ?
-                        Math.ceil(testTextarea.length != 0 ? (testTextarea.length)/69 : 1) : 4
-                    }
-                />
-                <button>
-                    <Trash size={18} weight="fill" className={styles.trash} />
-                </button>
-            </div>
-            <button className={styles.addSkills}>
+            {skills?.map((skill) => {
+                return(<SkillTableRow key={skill.id} skill={skill}/>)
+            })}
+            <button className={styles.addSkills} onClick={handleAddNewSkill}>
                 <Plus size={24}/>
             </button>
         </div>

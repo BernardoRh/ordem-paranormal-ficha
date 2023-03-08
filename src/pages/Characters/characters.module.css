@@ -1,3 +1,45 @@
+.charactersManipulationContainer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: calc(6rem - 16px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    gap: 10rem;
+    translate: -50%;
+} .charactersManipulationContainer > .exportImportButton {
+    position: relative;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} .charactersManipulationContainer > .exportImportButton > h4{
+    position: absolute;
+    font-size: 1.5rem;
+    margin-top: 2rem;
+    filter: brightness(25%);
+    z-index: 1;
+    transition: 0.2s;
+    font-family: 'Special Elite', cursive;
+} .charactersManipulationContainer > .exportImportButton > svg{
+    height: 2.25rem;
+    position: absolute;
+    filter: brightness(10%);
+    transition: 0.2s;
+} .charactersManipulationContainer > .exportImportButton:hover > h4{
+    font-size: 1.75rem;
+    filter: brightness(80%);
+} .charactersManipulationContainer > .exportImportButton:hover > svg{
+    height: 2.5rem;
+    filter: brightness(30%);
+} .charactersManipulationContainer > input[type="file"] {
+    display: none;
+}
+
 .charactersContainer {
     width: 100%;
     display: flex;

@@ -1,6 +1,6 @@
 import produce from "immer"
 import { ActionsType } from "./actions"
-import { Attributes, CharactersSheet } from "./charactersSheet"
+import { Attack, CharactersSheet, Item, Ritual, Skill } from "./charactersSheet"
 
 interface CharactersState {
     characters: CharactersSheet[]
@@ -284,6 +284,266 @@ export function charactersReducer(state: CharactersState, action: any) {
                                 }
                             }
                         })
+                    }
+                    return character
+                })
+            })
+        }
+
+        case ActionsType.CHANGE_ATTACKS: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id) {
+                        switch(action.payload.type){
+                            case "delete": {
+                                let newAttacks: Attack[] = []
+                                character.attacks.map((attack) => {
+                                    if(attack.id != action.payload.attackId){
+                                        return newAttacks.push(attack)
+                                    }
+                                })
+                                return character.attacks = newAttacks
+                            }
+                            case "addAttack": {
+                                return character.attacks.push(action.payload.value)
+                            }
+                            default: {
+                                character.attacks.map((attack) => {
+                                    if(attack.id == action.payload.attackId){
+                                        switch(action.payload.type){
+                                            case "changeName": {
+                                                return attack.name = action.payload.value
+                                            }
+                                            case "changeTestDiceQuantity": {
+                                                return attack.rollTest.quantity = action.payload.value
+                                            }
+                                            case "changeTestBonus": {
+                                                return attack.rollTest.bonus = action.payload.value
+                                            }
+                                            case"changeDamageDiceQuantity": {
+                                                return attack.damage.quantity = action.payload.value
+                                            }
+                                            case"changeDamageDiceType": {
+                                                return attack.damage.diceType = action.payload.value
+                                            }
+                                            case"changeDamageBonus": {
+                                                return attack.damage.bonus = action.payload.value
+                                            }
+                                            case"changeCritical": {
+                                                return attack.critical = action.payload.value
+                                            }
+                                            case"changeRange": {
+                                                return attack.range = action.payload.value
+                                            }
+                                            case "changeSpecial": {
+                                                return attack.especial = action.payload.value
+                                            }
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    }
+                    return character
+                })
+            })
+        }
+
+        case ActionsType.CHANGE_SKILLS: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id) {
+                        switch(action.payload.type){
+                            case "delete": {
+                                let newSkills: Skill[] = []
+                                character.skills.map((skill) => {
+                                    if(skill.id != action.payload.skillId){
+                                        return newSkills.push(skill)
+                                    }
+                                })
+                                return character.skills = newSkills
+                            }
+                            case "addSkill": {
+                                return character.skills.push(action.payload.value)
+                            }
+                            default: {
+                                character.skills.map((skill) => {
+                                    if(skill.id == action.payload.skillId){
+                                        switch(action.payload.type){
+                                            case "changeName": {
+                                                return skill.name = action.payload.value
+                                            }
+                                            case "changeDescription": {
+                                                return skill.description = action.payload.value
+                                            }
+                                            case "changeCost": {
+                                                return skill.cost = action.payload.value
+                                            }
+                                            case "changePage": {
+                                                return skill.page = action.payload.value
+                                            }
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    }
+                    return character
+                })
+            })
+        }
+
+        case ActionsType.CHANGE_INVENTORY: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id) {
+                        switch(action.payload.type) {
+                            case "addItem": {
+                                const newItem = {
+                                    id: String(new Date()),
+                                    item: "",
+                                    category: "",
+                                    spaces: "",
+                                }
+                                character.inventory.items.push(newItem)
+                            }
+                            case "delete": {
+                                const newItems: Item[] = []
+                                character.inventory.items.map((item) => {
+                                    if(item.id != action.payload.itemId){
+                                        newItems.push(item)
+                                    }
+                                })
+                                return character.inventory.items = newItems
+                            }
+                            case "prestige": {
+                                return character.inventory.prestige = action.payload.value
+                            }
+                            case "itemsLimit": {
+                                return character.inventory.itemsLimit = action.payload.value
+                            }
+                            case "patent": {
+                                return character.inventory.patent = action.payload.value
+                            }
+                            case "weight": {
+                                return character.inventory.loadout.actualLoadout = action.payload.value
+                            }
+                            case "maxWeight": {
+                                return character.inventory.loadout.maxLoadout = action.payload.value
+                            }
+                            case "credit": {
+                                return character.inventory.creditLimit = action.payload.value
+                            }
+                            default: {
+                                character.inventory.items.map((item) => {
+                                    if(item.id == action.payload.itemId){
+                                        switch(action.payload.type) {
+                                            case "changeName": {
+                                                return item.item = action.payload.value
+                                            }
+                                            case "changeCategory": {
+                                                return item.category = action.payload.value
+                                            }
+                                            case "changeSpaces": {
+                                                return item.spaces = action.payload.value
+                                            }
+                                        }
+                                    }
+                                })
+                            }
+                        }
+                    }
+                    return character
+                })
+            })
+        }
+
+        case ActionsType.CHANGE_RITUALS: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id) {
+                        switch(action.payload.type) {
+                            case "addRitual": {
+                                const newRitual: Ritual = {
+                                    id: String(new Date) + String(Math.random()),
+                                    name: "",
+                                    type: "none",
+                                    level: "",
+                                    execution: "",
+                                    range: "",
+                                    target: "",
+                                    duration: "",
+                                    resistance: "",
+                                    description: {
+                                        principal: "",
+                                        subDescriptions: []
+                                    },
+                                    studied: {
+                                        isActive: false,
+                                        additionalCost: "",
+                                        additionalEffect: "",
+                                    },
+                                    truly: {
+                                        isActive: false,
+                                        additionalCost: "",
+                                        additionalEffect: "",
+                                    },
+                                    rolls: []
+                                }
+                                return character.rituals.push(newRitual)
+                            }
+                            case "delete": {
+                                const newRituals: Ritual[] = []
+                                character.rituals.map((ritual) => {
+                                    if(ritual.id != action.payload.ritualId){
+                                        newRituals.push(ritual)
+                                    }
+                                })
+                                return character.rituals = newRituals
+                            }
+                            default: {
+                                character.rituals.map((ritual) => {
+                                    if(ritual.id == action.payload.ritualId) {
+                                        switch(action.payload.type){
+                                            case "name": {
+                                                return ritual.name = action.payload.value 
+                                            }
+                                            case "type": {
+                                                return ritual.type = action.payload.value 
+                                            }
+                                            case "level": {
+                                                return ritual.level = action.payload.value 
+                                            }
+                                            case "duration": {
+                                                return ritual.duration = action.payload.value 
+                                            }
+                                            case "name": {
+                                                return ritual.name = action.payload.value 
+                                            }
+                                            case "name": {
+                                                return ritual.name = action.payload.value 
+                                            }
+                                            case "name": {
+                                                return ritual.name = action.payload.value 
+                                            }
+                                            case "name": {
+                                                return ritual.name = action.payload.value 
+                                            }
+                                            case "name": {
+                                                return ritual.name = action.payload.value 
+                                            }
+                                            case "name": {
+                                                return ritual.name = action.payload.value 
+                                            }
+                                            case "name": {
+                                                return ritual.name = action.payload.value 
+                                            }
+                                        }
+                                    }
+                                })
+                                
+                            }
+                        }
                     }
                     return character
                 })
