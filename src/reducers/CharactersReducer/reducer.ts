@@ -1,6 +1,7 @@
 import produce from "immer"
+import { Rolls } from "../../components/Rolldice"
 import { ActionsType } from "./actions"
-import { Attack, CharactersSheet, Item, Ritual, Skill } from "./charactersSheet"
+import { Attack, CharactersSheet, Item, MultipleRolls, Ritual, RitualSubDescription, Skill } from "./charactersSheet"
 
 interface CharactersState {
     characters: CharactersSheet[]
@@ -468,7 +469,7 @@ export function charactersReducer(state: CharactersState, action: any) {
                                     id: String(new Date) + String(Math.random()),
                                     name: "",
                                     type: "none",
-                                    level: "",
+                                    level: "1",
                                     execution: "",
                                     range: "",
                                     target: "",
@@ -488,7 +489,7 @@ export function charactersReducer(state: CharactersState, action: any) {
                                         additionalCost: "",
                                         additionalEffect: "",
                                     },
-                                    rolls: []
+                                    multipleRolls: []
                                 }
                                 return character.rituals.push(newRitual)
                             }
@@ -517,26 +518,137 @@ export function charactersReducer(state: CharactersState, action: any) {
                                             case "duration": {
                                                 return ritual.duration = action.payload.value 
                                             }
-                                            case "name": {
-                                                return ritual.name = action.payload.value 
+                                            case "execution": {
+                                                return ritual.execution = action.payload.value 
                                             }
-                                            case "name": {
-                                                return ritual.name = action.payload.value 
+                                            case "range": {
+                                                return ritual.range = action.payload.value 
                                             }
-                                            case "name": {
-                                                return ritual.name = action.payload.value 
+                                            case "resistance": {
+                                                return ritual.resistance = action.payload.value 
                                             }
-                                            case "name": {
-                                                return ritual.name = action.payload.value 
+                                            case "target": {
+                                                return ritual.target = action.payload.value
                                             }
-                                            case "name": {
-                                                return ritual.name = action.payload.value 
+                                            case "studiedShow": {
+                                                return ritual.studied.isActive = action.payload.value 
                                             }
-                                            case "name": {
-                                                return ritual.name = action.payload.value 
+                                            case "studiedCost": {
+                                                return ritual.studied.additionalCost = action.payload.value 
                                             }
-                                            case "name": {
-                                                return ritual.name = action.payload.value 
+                                            case "studiedEffect": {
+                                                return ritual.studied.additionalEffect = action.payload.value 
+                                            }
+                                            case "trulyShow": {
+                                                return ritual.truly.isActive = action.payload.value 
+                                            }
+                                            case "trulyCost": {
+                                                return ritual.truly.additionalCost = action.payload.value 
+                                            }
+                                            case "trulyEffect": {
+                                                return ritual.truly.additionalEffect = action.payload.value 
+                                            }
+                                            case "description": {
+                                                return ritual.description.principal = action.payload.value 
+                                            }
+                                            case "addSubDescription": {
+                                                const newSubDescription: RitualSubDescription = {
+                                                    id: String(new Date) + String(Math.random()),
+                                                    name: "",
+                                                    description: ""
+                                                }
+                                                return ritual.description.subDescriptions.push(newSubDescription)
+                                            }
+                                            case "deleteSubDescription": {
+                                                const newSubDescription: RitualSubDescription[] = []
+                                                ritual.description.subDescriptions.map((subDescription) => {
+                                                    if(subDescription.id != action.payload.subDescriptionId){
+                                                        newSubDescription.push(subDescription)
+                                                    }
+                                                })
+                                                return ritual.description.subDescriptions = newSubDescription
+                                            }
+                                            case "subDescriptionName": {
+                                                ritual.description.subDescriptions.map((subDescription) => {
+                                                    if(subDescription.id == action.payload.subDescriptionId){
+                                                        return subDescription.name = action.payload.value
+                                                    }
+                                                })
+                                            }
+                                            case "addMultipleRolls": {
+                                                const newRoll: MultipleRolls = {
+                                                    id: String(new Date) + String(Math.random()),
+                                                    rolls: []
+                                                }
+                                                return ritual.multipleRolls.push(newRoll)
+                                            }
+                                            case "DescriptionDescriptionSub": {
+                                                ritual.description.subDescriptions.map((subDescription) => {
+                                                    if(subDescription.id == action.payload.subDescriptionId){
+                                                        return subDescription.description = action.payload.value
+                                                    }
+                                                })
+                                            }
+                                            case "deleteMultipleRolls": {
+                                                const newMultipleRolls: MultipleRolls[] = []
+                                                ritual.multipleRolls.map((multipleRoll) => {
+                                                    if(multipleRoll.id != action.payload.multipleRollId){
+                                                        newMultipleRolls.push(multipleRoll)
+                                                    }
+                                                })
+                                                return ritual.multipleRolls = newMultipleRolls
+                                            }
+                                            default: {
+                                                ritual.multipleRolls.map((multipleRoll) => {
+                                                    if(multipleRoll.id == action.payload.multipleRollId){
+                                                        switch(action.payload.type){
+                                                            case "addRoll": {
+                                                                const newRoll: Rolls = {
+                                                                    id: String(new Date) + String(Math.random()),
+                                                                    diceType: "4",
+                                                                    quantity: "",
+                                                                    isDamage: false
+                                                                }
+                                                                multipleRoll.rolls.push(newRoll)
+                                                            }
+                                                            case "deleteRoll": {
+                                                                const newRolls: Rolls[] = []
+                                                                multipleRoll.rolls.map((roll) => {
+                                                                    if(roll.id != action.payload.rollId){
+                                                                        newRolls.push(roll)
+                                                                    }
+                                                                })
+                                                                return multipleRoll.rolls = newRolls
+                                                            }
+                                                            default: {
+                                                                multipleRoll.rolls.map((roll) => {
+                                                                    if(roll.id == action.payload.rollId) {
+                                                                        switch(action.payload.type) {
+                                                                            case "rollBonus": {
+                                                                                return roll.bonus = action.payload.value
+                                                                            }
+                                                                            case "rollCritical": {
+                                                                                return roll.critical = action.payload.value
+                                                                            }
+                                                                            case "rollDamageType": {
+                                                                                return roll.damageType = action.payload.value
+                                                                            }
+                                                                            case "rollDiceType": {
+                                                                                return roll.diceType = action.payload.value
+                                                                            }
+                                                                            case "rollDiceQuantity": {
+                                                                                return roll.quantity = action.payload.value
+                                                                            }
+                                                                            case "rollIsDamage": {
+                                                                                return roll.isDamage = action.payload.value
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                })
+                                                            }
+                                                        }
+                                                    }
+                                                })
                                             }
                                         }
                                     }
@@ -545,13 +657,12 @@ export function charactersReducer(state: CharactersState, action: any) {
                             }
                         }
                     }
-                    return character
                 })
+                
             })
         }
 
         default:
-            console.log("DEFAULT")
             return state
     }
 }

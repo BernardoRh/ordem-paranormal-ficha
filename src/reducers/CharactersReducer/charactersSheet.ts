@@ -43,11 +43,15 @@ export interface RitualSubDescription {
     description: string,
 }
 
+export interface MultipleRolls {
+    id: string
+    rolls: Rolls[]
+}
 export interface Ritual {
     id: string,
     name: string,
     type: "none" | "death" | "knowledge" | "blood" | "energy" | "fear",
-    level: string,
+    level: "1" | "2" | "3" | "4",
     execution: string,
     range: string,
     target: string,
@@ -67,7 +71,7 @@ export interface Ritual {
         additionalCost: string,
         additionalEffect: string,
     },
-    rolls: Rolls[]
+    multipleRolls: MultipleRolls[]
 }
 
 export interface Item {

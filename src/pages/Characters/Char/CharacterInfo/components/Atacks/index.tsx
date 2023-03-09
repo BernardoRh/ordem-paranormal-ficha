@@ -21,14 +21,16 @@ export function Attacks({attacks}: AttacksProps) {
             rollTest: {
                 diceType: "20",
                 quantity: "",
-                name: "",
                 bonus: "",
+                id: "",
+                isDamage: false
             },
             damage: {
                 diceType: "4",
                 quantity: "",
-                name: "",
                 bonus: "",
+                id: "",
+                isDamage: false
             },
             critical: "",
             range: "",

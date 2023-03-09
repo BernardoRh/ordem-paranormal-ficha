@@ -1,5 +1,5 @@
 import { ArrowFatLineDown, ArrowFatLineUp, Plus } from "phosphor-react"
-import { ChangeEvent, FormEventHandler, useContext, useEffect, useState } from "react"
+import { ChangeEvent, useContext, useState } from "react"
 import styles from "./characters.module.css"
 
 

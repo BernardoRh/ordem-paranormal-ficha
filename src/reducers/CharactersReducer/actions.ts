@@ -273,3 +273,25 @@ export function changeInventoryAction(
         }
     }
 }
+
+export function changeRitualsAction(
+    id: string,
+    ritualId: string,
+    subDescriptionId: string,
+    multipleRollId: string,
+    rollId: string,
+    type: "addRitual" | "delete" | "name" | "type" | "level" | "duration" |
+    "execution" | "range" | "resistance" | "target" | "studiedShow" | "studiedCost" | "studiedEffect" | "trulyShow" |
+    "trulyCost" | "trulyEffect" | "description" | "addSubDescription" | "deleteSubDescription" | "subDescriptionName" |
+    "DescriptionDescriptionSub" | "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" |
+    "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage",
+    value: string | boolean
+) {
+    return {
+        type: ActionsType.CHANGE_RITUALS,
+        payload: {
+            id, ritualId, subDescriptionId,
+            multipleRollId, rollId, type, value
+        }
+    }
+}

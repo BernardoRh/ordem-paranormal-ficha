@@ -3,12 +3,13 @@ import { useState } from "react"
 import styles from "./rolldice.module.css"
 
 export interface Rolls {
-    name: string,
+    id: string,
     diceType: "4" | "6" | "10" | "12" | "20" | "100" ,
     quantity: string,
     bonus?: string,
     critical?: string,
-    damageType?: "Conhecimento" | "Energia" | "Morte" | "Sangue" | "Medo",
+    isDamage: boolean
+    damageType?: "knowledge" | "energy" | "death" | "blood" | "fear" | "bludgeoning" | "slash" | "piercing" | "ballistic",
 }
 
 export interface RollDiceProps {

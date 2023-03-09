@@ -14,6 +14,7 @@ import {
     changeCharacterAttacksAction,
     changeCharacterSkillsAction,
     changeInventoryAction,
+    changeRitualsAction,
 } from "../../reducers/CharactersReducer/actions";
 import { Attack, CharactersSheet, Skill } from "../../reducers/CharactersReducer/charactersSheet";
 import { charactersReducer } from "../../reducers/CharactersReducer/reducer";
@@ -77,6 +78,19 @@ interface CharactersContextType {
         type: "addItem" | "delete" | "changeName" | "changeCategory" | 
         "changeSpaces" | "prestige" | "itemsLimit" | "patent" | "weight" | "maxWeight" | "credit", 
         value: string | string[]
+    ) => void
+    changeRituals: (
+        id: string,
+        ritualId: string,
+        subDescriptionId: string,
+        multipleRollId: string,
+        rollId: string,
+        type: "addRitual" | "delete" | "name" | "type" | "level" | "duration" |
+        "execution" | "range" | "resistance" | "target" | "studiedShow" | "studiedCost" | "studiedEffect" | "trulyShow" |
+        "trulyCost" | "trulyEffect" | "description" | "addSubDescription" | "deleteSubDescription" | "subDescriptionName" |
+        "DescriptionDescriptionSub" | "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" |
+        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage",
+        value: string | boolean
     ) => void
 }
 
@@ -631,6 +645,17 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         dispatch(changeInventoryAction(id, itemId, type, value))
     }
 
+    function changeRituals(id: string, ritualId: string, subDescriptionId: string, multipleRollId: string, rollId: string,
+        type: "addRitual" | "delete" | "name" | "type" | "level" | "duration" |
+        "execution" | "range" | "resistance" | "target" | "studiedShow" | "studiedCost" | "studiedEffect" | "trulyShow" |
+        "trulyCost" | "trulyEffect" | "description" | "addSubDescription" | "deleteSubDescription" | "subDescriptionName" |
+        "DescriptionDescriptionSub" | "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" |
+        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage",
+        value: string | boolean
+    ){
+        dispatch(changeRitualsAction(id, ritualId, subDescriptionId, multipleRollId, rollId, type, value))
+    }
+
     const {characters, characterToDisplayId} = charactersState
 
     useEffect(() => {
@@ -664,7 +689,8 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                 changeCharacterAttacks,
                 changeCharacterSkills,
                 exportImportCharacter,
-                changeInventory
+                changeInventory,
+                changeRituals
             }}
         >
             {children}

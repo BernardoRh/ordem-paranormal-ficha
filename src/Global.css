@@ -12,7 +12,7 @@
     --blue: #255bff;
     --green: #18AD4A;
     --red: #FA413C;
-    --purpel: #48064a;
+    --purple: #48064a;
     --dark-blue: #021039;
 
 
@@ -24,7 +24,8 @@
     --blood-light: #5e2729;
     --knowledge-light: #685823;
     --energy-light: #4b2463;
-    --death-light: #3c3c3c;
+    --death-light: #0f0f0f;
+    --fear-light: #ffffff26;
 }
 
 * {

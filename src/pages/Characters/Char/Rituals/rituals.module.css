@@ -5,11 +5,11 @@
 }
 
 .ritualsTable {
-    width: 84rem;
+    width: 86rem;
     display: grid;
     grid-template-columns: 27.5rem 27.5rem 27.5rem;
     justify-content: space-between;
-    row-gap: 1rem;
+    row-gap: 2rem;
 }
 
 
