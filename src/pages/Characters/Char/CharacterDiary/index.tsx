@@ -78,6 +78,7 @@ export function CharacterDiary() {
             <div className={styles.diary}>
                 <button
                     className={styles.prevPage}
+                    // @ts-ignore
                     onClick={() => {diary.current != undefined && diary.current ? diary.current.pageFlip().flipPrev() : ""}}
                 >
                     <CaretDoubleLeft size={32} weight="fill" />
@@ -115,6 +116,7 @@ export function CharacterDiary() {
                 </HTMLFlipBook>
                 <button
                     className={styles.nexPage}
+                    // @ts-ignore
                     onClick={() => {diary.current != undefined ? diary.current.pageFlip().flipNext(): ""}}
                 >
                     <CaretDoubleRight size={32} weight="fill" />
