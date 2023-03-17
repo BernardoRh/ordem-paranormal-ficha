@@ -133,7 +133,7 @@ export interface CharactersSheet {
     skills: Skill[],
     rituals: Ritual[],
     inventory: Inventory,
-    description: {
+    diary: {
         personality: string[],
         history: HistoryAndObjectives[],
         objectives: HistoryAndObjectives[],
