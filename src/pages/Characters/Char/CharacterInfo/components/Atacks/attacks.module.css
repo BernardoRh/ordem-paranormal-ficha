@@ -11,7 +11,7 @@
     position: relative;
     width: 84rem;
     display: grid;
-    grid-template-columns: 2rem 18rem 10rem 10rem 6rem 8rem 24.5rem;
+    grid-template-columns: 2rem 16rem 9rem 9rem 7rem 5rem 7rem 22.5rem;
     column-gap: 0.5rem;
     justify-items: center;
     align-items: center;
@@ -25,7 +25,7 @@
     border: 8px solid transparent;
     border-image: url("../../../../../../img/inregularborder.png") 40 stretch;
     background: var(--white); 
-    filter: brightness(20%);
+    filter: brightness(20%) opacity(50%);
     background-clip: content-box;
     z-index: -1;
 }
@@ -53,6 +53,7 @@
     background: transparent;
     border: 0;
     cursor: pointer;
+    gap: 1rem;
 }
 
 
@@ -67,6 +68,12 @@
     width: 4rem;
     opacity: 0.3;
     transition: 0.2s;
+    cursor: pointer;
 } .attacksTable > .addAtacks:hover {
+    border: 1px solid var(--green);
     opacity: 1;
+} .addAtacks > svg {
+    transition: 0.2s;
+} .addAtacks:hover > svg {
+    fill: var(--green);
 }

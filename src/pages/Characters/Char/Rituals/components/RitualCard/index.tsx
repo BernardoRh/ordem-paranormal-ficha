@@ -28,118 +28,115 @@ export function RitualCard({ritual}: RitualCardProps) {
     function handleChangeCardType(event: ChangeEvent<HTMLSelectElement>) {
         const newCardType = event.target.value as "none" | "death" | "knowledge" | "blood" | "energy" | "fear";
         if(characterToDisplayId != null){
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "type", newCardType)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "type", "", newCardType)
         }
     }
 
     function handleChangeRitualName(event: ChangeEvent<HTMLInputElement>){
         const changedName = event.target.value
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "name", changedName)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "name", "", changedName)
         }
     }
 
     function handleChangeLabelStudied(checked: CheckedState){
         const newState = checked as boolean
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "studiedShow", newState)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "studiedShow", "", newState)
         }
     }
 
     function handleChangeLabelTruly(checked: CheckedState){
         const newState = checked as boolean
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "trulyShow", newState)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "trulyShow", "", newState)
         }
     }
 
     function handleAddSubDescription() {
         if(characterToDisplayId != null){
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "addSubDescription", "")
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "addSubDescription", "subDescription", "")
         }
     }
 
     function handleChangeDescription(event: ChangeEvent<HTMLTextAreaElement>) {
         const newDescription = event.target.value
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "description", newDescription)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "description", "", newDescription)
         }
     }
 
     function handleChangeRitualLevel(event: ChangeEvent<HTMLSelectElement>){
         const newLevel = event.target.value
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "level", newLevel)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "level", "", newLevel)
         }
     }
 
     function handleChangeTrulyCost(event: ChangeEvent<HTMLInputElement>){
         const newCost = event.target.value
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "trulyCost", newCost)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "trulyCost", "", newCost)
         }
     }
 
     function handleChangeStudiedCost(event: ChangeEvent<HTMLInputElement>){
         const newCost = event.target.value
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "studiedCost", newCost)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "studiedCost", "", newCost)
         }
     }
 
     function handleDeleteRitual() {
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "delete", "")
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "delete", "", "")
         }
     }
 
     function handleChangeStudiedEffect(event: ChangeEvent<HTMLTextAreaElement>) {
         const newEffect = event.target.value
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "studiedEffect", newEffect)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "studiedEffect", "", newEffect)
         }
     }
 
     function handleChangeTrulyEffect(event: ChangeEvent<HTMLTextAreaElement>) {
         const newEffect = event.target.value
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "trulyEffect", newEffect)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "trulyEffect", "", newEffect)
         }
     }
 
     function handleChangeRitualExecution(event: ChangeEvent<HTMLInputElement>){
         const newExecution = event.target.value
         if(characterToDisplayId != null){
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "execution", newExecution)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "execution", "", newExecution)
         }
     }
     function handleChangeRitualRange(event: ChangeEvent<HTMLInputElement>){
         const newRange = event.target.value
         if(characterToDisplayId != null){
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "range", newRange)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "range", "", newRange)
         }
     }
     function handleChangeRitualTarget(event: ChangeEvent<HTMLInputElement>){
         const newTarget = event.target.value
         if(characterToDisplayId != null){
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "target", newTarget)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "target", "", newTarget)
         }
     }
     function handleChangeRitualDuration(event: ChangeEvent<HTMLInputElement>){
         const newDuration = event.target.value
         if(characterToDisplayId != null){
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "duration", newDuration)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "duration", "", newDuration)
         }
     }
     function handleChangeRitualResistance(event: ChangeEvent<HTMLInputElement>){
         const newResistances = event.target.value
         if(characterToDisplayId != null){
-            changeRituals(characterToDisplayId, ritual.id, "", "", "", "resistance", newResistances)
+            changeRituals(characterToDisplayId, ritual.id, "", "", "", "resistance", "", newResistances)
         }
     }
-
-    // id: string, ritualId: string, subDescriptionId: string, multipleRollId: string, rollId: string,
-    //     type: "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" | "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage",
     
     return(
         <div
@@ -178,7 +175,6 @@ export function RitualCard({ritual}: RitualCardProps) {
                             name="level"
                             onChange={handleChangeRitualLevel}
                         >
-                            <option value="0" disabled></option>
                             <option value="1">I</option>
                             <option value="2">II</option>
                             <option value="3">III</option>
@@ -262,7 +258,7 @@ export function RitualCard({ritual}: RitualCardProps) {
                 </div>
                 <div className={styles.ritualsRolls}>
                     <h4>ROLAGENS</h4>
-                    <RitualRolls/>
+                    <RitualRolls multipleRolls={ritual.multipleRolls} ritualId={ritual.id}/>
                 </div>
                 <button className={`${styles.buttonsRitualCard} ${styles.deleteRitualCard}`} onClick={handleDeleteRitual}><X size={24} weight="fill"/></button> 
                 <button className={`${styles.buttonsRitualCard} ${styles.exportRitualCard}`}><ArrowFatLineUp size={24} weight="fill"/></button>

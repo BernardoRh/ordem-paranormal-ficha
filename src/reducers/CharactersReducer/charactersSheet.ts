@@ -45,6 +45,7 @@ export interface RitualSubDescription {
 
 export interface MultipleRolls {
     id: string
+    name: string
     rolls: Rolls[]
 }
 export interface Ritual {
@@ -133,7 +134,6 @@ export interface CharactersSheet {
     rituals: Ritual[],
     inventory: Inventory,
     description: {
-        appearance: string[],
         personality: string[],
         history: HistoryAndObjectives[],
         objectives: HistoryAndObjectives[],

@@ -1,5 +1,5 @@
 import { Rolls } from './../../components/Rolldice/index';
-import { Attack, CharactersSheet, Skill } from './charactersSheet';
+import { Attack, CharactersSheet, Skill, Ritual } from './charactersSheet';
 
 export enum ActionsType{
     IMPORT_EXPORT_CHARACTER = 'IMPORT_EXPORT_CHARACTER',
@@ -231,7 +231,7 @@ export function changeCharacterAttacksAction(
         id: string,
         attackId: string,
         type: "delete" | "changeName" | "changeTestDiceQuantity" | "changeTestBonus" | "changeDamageDiceQuantity" | 
-        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack",
+        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack" | "changeDamageType",
         value: string | Rolls | Attack
     ) {
         return {
@@ -284,14 +284,16 @@ export function changeRitualsAction(
     "execution" | "range" | "resistance" | "target" | "studiedShow" | "studiedCost" | "studiedEffect" | "trulyShow" |
     "trulyCost" | "trulyEffect" | "description" | "addSubDescription" | "deleteSubDescription" | "subDescriptionName" |
     "DescriptionDescriptionSub" | "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" |
-    "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage",
-    value: string | boolean
+    "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage" | "multipleRollsName",
+    block: "subDescription" | "multipleRolls" | "rolls" | "",
+    value: string | boolean | Ritual
 ) {
     return {
         type: ActionsType.CHANGE_RITUALS,
         payload: {
             id, ritualId, subDescriptionId,
-            multipleRollId, rollId, type, value
+            multipleRollId, rollId, type, value,
+            block
         }
     }
 }

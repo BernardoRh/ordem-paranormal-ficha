@@ -225,7 +225,7 @@ export function InventoryComponent({inventory}: InventoryProps) {
                     )
                 })}
                 <button className={styles.addItems} onClick={handleAddItem}>
-                    <Plus size={24}/>
+                    <Plus size={24} weight="fill"/>
                 </button>
             </div>
         </div>

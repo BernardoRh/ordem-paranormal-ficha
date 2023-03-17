@@ -34,7 +34,7 @@
     border: 6px solid transparent;
     border-image: url("../../../../../../../../img/inregularborder.png") 15 stretch;
     background: var(--white); 
-    filter: brightness(20%);
+    filter: brightness(20%) opacity(50%);
     background-clip: content-box;
     z-index:-1;
 }

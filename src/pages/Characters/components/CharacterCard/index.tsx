@@ -1,4 +1,4 @@
-import { ArrowFatLineUp, Pencil, X } from "phosphor-react"
+import { ArrowFatLineUp, Copy, Pencil, X } from "phosphor-react"
 import { ChangeEvent, useContext, useState } from "react"
 import { NavLink } from "react-router-dom"
 import { CharactersContext } from "../../../../contexts/CaractersContexts/CharactersContext"
@@ -15,34 +15,10 @@ interface CharacterCardProps {
 
 export function CharacterCard({id, avatar, name, handleExportCharacter}: CharacterCardProps) {
     
-    const [displayInputAvatar, setDisplayInputAvatar] = useState("none")
-    const { deleteCharacter, displayCharacter, changeAvatar } = useContext(CharactersContext)
-
-    function handleChangeAvatar(event: ChangeEvent<HTMLInputElement>) {
-        const avatar = event.target.value
-        changeAvatar(id, avatar)
-    }
+    const { deleteCharacter, displayCharacter } = useContext(CharactersContext)
 
     return(
-        <div key={id}>
-            <button
-                className={styles.changeCharacterAvatar}
-                onClick={() => {setDisplayInputAvatar("flex")}}
-            >
-                <Pencil size={32} weight="fill"/>
-            </button>
-            <span
-                style={{display: displayInputAvatar}}
-                className={styles.characterUrlAvatar}
-                onMouseLeave={() => {setDisplayInputAvatar("none")}}
-            >
-                <input
-                    value={avatar ? avatar : ""}
-                    type="text"
-                    placeholder="https://exemplo"
-                    onChange={handleChangeAvatar}
-                />
-            </span>
+        <div>
             <button className={styles.deleteCharacter} onClick={() => {
                 deleteCharacter(id)
             }}>
@@ -52,6 +28,9 @@ export function CharacterCard({id, avatar, name, handleExportCharacter}: Charact
                 handleExportCharacter(id)
             }}>
                 <ArrowFatLineUp size={32} weight="fill" />
+            </button>
+            <button className={styles.duplicateCharacter}>
+                <Copy size={32} weight="fill"/>
             </button>
             <NavLink to="/Char" onClick={() => {
                 displayCharacter(id)

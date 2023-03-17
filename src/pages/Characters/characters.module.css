@@ -87,7 +87,7 @@
     cursor: pointer;
     z-index: 2;
 } .charactersContainer > nav > div > button:hover {
-    filter: brightness(100%) drop-shadow(1px 1px 3px var(--gray-700));
+    filter: brightness(100%);
 } .charactersContainer > nav > div > a {
     position: absolute;
     border: 0;

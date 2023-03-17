@@ -1,0 +1,101 @@
+.diaryContainer {
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.diary {
+    position: relative;
+    width: 84rem;
+    height: 58rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+} .diary::before {
+    content: "";
+    position: absolute;
+    background-image: url("../../../../img/cover.jpg");
+    background-size: contain;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    transition: 0.3s;
+} .diary:hover::before {
+    box-shadow: 0 0 7px black;
+} .diary > button {
+    background: transparent;
+    width: 2.25rem;
+    height: 6rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.3;
+    transition: 0.2s;
+} .diary > button:hover {
+    opacity: 1;
+} .diary > .nexPage {
+    border: 1px solid var(--white);
+    border-left: 0;
+} .diary > .prevPage {
+    border: 1px solid var(--white);
+    border-right: 0;
+} 
+
+.cover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} .coverLeft {
+    background-image: url("../../../../img/coverLeft.jpg");
+    filter: brightness(40%);
+    background-size: cover;
+} .coverRight {
+    background-image: url("../../../../img/coverRight.jpg");
+    filter: brightness(40%);
+    background-size: cover;
+}
+
+.page {
+    width: 100%;
+    height: 100%;
+    display: flex;
+} .page * {
+    color: black;
+}
+
+.pageLeft {
+    background-image: url("../../../../img/pageLeft.jpg");
+    background-size: cover;
+    box-shadow: -3px 3px 10px black;
+}
+.pageRight {
+    background-image: url("../../../../img/pageRight.jpg");
+    background-size: cover;
+    box-shadow: 3px 3px 10px black;
+}
+
+
+.pageContent {
+    padding: 1.75rem 1rem;
+    width: 100%;
+    height: 100%;
+} .pageContent > .pageNumber {
+    position: absolute;
+    top: 0;
+    margin-top: 0.5rem;
+    font-size: 1.5rem;
+    font-family: 'Special Elite', cursive;
+}
+.pageRight > .pageContent > .pageNumber {
+    right: 0;
+    margin-right: 1rem;
+}
+.pageLeft > .pageContent > .pageNumber {
+    left: 0;
+    margin-left: 1rem;
+}

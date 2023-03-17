@@ -339,6 +339,9 @@ export function charactersReducer(state: CharactersState, action: any) {
                                             case "changeSpecial": {
                                                 return attack.especial = action.payload.value
                                             }
+                                            case "changeDamageType": {
+                                                return attack.damage.damageType = action.payload.value
+                                            }
                                         }
                                     }
                                 })
@@ -465,33 +468,7 @@ export function charactersReducer(state: CharactersState, action: any) {
                     if(character.id == action.payload.id) {
                         switch(action.payload.type) {
                             case "addRitual": {
-                                const newRitual: Ritual = {
-                                    id: String(new Date) + String(Math.random()),
-                                    name: "",
-                                    type: "none",
-                                    level: "1",
-                                    execution: "",
-                                    range: "",
-                                    target: "",
-                                    duration: "",
-                                    resistance: "",
-                                    description: {
-                                        principal: "",
-                                        subDescriptions: []
-                                    },
-                                    studied: {
-                                        isActive: false,
-                                        additionalCost: "",
-                                        additionalEffect: "",
-                                    },
-                                    truly: {
-                                        isActive: false,
-                                        additionalCost: "",
-                                        additionalEffect: "",
-                                    },
-                                    multipleRolls: []
-                                }
-                                return character.rituals.push(newRitual)
+                                return character.rituals.push(action.payload.value)
                             }
                             case "delete": {
                                 const newRituals: Ritual[] = []
@@ -505,103 +482,81 @@ export function charactersReducer(state: CharactersState, action: any) {
                             default: {
                                 character.rituals.map((ritual) => {
                                     if(ritual.id == action.payload.ritualId) {
-                                        switch(action.payload.type){
-                                            case "name": {
-                                                return ritual.name = action.payload.value 
-                                            }
-                                            case "type": {
-                                                return ritual.type = action.payload.value 
-                                            }
-                                            case "level": {
-                                                return ritual.level = action.payload.value 
-                                            }
-                                            case "duration": {
-                                                return ritual.duration = action.payload.value 
-                                            }
-                                            case "execution": {
-                                                return ritual.execution = action.payload.value 
-                                            }
-                                            case "range": {
-                                                return ritual.range = action.payload.value 
-                                            }
-                                            case "resistance": {
-                                                return ritual.resistance = action.payload.value 
-                                            }
-                                            case "target": {
-                                                return ritual.target = action.payload.value
-                                            }
-                                            case "studiedShow": {
-                                                return ritual.studied.isActive = action.payload.value 
-                                            }
-                                            case "studiedCost": {
-                                                return ritual.studied.additionalCost = action.payload.value 
-                                            }
-                                            case "studiedEffect": {
-                                                return ritual.studied.additionalEffect = action.payload.value 
-                                            }
-                                            case "trulyShow": {
-                                                return ritual.truly.isActive = action.payload.value 
-                                            }
-                                            case "trulyCost": {
-                                                return ritual.truly.additionalCost = action.payload.value 
-                                            }
-                                            case "trulyEffect": {
-                                                return ritual.truly.additionalEffect = action.payload.value 
-                                            }
-                                            case "description": {
-                                                return ritual.description.principal = action.payload.value 
-                                            }
-                                            case "addSubDescription": {
-                                                const newSubDescription: RitualSubDescription = {
-                                                    id: String(new Date) + String(Math.random()),
-                                                    name: "",
-                                                    description: ""
+                                        switch(action.payload.block){
+                                            case "subDescription": {
+                                                switch(action.payload.type){
+                                                    case "addSubDescription": {
+                                                        const newSubDescription: RitualSubDescription = {
+                                                            id: String(new Date) + String(Math.random()),
+                                                            name: "",
+                                                            description: ""
+                                                        }
+                                                        return ritual.description.subDescriptions.push(newSubDescription)
+                                                    }
+                                                    case "deleteSubDescription": {
+                                                        const newSubDescription: RitualSubDescription[] = []
+                                                        ritual.description.subDescriptions.map((subDescription) => {
+                                                            if(subDescription.id != action.payload.subDescriptionId){
+                                                                newSubDescription.push(subDescription)
+                                                            }
+                                                        })
+                                                        return ritual.description.subDescriptions = newSubDescription
+                                                    }
+                                                    default: {
+                                                        ritual.description.subDescriptions.map((subDescription) => {
+                                                            if(subDescription.id == action.payload.subDescriptionId){
+                                                                switch(action.payload.type) {
+                                                                    case "DescriptionDescriptionSub": {
+                                                                        return subDescription.description = action.payload.value
+                                                                    }
+                                                                    case "subDescriptionName": {
+                                                                        return subDescription.name = action.payload.value
+                                                                    }
+                                                                }
+                                                            }
+                                                        })
+                                                    }
                                                 }
-                                                return ritual.description.subDescriptions.push(newSubDescription)
                                             }
-                                            case "deleteSubDescription": {
-                                                const newSubDescription: RitualSubDescription[] = []
-                                                ritual.description.subDescriptions.map((subDescription) => {
-                                                    if(subDescription.id != action.payload.subDescriptionId){
-                                                        newSubDescription.push(subDescription)
+                                            case "multipleRolls": {
+                                                switch(action.payload.type){
+                                                    case "deleteMultipleRolls": {
+                                                        const newMultipleRolls: MultipleRolls[] = []
+                                                        ritual.multipleRolls.map((multipleRoll) => {
+                                                            if(multipleRoll.id != action.payload.multipleRollId){
+                                                                newMultipleRolls.push(multipleRoll)
+                                                            }
+                                                        })
+                                                        return ritual.multipleRolls = newMultipleRolls
                                                     }
-                                                })
-                                                return ritual.description.subDescriptions = newSubDescription
-                                            }
-                                            case "subDescriptionName": {
-                                                ritual.description.subDescriptions.map((subDescription) => {
-                                                    if(subDescription.id == action.payload.subDescriptionId){
-                                                        return subDescription.name = action.payload.value
+                                                    case "addMultipleRolls": {
+                                                        const newRoll: MultipleRolls = {
+                                                            id: String(new Date) + String(Math.random()),
+                                                            rolls: [
+                                                                {
+                                                                    id: String(new Date) + String(Math.random()),
+                                                                    diceType: "4",
+                                                                    isDamage: false,
+                                                                    bonus: "",
+                                                                    quantity: ""
+                                                                }
+                                                            ],
+                                                            name: ""
+                                                        }
+                                                        return ritual.multipleRolls.push(newRoll)
                                                     }
-                                                })
-                                            }
-                                            case "addMultipleRolls": {
-                                                const newRoll: MultipleRolls = {
-                                                    id: String(new Date) + String(Math.random()),
-                                                    rolls: []
+                                                    default: {
+                                                        return ritual
+                                                    }
                                                 }
-                                                return ritual.multipleRolls.push(newRoll)
                                             }
-                                            case "DescriptionDescriptionSub": {
-                                                ritual.description.subDescriptions.map((subDescription) => {
-                                                    if(subDescription.id == action.payload.subDescriptionId){
-                                                        return subDescription.description = action.payload.value
-                                                    }
-                                                })
-                                            }
-                                            case "deleteMultipleRolls": {
-                                                const newMultipleRolls: MultipleRolls[] = []
-                                                ritual.multipleRolls.map((multipleRoll) => {
-                                                    if(multipleRoll.id != action.payload.multipleRollId){
-                                                        newMultipleRolls.push(multipleRoll)
-                                                    }
-                                                })
-                                                return ritual.multipleRolls = newMultipleRolls
-                                            }
-                                            default: {
+                                            case "rolls": {
                                                 ritual.multipleRolls.map((multipleRoll) => {
                                                     if(multipleRoll.id == action.payload.multipleRollId){
                                                         switch(action.payload.type){
+                                                            case "multipleRollsName": {
+                                                                return multipleRoll.name = action.payload.value
+                                                            }
                                                             case "addRoll": {
                                                                 const newRoll: Rolls = {
                                                                     id: String(new Date) + String(Math.random()),
@@ -642,6 +597,9 @@ export function charactersReducer(state: CharactersState, action: any) {
                                                                             case "rollIsDamage": {
                                                                                 return roll.isDamage = action.payload.value
                                                                             }
+                                                                            default: {
+                                                                                return roll
+                                                                            }
                                                                         }
                                                                     }
                                                                 })
@@ -650,18 +608,67 @@ export function charactersReducer(state: CharactersState, action: any) {
                                                     }
                                                 })
                                             }
+                                            default: {
+                                                switch(action.payload.type){
+                                                    case "name": {
+                                                        return ritual.name = action.payload.value 
+                                                    }
+                                                    case "type": {
+                                                        return ritual.type = action.payload.value 
+                                                    }
+                                                    case "level": {
+                                                        return ritual.level = action.payload.value 
+                                                    }
+                                                    case "duration": {
+                                                        return ritual.duration = action.payload.value 
+                                                    }
+                                                    case "execution": {
+                                                        return ritual.execution = action.payload.value 
+                                                    }
+                                                    case "range": {
+                                                        return ritual.range = action.payload.value 
+                                                    }
+                                                    case "resistance": {
+                                                        return ritual.resistance = action.payload.value 
+                                                    }
+                                                    case "target": {
+                                                        return ritual.target = action.payload.value
+                                                    }
+                                                    case "studiedShow": {
+                                                        return ritual.studied.isActive = action.payload.value 
+                                                    }
+                                                    case "studiedCost": {
+                                                        return ritual.studied.additionalCost = action.payload.value 
+                                                    }
+                                                    case "studiedEffect": {
+                                                        return ritual.studied.additionalEffect = action.payload.value 
+                                                    }
+                                                    case "trulyShow": {
+                                                        return ritual.truly.isActive = action.payload.value 
+                                                    }
+                                                    case "trulyCost": {
+                                                        return ritual.truly.additionalCost = action.payload.value 
+                                                    }
+                                                    case "trulyEffect": {
+                                                        return ritual.truly.additionalEffect = action.payload.value 
+                                                    }
+                                                    case "description": {
+                                                        return ritual.description.principal = action.payload.value 
+                                                    }
+                                                    default: {
+                                                        return ritual
+                                                    }
+                                                }
+                                            }
                                         }
                                     }
-                                })
-                                
+                                })   
                             }
                         }
                     }
                 })
-                
             })
         }
-
         default:
             return state
     }

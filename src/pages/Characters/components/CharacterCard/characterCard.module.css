@@ -39,6 +39,19 @@
     box-shadow: inset 0px 0px 5px var(--black);
 }
 
+
+.exportCharacters{
+    left: 0;
+}
 .exportCharacters:hover > svg {
     fill: var(--green);
+}
+
+.duplicateCharacter {
+    left: 0;
+    margin-left: 3rem;
+}
+
+.duplicateCharacter:hover > svg {
+    fill: var(--blue);
 }

@@ -26,7 +26,7 @@
     border: 8px solid transparent;
     border-image: url("../../../../../../img/inregularborder.png") 40 stretch;
     background: var(--white); 
-    filter: brightness(20%);
+    filter: brightness(20%) opacity(50%);
     background-clip: content-box;
     z-index: -1;
 }
@@ -43,6 +43,17 @@
     justify-content: space-between;
     align-items: center;
     font-size: 1.25rem;
+} .skillsTableColumHeader > button {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: transparent;
+    font-size: 1.25rem;
+    border: 0;
+    justify-self: left;
+    gap: 1rem;
+    cursor: pointer;
 }
 
 .skillsTable > .addSkills {
@@ -55,6 +66,12 @@
     width: 4rem;
     opacity: 0.3;
     transition: 0.2s;
+    cursor: pointer;
 } .skillsTable > .addSkills:hover {
     opacity: 1;
+    border: 1px solid var(--green);
+} .addSkills > svg {
+    transition: 0.2s;
+} .addSkills:hover > svg {
+    fill: var(--green);
 }

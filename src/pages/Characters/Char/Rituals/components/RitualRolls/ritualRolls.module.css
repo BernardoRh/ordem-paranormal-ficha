@@ -1,40 +1,32 @@
 .multipleRolls {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: auto;
     padding: 0.75rem 0.75rem;
     gap: 0.5rem;
-}
-
-.multipleRolls > button{
+} .multipleRolls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
+} .multipleRolls > button {
+    width: 6rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 1rem;
-    border: 0;
     background: transparent;
-}
-
-.multipleRolls > button > img{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 1.5rem;
-    cursor: pointer;
-    filter: brightness(70%);
-    transition: 0.2s;
-}.multipleRolls > button:hover > img{
-    filter: brightness(100%);
-} .multipleRolls > button > svg{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 1.5rem;
-    cursor: pointer;
-    transition: 0.2s;
     border: 1px solid var(--white);
-} .multipleRolls > button:hover > svg{
-    fill: var(--green);
+    transition: 0.2s;
+    opacity: 0.3;
+    cursor: pointer;
+} .multipleRolls > button:hover {
     border: 1px solid var(--green);
+    opacity: 1;
+} .multipleRolls > button > svg {
+    transition: 0.2s;
+} .multipleRolls > button:hover > svg {
+    fill: var(--green);
 }

@@ -7,6 +7,7 @@
     --gray-300: #343434;
     --gray-400: #424242;
     --gray-700: #8e8e8e;
+    --polaroid: #ddd5c9;
     --black-10-percent: #0000007a;
     --black-70-percent: #000000f2;
     --blue: #255bff;
@@ -20,12 +21,18 @@
     --knowledge: #bf9100;
     --energy: #9a00fd;
     --death: #000;
+    --fear: #adadadbe;
 
     --blood-light: #5e2729;
     --knowledge-light: #685823;
     --energy-light: #4b2463;
     --death-light: #0f0f0f;
     --fear-light: #ffffff26;
+
+    --bludgeoning: #FFF;
+    --slash: #FFF;
+    --piercing: #FFF;
+    --ballistic: #FFF;
 }
 
 * {

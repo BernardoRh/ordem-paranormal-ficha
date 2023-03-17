@@ -16,7 +16,7 @@ import {
     changeInventoryAction,
     changeRitualsAction,
 } from "../../reducers/CharactersReducer/actions";
-import { Attack, CharactersSheet, Skill } from "../../reducers/CharactersReducer/charactersSheet";
+import { Attack, CharactersSheet, Ritual, Skill } from "../../reducers/CharactersReducer/charactersSheet";
 import { charactersReducer } from "../../reducers/CharactersReducer/reducer";
 interface AlertProps {
     alert: "NONE" | "BAD" | "GOOD",
@@ -58,7 +58,7 @@ interface CharactersContextType {
         id: string,
         attackId: string,
         type: "delete" | "changeName" | "changeTestDiceQuantity" | "changeTestBonus" | "changeDamageDiceQuantity" | 
-        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack",
+        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack" | "changeDamageType",
         value: string | Rolls | Attack
     ) => void
     changeCharacterSkills: (
@@ -89,9 +89,11 @@ interface CharactersContextType {
         "execution" | "range" | "resistance" | "target" | "studiedShow" | "studiedCost" | "studiedEffect" | "trulyShow" |
         "trulyCost" | "trulyEffect" | "description" | "addSubDescription" | "deleteSubDescription" | "subDescriptionName" |
         "DescriptionDescriptionSub" | "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" |
-        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage",
-        value: string | boolean
+        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage" | "multipleRollsName",
+        block: "subDescription" | "multipleRolls" | "rolls" | "",
+        value: string | boolean | Ritual
     ) => void
+    exportImportRituals: (id: string, ritualId: string, type: "exportAllRituals" | "exportRitual" | "importRitual", event?: ChangeEvent<HTMLInputElement>) => void
 }
 
 export const CharactersContext = createContext({} as CharactersContextType)
@@ -459,8 +461,7 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                 },
                 items: [],
             },
-            description: {
-                appearance: [],
+            diary: {
                 personality: [],
                 history: [],
                 objectives: []
@@ -547,7 +548,7 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         id: string,
         attackId: string,
         type: "delete" | "changeName" | "changeTestDiceQuantity" | "changeTestBonus" | "changeDamageDiceQuantity" | 
-        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack",
+        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack" | "changeDamageType",
         value: string | Rolls | Attack
     ) {
         dispatch(changeCharacterAttacksAction(id, attackId, type, value))
@@ -564,18 +565,18 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
 
     function exportImportCharacter(id: string, type: "exportAllCharacters" | "exportCharacter" | "importCharacter", event?: ChangeEvent<HTMLInputElement>) {
         let StateJSON = "";
-        let fileName = "characters";
+        let fileName = "Personagens";
         switch(type){
             case "exportAllCharacters": {
                 StateJSON = JSON.stringify(characters)
-                handleCharacterExportation(StateJSON, fileName)
+                handleExportation(StateJSON, fileName)
             }
             case "exportCharacter": {
                 characters.map((character) => {
                     if(character.id == id){
                         StateJSON = JSON.stringify([character])
-                        fileName = character.name ? character.name : "character"
-                        handleCharacterExportation(StateJSON, fileName)
+                        fileName = character.name ? character.name : "Personagen"
+                        handleExportation(StateJSON, fileName)
                     }
                 })
             }
@@ -628,7 +629,7 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         }
     }
 
-    function handleCharacterExportation(StateJSON: any, fileName: string) {
+    function handleExportation(StateJSON: any, fileName: string) {
         const blob = new Blob([StateJSON], { type: "application/json" });
         const href = URL.createObjectURL(blob);
         const link = document.createElement("a");
@@ -650,10 +651,70 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         "execution" | "range" | "resistance" | "target" | "studiedShow" | "studiedCost" | "studiedEffect" | "trulyShow" |
         "trulyCost" | "trulyEffect" | "description" | "addSubDescription" | "deleteSubDescription" | "subDescriptionName" |
         "DescriptionDescriptionSub" | "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" |
-        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage",
-        value: string | boolean
+        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage" | "multipleRollsName",
+        block: "subDescription" | "multipleRolls" | "rolls" | "",
+        value: string | boolean | Ritual
     ){
-        dispatch(changeRitualsAction(id, ritualId, subDescriptionId, multipleRollId, rollId, type, value))
+        dispatch(changeRitualsAction(id, ritualId, subDescriptionId, multipleRollId, rollId, type, block, value))
+    }
+
+    function exportImportRituals(id: string, ritualId: string, type: "exportAllRituals" | "exportRitual" | "importRitual", event?: ChangeEvent<HTMLInputElement>) {
+        let StateJSON = "";
+        let fileName = "Rituais";
+        characters.map((character) => {
+            if(character.id == id){
+                switch(type){
+                    case "exportAllRituals": {
+                        StateJSON = JSON.stringify(character.rituals)
+                        handleExportation(StateJSON, fileName)
+                    }
+                    case "exportRitual": {
+                        character.rituals.map((ritual) => {
+                            if(ritual.id == ritualId){
+                                StateJSON = JSON.stringify([ritual])
+                                fileName = ritual.name ? ritual.name : "Ritual"
+                                handleExportation(StateJSON, fileName)
+                            }
+                        })
+                    }
+                    case "importRitual": {
+                        const fileReader = new FileReader();
+                        if(event?.target.files) {
+                            fileReader.readAsText(event.target.files[0], "UTF-8");
+                            fileReader.onload = (importedRituals) => {
+                                if(importedRituals.target != null){
+                                    const toImportCharacters: Ritual[] = JSON.parse(importedRituals.target.result as string)
+                                    toImportCharacters.map((ritual: Ritual) => {
+                                        if(
+                                            "id" in ritual &&
+                                            "name" in ritual &&
+                                            "type" in ritual &&
+                                            "level" in ritual &&
+                                            "execution" in ritual &&
+                                            "range" in ritual &&
+                                            "target" in ritual &&
+                                            "duration" in ritual &&
+                                            "resistance" in ritual &&
+                                            "description" in ritual &&
+                                            "studied" in ritual &&
+                                            "truly" in ritual &&
+                                            "multipleRolls" in ritual
+                                        ){
+                                            const newRitual = {...ritual, id: String(new Date()) + String(Math.random())}
+                                            changeRituals(character.id, "", "", "", "", "addRitual", "",newRitual)
+                                        }
+                                    })
+                                }
+                            };
+                        }
+                    }
+                    default: {
+        
+                    }
+                }
+            }
+        })
+        
     }
 
     const {characters, characterToDisplayId} = charactersState
@@ -690,7 +751,8 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                 changeCharacterSkills,
                 exportImportCharacter,
                 changeInventory,
-                changeRituals
+                changeRituals,
+                exportImportRituals
             }}
         >
             {children}

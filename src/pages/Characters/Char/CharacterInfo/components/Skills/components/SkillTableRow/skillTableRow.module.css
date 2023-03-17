@@ -42,7 +42,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
+} .skillsTableColum > button > .trash {
+    transition: 0.2s;
 } .skillsTableColum > button:hover > .trash {
     fill: var(--red);
-    transition: 0.2s;
 }

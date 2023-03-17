@@ -1,4 +1,4 @@
-import { Pencil, Plus, Trash } from "phosphor-react"
+import { CaretDown, CaretRight, CaretUp, Pencil, Plus, Trash } from "phosphor-react"
 import { ChangeEvent, useContext, useState } from "react"
 import { CharactersContext } from "../../../../../../contexts/CaractersContexts/CharactersContext"
 import { Skill } from "../../../../../../reducers/CharactersReducer/charactersSheet"
@@ -15,7 +15,7 @@ export function Skills({skills}: Skills) {
 
     function handleAddNewSkill() {
         const newSkill: Skill = {
-            id: String(new Date()),
+            id: String(new Date()) + String(Math.random()),
             name: "",
             page: "",
             description: "",
@@ -26,21 +26,48 @@ export function Skills({skills}: Skills) {
         }
     }
 
+    const [sortSkills, setSortSkills] = useState<boolean | undefined>(undefined)
+
+    function handleChangeSort() {
+        if(sortSkills == undefined){
+            setSortSkills(true)
+        } else if(sortSkills == true){
+            setSortSkills(false)
+        } else {
+            setSortSkills(undefined)
+        }
+    }
+
+    let skillsToDisplay = skills?.slice()
+
+    if(sortSkills == true){
+        skillsToDisplay = skillsToDisplay?.sort((a, b) => a.name > b.name ? 1 : -1)
+    } else if(sortSkills == false){
+        skillsToDisplay = skillsToDisplay?.sort((a, b) => a.name < b.name ? 1 : -1)
+    }
+    
+
     return(
         <div className={styles.skillsTable}>
             <div className={styles.skillsTableColumHeader}>
-                <div>HABILIDADES</div>
+                <button onClick={handleChangeSort}>
+                    HABILIDADES
+                    {sortSkills == undefined ? <CaretRight size={16} weight="fill" /> : sortSkills ? 
+                        <CaretDown size={16} weight="fill"/> : 
+                        <CaretUp size={16} weight="fill"/>
+                    }
+                </button>
                 <div className={styles.center}>CUSTO</div>
                 <div className={styles.center}>PAGINA</div>
                 <div>
                     DESCRIÇÃO
                 </div>
             </div>
-            {skills?.map((skill) => {
+            {skillsToDisplay?.map((skill) => {
                 return(<SkillTableRow key={skill.id} skill={skill}/>)
             })}
             <button className={styles.addSkills} onClick={handleAddNewSkill}>
-                <Plus size={24}/>
+                <Plus size={24} weight="fill"/>
             </button>
         </div>
     )

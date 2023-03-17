@@ -9,16 +9,14 @@ import { CharacterCard } from "./components/CharacterCard"
 export function Characters() {
 
     const { characters, createNewCharacter, exportImportCharacter} = useContext(CharactersContext)
-    const [isDisabled, setIsDisabled] = useState(false)
     const [resetKey, setResetKey] = useState(String(new Date()))
     
     function handleResetKey() {
         setResetKey(String(new Date()))
     }
 
-    function cooldownButton() {
-        setIsDisabled(true)
-        setTimeout(function() {setIsDisabled(false)}, 2000)
+    function handleCreateNewCharacter() {
+        createNewCharacter()
     }
 
     function handleExportCharacters() {
@@ -60,9 +58,8 @@ export function Characters() {
                             ""
                         }
                         <button
-                            disabled={isDisabled}
                             className={styles.addCharacter}
-                            onClick={() => {createNewCharacter(); cooldownButton()}}>
+                            onClick={handleCreateNewCharacter}>
                             <Plus size={128} weight="fill"/>
                         </button>
                     </>

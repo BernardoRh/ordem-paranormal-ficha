@@ -17,7 +17,7 @@
     border: 6px solid transparent;
     border-image: url("../../../../../../../../img/inregularborder.png") 15 stretch;
     background: var(--white); 
-    filter: brightness(20%);
+    filter: brightness(20%) opacity(50%);
     background-clip: content-box;
     z-index:-1;
 }
@@ -26,7 +26,7 @@
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
-    margin: 0.25rem 0;
+    margin-top: 0.5rem;
 }
 
 .protectionAndResistanceHeader > input{
@@ -60,6 +60,7 @@
     align-items: center;
     border: 0;
     background: transparent;
+    cursor: pointer;
 }.protectionAndResistance > div > span > button > svg {
     transition: 0.2s;
 } .protectionAndResistance > div > span > button:hover > svg {

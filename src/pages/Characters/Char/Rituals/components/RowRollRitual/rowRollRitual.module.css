@@ -1,0 +1,53 @@
+.roll {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.roll > * {
+    margin: 0 0.15rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    height: 1.5rem;
+    background: transparent;
+    border: 0;
+    float: left;
+    font-size: 0.75rem;
+} .roll > * > * {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    height: 1.5rem;
+    background: transparent;
+    border: 0;
+    font-size: 0.75rem;
+} .roll > select > option{
+    background: var(--gray-100);
+    font-size: 0.75rem;
+} .roll > select, .roll > input, .roll > span > input { 
+    border-bottom: 1px solid var(--white);
+    appearance: none;
+    text-align: center;
+} .roll > .testOrdDamage {
+    width: 4rem;
+} .roll > select {
+    width: 2rem;
+} .roll > input, .roll > span > input { 
+    height: 1.5rem;
+    width: 1.5rem;
+} .roll > button {
+    filter: brightness(70%);
+    cursor: pointer;
+} .roll > button:hover {
+    filter: brightness(100%);
+} .roll > button > svg {
+    transition: 0.2s;
+} .roll > button:hover > svg {
+    fill: var(--red);
+}

@@ -16,20 +16,20 @@ export function SubDescription({subDescription, ritualId}: SubDescriptionProps) 
     function handleChangeSubDescription(event: ChangeEvent<HTMLTextAreaElement>) {
         const changedDescription = event.target.value
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritualId, subDescription.id, "", "", "DescriptionDescriptionSub", changedDescription)
+            changeRituals(characterToDisplayId, ritualId, subDescription.id, "", "", "DescriptionDescriptionSub", "subDescription", changedDescription)
         }
     }
 
     function handleChangeSubName(event: ChangeEvent<HTMLInputElement>) {
         const changedName = event.target.value
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritualId, subDescription.id, "", "", "subDescriptionName", changedName)
+            changeRituals(characterToDisplayId, ritualId, subDescription.id, "", "", "subDescriptionName", "subDescription", changedName)
         }
     }
 
     function handleDeleteSubDescription() {
         if(characterToDisplayId != null) {
-            changeRituals(characterToDisplayId, ritualId, subDescription.id, "", "", "deleteSubDescription", "")
+            changeRituals(characterToDisplayId, ritualId, subDescription.id, "", "", "deleteSubDescription", "subDescription", "")
         }
     }
 

@@ -6,6 +6,7 @@ export interface Rolls {
     id: string,
     diceType: "4" | "6" | "10" | "12" | "20" | "100" ,
     quantity: string,
+    name?: string,
     bonus?: string,
     critical?: string,
     isDamage: boolean

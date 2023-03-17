@@ -25,7 +25,7 @@
     border: 8px solid transparent;
     border-image: url("../../../../../../img/inregularborder.png") 40 stretch;
     background: var(--white); 
-    filter: brightness(20%);
+    filter: brightness(20%) opacity(50%);
     background-clip: content-box;
     z-index: -1;
 }
@@ -207,6 +207,12 @@
     width: 4rem;
     opacity: 0.3;
     transition: 0.2s;
+    cursor: pointer;
 } .items > .addItems:hover {
+    border: 1px solid var(--green);
     opacity: 1;
+} .items > .addItems > svg {
+    transition: 0.2s;
+} .items > .addItems:hover > svg {
+    fill: var(--green);
 }

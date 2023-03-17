@@ -1,0 +1,6 @@
+.page {
+    overflow: auto;
+    overflow-x: hidden;
+} .page::-webkit-scrollbar {
+    display: none;
+}

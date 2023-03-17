@@ -118,6 +118,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
     width: 8rem;
     gap: 0.5rem;
 }
@@ -166,12 +167,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 5rem;
+    width: 6rem;
     border: 1px solid var(--white);
-    opacity: 70%;
+    opacity: 0.3;
     cursor: pointer;
+    transition: 0.2s;
 } .addSubDescription:hover {
-    opacity: 100%;
+    opacity: 1;
+    border: 1px solid var(--green);
+} .addSubDescription > svg {
+    transition: 0.2s;
+} .addSubDescription:hover > svg{
+    opacity: 1;
+    fill: var(--green);
 }
 
 .buttonsRitualCard {

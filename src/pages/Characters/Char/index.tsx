@@ -9,29 +9,6 @@ import { ChangeEvent, useContext } from "react"
 import { CharactersContext } from "../../../contexts/CaractersContexts/CharactersContext"
 
 export function Char() {
-
-    const { changeCharacterName, changeCharacterAge, characterToDisplayId, characters } = useContext(CharactersContext)
-
-    const characterToDisplay = characters.find((character) => {
-        if(character.id == characterToDisplayId){
-            return character
-        }
-    })
-
-    function handleChangeCharacterName(event: ChangeEvent<HTMLInputElement>){
-        const name = event.target.value
-        if(characterToDisplayId != null){
-            changeCharacterName(characterToDisplayId, name)
-        }
-    }
-
-    function handleChangeCharacterAge(event: ChangeEvent<HTMLInputElement>){
-        const age = event.target.value
-        if(characterToDisplayId != null){
-            changeCharacterAge(characterToDisplayId, age)
-        }
-    }
-
     return(
         <>
             <nav className={styles.characterNavHeader}>
@@ -48,22 +25,6 @@ export function Char() {
                     <h4>DIÁRIO</h4>
                 </NavLink>
             </nav>
-            <div className={styles.characterInfo}>
-                <span>
-                    NOME:<input 
-                        type="text"
-                        onChange={handleChangeCharacterName}
-                        value={characterToDisplay?.name}
-                    />
-                </span>
-                <span>
-                    IDADE:<input
-                        type="number"
-                        value={characterToDisplay?.age}
-                        onChange={handleChangeCharacterAge}
-                    />
-                </span>
-            </div>
             <Outlet />
             {/* LEMBRAR DE REMOVER DIV COM DISPLAY: NONE */}
             <div style={{display: "none"}}>

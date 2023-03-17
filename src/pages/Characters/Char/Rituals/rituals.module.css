@@ -12,6 +12,94 @@
     row-gap: 2rem;
 }
 
+.ritualHeader {
+    position: relative;
+    grid-column-start: 1;
+    grid-column-end: 4;
+    width: 86rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+} .ritualHeader::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border: 8px solid transparent;
+    border-image: url("../../../../img/inregularborder.png") 40 stretch;
+    background: var(--white);
+    filter: brightness(20%) opacity(50%);
+    background-clip: content-box;
+    z-index: -1;
+} .ritualHeader > *, .ritualHeader > div > *{
+    font-size: 1.25rem;
+    background: transparent;
+    margin: 0 4rem;
+    border: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    appearance: none;
+    text-align: center;
+    font-family: 'Special Elite', cursive;
+    cursor: pointer;
+    gap: 1rem;
+    transition: 0.2s;
+} .ritualHeader > select > option {
+    background: var(--gray-100);
+    text-align: center;
+} .ritualHeader > div > select {
+    border-bottom: 1px solid var(--white);
+}
+
+.ritualHeader > div > * {
+    margin: 0;
+} .ritualHeader > div > p:hover {
+    filter: none;
+} .ritualHeader > div > p {
+    cursor: default;
+}  .ritualHeader > div > button {
+    width: 7.25rem;
+    justify-content: left;
+} .ritualHeader > div {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    justify-content: center;
+    align-items: center;
+}  .ritualHeader > div > select > option {
+    background: var(--gray-100);
+    text-align: center;
+}  
+
+.ritualHeader > select:hover, .ritualHeader > div > *:hover {
+    filter: drop-shadow(2px 2px 4px black);
+}
+
+.ritualsManipulationContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+} .ritualsManipulationContainer > .exportImportButton {
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+} .ritualsManipulationContainer > .exportImportButton > h4{
+    font-weight: 400;
+    font-size: 1.25rem;
+    transition: 0.2s;
+    font-family: 'Special Elite', cursive;
+} .ritualsManipulationContainer > .exportImportButton > svg{
+    transition: 0.2s;
+} .ritualsManipulationContainer > input[type="file"] {
+    display: none;
+}
 
 .addRitualCard {
     width: 27.5rem;
@@ -27,10 +115,15 @@
     width: 13.75rem;
     height: 21.5rem;
     background: transparent;
-    filter: opacity(40%);
+    opacity: 0.3;
     transition: 0.2s;
     cursor: pointer;
 } .addRitualCard > button:hover {
-    filter: opacity(100%);
+    border: 3px solid var(--green);
+    opacity: 1;
     box-shadow: 4px 4px 6px black;
+} .addRitualCard > button > svg {
+    transition: 0.2s;
+} .addRitualCard > button:hover > svg {
+    fill: var(--green);
 }

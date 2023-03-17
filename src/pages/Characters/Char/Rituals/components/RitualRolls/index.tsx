@@ -1,20 +1,32 @@
-import { Plus } from "phosphor-react"
+import { Plus, X } from "phosphor-react"
 import styles from "./ritualRolls.module.css"
-import rollDiceIcon from "../../../../../../img/rollDice.png"
+import { RollRitual } from "../RollRitual"
+import { MultipleRolls } from "../../../../../../reducers/CharactersReducer/charactersSheet"
+import { useContext } from "react"
+import { CharactersContext } from "../../../../../../contexts/CaractersContexts/CharactersContext"
 
-export function RitualRolls() {
+interface RitualRollsProps {
+    multipleRolls: MultipleRolls[]
+    ritualId: string
+}
+
+
+export function RitualRolls({multipleRolls, ritualId}: RitualRollsProps) {
+
+    const {characterToDisplayId, changeRituals} = useContext(CharactersContext)
+
+    function handleAddMultipleRolls() {
+        if(characterToDisplayId != null) {
+            changeRituals(characterToDisplayId, ritualId, "", "", "", "addMultipleRolls", "multipleRolls", "")
+        }
+    }
+
     return(
         <div className={styles.multipleRolls}>
-            <button><img src={rollDiceIcon}/></button>:
-            <div className={styles.roll}>
-                <select>
-                    <option value="test">Teste</option>
-                    <option value="energy">Energia</option>
-                    <option value="fear">Medo</option>
-                    <option value="death">Morte</option>
-                </select>
-            </div>
-            <button><Plus size={24} weight="fill"/></button>
+            {multipleRolls.map((multipleRoll) => {
+                return(<RollRitual key={multipleRoll.id} multipleRollsId={multipleRoll.id} rolls={multipleRoll.rolls} name={multipleRoll.name} ritualId={ritualId}/>)
+            })}
+            <button onClick={handleAddMultipleRolls}><Plus size={24} weight="fill"/></button>
         </div>
     )
 }
