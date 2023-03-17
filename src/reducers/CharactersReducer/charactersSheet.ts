@@ -94,15 +94,21 @@ export interface Inventory {
     items: Item[],
 }
 
-export interface HistoryAndObjectives {
+export interface Objectives {
     id: string,
     title: string,
     description: string,
 }
 
+interface Pages {
+    id: string,
+    title: string,
+    notes: Objectives[]
+}
+
 export interface CharactersSheet {
     id: string,
-    avatar: string,
+    avatar?: string,
     name: string,
     age: string,
     origin: string,
@@ -135,7 +141,8 @@ export interface CharactersSheet {
     inventory: Inventory,
     diary: {
         personality: string[],
-        history: HistoryAndObjectives[],
-        objectives: HistoryAndObjectives[],
+        history: string,
+        objectives: Objectives[],
+        pages: Pages[]
     }
 }

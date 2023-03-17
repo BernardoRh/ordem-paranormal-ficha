@@ -1,4 +1,3 @@
-import produce from "immer";
 import { ReactNode, createContext, useEffect, useReducer, useState, ChangeEvent } from "react";
 import { Rolls } from "../../components/Rolldice";
 import {
@@ -28,7 +27,7 @@ interface CharactersContextType {
     displayCharacter: (id: string) => void,
     createNewCharacter: (character?: CharactersSheet) => void,
     deleteCharacter: (id: string) => void,
-    changeAvatar: (id: string, avatar: string) => void
+    changeAvatar: (id: string, type: "deleteAvatar" | "changeAvatar", avatar?: File) => void
     changeCharacterName: (id: string, name: string) => void
     changeCharacterAge: (id: string, age: string) => void
     changeCharacterAttributes: (id: string, attribute: string, value: string) => void
@@ -422,7 +421,6 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                 strength: "",
                 vigor: ""
             },
-            avatar: "",
             name: "",
             age: "",
             origin: "",
@@ -463,9 +461,11 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
             },
             diary: {
                 personality: [],
-                history: [],
-                objectives: []
+                history: "",
+                objectives: [],
+                pages: []
             },
+            avatar: ""
         }
         dispatch(createNewCharacterAction(character ? character : newCharacter))
     }
@@ -478,8 +478,18 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         dispatch(displayCharacterAction(id))
     }
 
-    function changeAvatar(id: string, avatar: string){
-        dispatch(changeAvatarAction(avatar, id))
+    function changeAvatar(id: string, type: "deleteAvatar" | "changeAvatar", avatar?: File){
+        if(avatar != undefined){
+            const newAvatar = new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.onload = () => resolve(fileReader.result);
+                fileReader.readAsDataURL(avatar);
+            });
+            newAvatar.then(base64 => dispatch(changeAvatarAction(id, type, base64)))
+        } else {
+            dispatch(changeAvatarAction(id, type))
+            changeCharacterName(id, "")
+        }
     }
 
     function changeCharacterName(id: string, name: string) {
@@ -612,7 +622,7 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                                 'skills' in character &&
                                 'rituals' in character &&
                                 'inventory' in character &&
-                                'description' in character
+                                'diary' in character
                             ){
                                 const newCharacter = {...character, id: String(new Date()) + String(Math.random())}
                                 createNewCharacter(newCharacter)

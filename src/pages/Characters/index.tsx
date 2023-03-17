@@ -52,7 +52,7 @@ export function Characters() {
                     <>
                         {characters ? characters.map((character) => {
                             return(
-                                <CharacterCard handleExportCharacter={handleExportCharacter} key={character.id} id={character.id} avatar={character.avatar} name={character.name}/>
+                                <CharacterCard handleExportCharacter={handleExportCharacter} key={character.id} id={character.id} avatar={`${character.avatar}`} name={character.name}/>
                             )
                         }):
                             ""

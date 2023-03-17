@@ -36,7 +36,9 @@ export function CharacterCard({id, avatar, name, handleExportCharacter}: Charact
                 displayCharacter(id)
             }}>
                 <>
-                    <img src={avatar ? avatar : PlaceholderAvatar} />
+                    <img 
+                        src={avatar ? avatar : PlaceholderAvatar}
+                    />
                     {name}
                 </>
             </NavLink>

@@ -76,11 +76,12 @@ export function deleteCharacterAction(id: string) {
     }
 }
 
-export function changeAvatarAction(avatar: string, id: string) {
+export function changeAvatarAction(id: string, type: "deleteAvatar" | "changeAvatar", avatar?: unknown) {
     return {
         type: ActionsType.CHANGE_AVATAR,
         payload: {
             avatar,
+            type,
             id,
         }
     }

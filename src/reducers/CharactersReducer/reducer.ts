@@ -40,7 +40,14 @@ export function charactersReducer(state: CharactersState, action: any) {
             return produce(state, (draft) => {
                 draft.characters.map((character) => {
                     if(character.id == action.payload.id){
-                        return character.avatar = action.payload.avatar
+                        switch(action.payload.type) {
+                            case "deleteAvatar": {
+                                return character.avatar = ""
+                            }
+                            case "changeAvatar": {
+                                return character.avatar = action.payload.avatar
+                            }
+                        }
                     }
                     return character
                 })

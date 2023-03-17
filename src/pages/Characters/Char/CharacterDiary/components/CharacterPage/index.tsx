@@ -1,4 +1,4 @@
-import { ChangeEvent, HtmlHTMLAttributes, ReactNode, useContext } from "react"
+import { ChangeEvent, HtmlHTMLAttributes, ReactNode, useContext, useState } from "react"
 import { Page } from "../Page"
 import styles from "./characterPage.module.css"
 import avatarPlaceHolder from "./../../../../../../img/silhuetaSenhorVerissimo.webp"
@@ -7,6 +7,7 @@ import tape from "./../../../../../../img/tape.png"
 import { X } from "phosphor-react"
 import { CharactersContext } from "../../../../../../contexts/CaractersContexts/CharactersContext"
 import line from "./../../../../../../img/line.png"
+import { useDropzone } from "react-dropzone"
 
 interface CharacterPageProps extends HtmlHTMLAttributes<HTMLDivElement>{
     children?: ReactNode,
@@ -14,7 +15,7 @@ interface CharacterPageProps extends HtmlHTMLAttributes<HTMLDivElement>{
 
 export function CharacterPage({children, ...props}: CharacterPageProps) {
 
-    const { changeCharacterName, changeCharacterAge, characterToDisplayId, characters } = useContext(CharactersContext)
+    const { changeCharacterName, changeCharacterAge, changeAvatar, characterToDisplayId, characters } = useContext(CharactersContext)
 
     const characterToDisplay = characters.find((character) => {
         if(character.id == characterToDisplayId){
@@ -22,7 +23,23 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
         }
     })
 
-    
+    const {getRootProps, getInputProps} = useDropzone({
+        accept: {
+            "image/png": ['.png']
+        },
+        onDrop: acceptFiles => {
+            if(characterToDisplayId != null){
+                changeAvatar(characterToDisplayId, "changeAvatar", acceptFiles[0])
+            }
+        }
+    })
+
+    function handleRemoveAvatar() {
+        restKey()
+        if(characterToDisplayId != null) {
+            changeAvatar(characterToDisplayId, "deleteAvatar")
+        }
+    }
 
     function handleChangeCharacterName(event: ChangeEvent<HTMLTextAreaElement>){
         const name = event.target.value
@@ -38,6 +55,11 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
         }
     }
 
+    const [key, setKey] = useState(String(new Date()) + String(Math.random()))
+    function restKey() {
+        setKey(String(new Date()) + String(Math.random()))
+    }
+
     return(
         <Page {...props}>
             <div className={`${styles.characterInfo}`}>
@@ -46,11 +68,13 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
                     <input type="number" value={characterToDisplay?.age} onChange={handleChangeCharacterAge}/>
                     <img src={line}/>
                 </span>
+                {
+                characterToDisplay?.avatar ?
                 <div className={styles.characterPolaroid}>
-                    <button className={styles.pinButton}>
+                    <button className={styles.pinButton} onClick={handleRemoveAvatar}>
                         <img className={styles.pin} src={pin}/>
                     </button>
-                    <img src="https://i.pinimg.com/originals/8f/8e/bf/8f8ebf44a8855679dda64ebee085a563.png"/>
+                    <img src={`${characterToDisplay?.avatar}`}/>
                     <textarea
                         maxLength={40}
                         rows={2}
@@ -59,6 +83,14 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
                         value={characterToDisplay?.name}
                     />
                 </div>
+                :
+                <div {...getRootProps({className: styles.avatarInput})}>
+                    <img src={avatarPlaceHolder} />
+                    Solte uma imagem ou clique
+                    <input key={key} id="avatar" accept=".png" type="file" style={{ display: "none" }} {...getInputProps()}/>
+                </div>
+                
+                }
                 <div className={styles.characterPersonality}>
                     <h4>PERSONALIDADE</h4>
                     <input type="text" />
@@ -68,11 +100,6 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
                     <img className={`${styles.tape} ${styles.tapeOne}`} src={tape}/>
                     <img className={`${styles.tape} ${styles.tapeTwo}`} src={tape}/>
                 </div>
-                <label htmlFor="avatar" style={{display: "none"}}>
-                    <img src={avatarPlaceHolder}/>
-                    Solte uma imagem ou clique
-                </label>
-                <input id="avatar" type="file" style={{display: "none"}}/>
             </div>
             <div className={styles.containerHistory}>
                 <div className={styles.history}>

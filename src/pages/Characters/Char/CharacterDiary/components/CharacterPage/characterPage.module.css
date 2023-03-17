@@ -4,7 +4,9 @@
     justify-content: center;
     gap: 3rem;
     position: relative;
-} .characterInfo > label {
+} 
+
+.avatarInput {
     width: 18rem;
     height: 24rem;
     display: flex;
@@ -18,13 +20,14 @@
     transition: 0.2s;
     gap: 1rem;
     font-family: 'Special Elite', cursive;
-} .characterInfo > label:hover {
+    font-weight: bold;
+} .avatarInput:hover {
     font-size: 1.25rem;
-} .characterInfo > label > img {
+} .avatarInput > img {
     height: 16rem;
     filter: brightness(0);
     transition: 0.2s;
-} .characterInfo > label:hover > img {
+} .avatarInput:hover > img {
     height: 17rem;
 }
 
@@ -68,6 +71,7 @@
     box-shadow: 0 2px 4px black;
     position: relative;
     rotate: -3deg;
+    transition: 0.4s;
 } .characterPolaroid::before {
     content: "";
     position: absolute;
@@ -79,6 +83,7 @@
     z-index: -1;
 } .characterPolaroid > img {
     height: 17rem;
+    max-width: 16rem;
 } .characterPolaroid > textarea {
     font-family: 'Special Elite', cursive;
     position: absolute;
