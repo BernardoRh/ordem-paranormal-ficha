@@ -2,7 +2,7 @@ import { Trash } from "phosphor-react";
 import { ChangeEvent, useContext, useState } from "react";
 import styles from "./skillTableRow.module.css"
 import { Skill } from "../../../../../../../../reducers/CharactersReducer/charactersSheet";
-import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext";
+import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext";
 
 interface SkillTableRow {
     skill?: Skill

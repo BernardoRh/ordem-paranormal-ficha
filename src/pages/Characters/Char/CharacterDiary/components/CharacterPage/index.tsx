@@ -1,13 +1,17 @@
 import { ChangeEvent, HtmlHTMLAttributes, ReactNode, useContext, useState } from "react"
+import { CharactersContext } from "../../../../../../contexts/CharactersContexts/CharactersContext"
+import { useDropzone } from "react-dropzone"
+
 import { Page } from "../Page"
+import { X } from "phosphor-react"
+
 import styles from "./characterPage.module.css"
+
+import line from "./../../../../../../img/line.png"
 import avatarPlaceHolder from "./../../../../../../img/silhuetaSenhorVerissimo.webp"
 import pin from "./../../../../../../img/pin.png"
 import tape from "./../../../../../../img/tape.png"
-import { X } from "phosphor-react"
-import { CharactersContext } from "../../../../../../contexts/CaractersContexts/CharactersContext"
-import line from "./../../../../../../img/line.png"
-import { useDropzone } from "react-dropzone"
+import { Tape } from "../Tape"
 
 interface CharacterPageProps extends HtmlHTMLAttributes<HTMLDivElement>{
     children?: ReactNode,
@@ -86,7 +90,7 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
                 :
                 <div {...getRootProps({className: styles.avatarInput})}>
                     <img src={avatarPlaceHolder} />
-                    Solte uma imagem ou clique
+                    SOLTE UMA IMAGEM OU CLIQUE
                     <input key={key} id="avatar" accept=".png" type="file" style={{ display: "none" }} {...getInputProps()}/>
                 </div>
                 
@@ -94,19 +98,19 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
                 <div className={styles.characterPersonality}>
                     <h4>PERSONALIDADE</h4>
                     <input type="text" />
-                    <div>
+                    <div className={styles.personalityContent}>
                         <span>Gayzão <button><X size={16}/></button></span>
                     </div>
-                    <img className={`${styles.tape} ${styles.tapeOne}`} src={tape}/>
-                    <img className={`${styles.tape} ${styles.tapeTwo}`} src={tape}/>
+                    <Tape rotation="-45deg" className={`${styles.tape} ${styles.tapeOne}`}/>
+                    <Tape rotation="-45deg" className={`${styles.tape} ${styles.tapeTwo}`}/>
                 </div>
             </div>
             <div className={styles.containerHistory}>
                 <div className={styles.history}>
                     <h4>HISTÓRIA<img src={line}/></h4>
                     <textarea rows={15}/>
-                    <img className={`${styles.tape} ${styles.tapeOne}`} src={tape}/>
-                    <img className={`${styles.tape} ${styles.tapeTwo}`} src={tape}/>
+                    <Tape rotation="45deg" className={`${styles.tape} ${styles.tapeOne}`}/>
+                    <Tape rotation="45deg" className={`${styles.tape} ${styles.tapeTwo}`}/>
                 </div>
             </div>
             {children}

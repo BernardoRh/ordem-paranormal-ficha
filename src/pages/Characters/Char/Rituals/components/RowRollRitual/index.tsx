@@ -1,7 +1,7 @@
 import { Plus, X } from 'phosphor-react'
 import { ChangeEvent, useContext } from 'react'
 import { Rolls } from '../../../../../../components/Rolldice'
-import { CharactersContext } from '../../../../../../contexts/CaractersContexts/CharactersContext'
+import { CharactersContext } from '../../../../../../contexts/CharactersContexts/CharactersContext'
 import styles from './rowRollRitual.module.css'
 
 interface RowRollRitualProps {

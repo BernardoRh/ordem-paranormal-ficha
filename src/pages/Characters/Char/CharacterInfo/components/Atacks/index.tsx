@@ -3,7 +3,7 @@ import styles from "./attacks.module.css"
 import { Attack } from "../../../../../../reducers/CharactersReducer/charactersSheet"
 import { AttackRow } from "./components/Attack"
 import { useContext, useEffect, useState } from "react"
-import { CharactersContext } from "../../../../../../contexts/CaractersContexts/CharactersContext"
+import { CharactersContext } from "../../../../../../contexts/CharactersContexts/CharactersContext"
 import { string } from "zod"
 
 interface AttacksProps {

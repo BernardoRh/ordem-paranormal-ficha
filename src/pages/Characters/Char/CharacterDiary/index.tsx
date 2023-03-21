@@ -1,9 +1,8 @@
 import { CaretDoubleLeft, CaretDoubleRight } from "phosphor-react"
-import { useContext, useRef, useState } from "react"
+import { useRef } from "react"
 import HTMLFlipBook from "react-pageflip"
-import { CharactersContext } from "../../../../contexts/CaractersContexts/CharactersContext"
 import styles from "./characterDiary.module.css"
-import { Annotation } from "./components/Annotation"
+import { CharacterObjectives } from "./components/CharacterObjectives"
 import { CharacterPage } from "./components/CharacterPage"
 import { Page } from "./components/Page"
 
@@ -92,6 +91,15 @@ export function CharacterDiary() {
                                 {pageCount = pageCount + 1}
                             </span>
                         </CharacterPage>
+                    </div>
+                    <div className={`${styles.page} ${styles.pageRight}`}>
+                        <CharacterObjectives
+                            className={styles.pageContent}
+                        >
+                            <span className={styles.pageNumber}>
+                                {pageCount = pageCount + 1}
+                            </span>
+                        </CharacterObjectives>
                     </div>
                     {toDisplayContent.map((page) => {
                         pageCount = pageCount + 1

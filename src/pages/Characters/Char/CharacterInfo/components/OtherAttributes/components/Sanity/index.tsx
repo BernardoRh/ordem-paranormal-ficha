@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext, useState } from "react"
-import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext";
+import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext";
 import { BarContainer } from "../BarContainer";
 import styles from "./sanity.module.css"
 

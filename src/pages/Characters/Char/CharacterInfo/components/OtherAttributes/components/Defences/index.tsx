@@ -1,6 +1,6 @@
 import { Circle, Shield, ShieldChevron } from "phosphor-react";
 import { ChangeEvent, useContext } from "react";
-import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext";
+import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext";
 import { BaseBox } from "../BaseBox";
 import styles from "./defenses.module.css"
 

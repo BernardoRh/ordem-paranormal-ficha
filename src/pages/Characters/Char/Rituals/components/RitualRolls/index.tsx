@@ -3,7 +3,7 @@ import styles from "./ritualRolls.module.css"
 import { RollRitual } from "../RollRitual"
 import { MultipleRolls } from "../../../../../../reducers/CharactersReducer/charactersSheet"
 import { useContext } from "react"
-import { CharactersContext } from "../../../../../../contexts/CaractersContexts/CharactersContext"
+import { CharactersContext } from "../../../../../../contexts/CharactersContexts/CharactersContext"
 
 interface RitualRollsProps {
     multipleRolls: MultipleRolls[]

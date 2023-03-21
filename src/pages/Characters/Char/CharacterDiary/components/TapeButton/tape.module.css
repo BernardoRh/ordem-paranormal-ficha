@@ -1,0 +1,115 @@
+.containerTape {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    background: transparent;
+    border: 0;
+}
+
+.animation{
+    transition: all 750ms ease-in-out;
+    cursor: pointer;
+}
+
+#container {
+    position: relative;
+    width: 1.5rem;
+    height: 5rem;
+    opacity: 0.8;
+    
+    backface-visibility: hidden;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+}
+
+.x {
+    position: absolute;
+    width: 1.5rem;
+    height: 5rem;
+    opacity: 0.5;
+} .x > svg {
+    transition: 0.75s;
+    margin-top: 2rem;
+    top: 2.5;
+    rotate: 45deg;
+} #container:hover > .x > svg {
+    fill: var(--red);
+}
+
+#container .sticky{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.5rem;
+    height: 5rem;
+    cursor: pointer;
+}
+
+#container .tape_wrapper{
+    position: absolute;
+    width: 1.5rem;
+    height: 5rem;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+    background-color: #d2d1d2;
+}
+
+#container .square{
+    position: absolute;
+    width: 1.5rem;
+    height: 5rem;
+}
+
+#container .back{
+    height: 0.25rem;
+    top: 0rem;
+}
+
+#container:hover .back{
+    top: 1.15rem;
+}
+
+#container .back .square{
+    margin-top: 0rem;
+    background-color: transparent;
+
+    background-image: -webkit-linear-gradient(bottom, #d2d1d2 45%, #bebebe 65%);
+}
+
+#container:hover .back .square{
+    margin-top: 0rem;
+}
+
+#container .front{
+    height: 5rem;
+    bottom: 0;
+    top: auto;
+    
+    box-shadow: 0px 0px 1px #34343476;
+}
+
+#container:hover .front{
+    height: 4.25rem;
+    
+    box-shadow: 0px -6px 1px #34343476;
+}
+
+#container .front .square{
+    margin-top: 0px;
+    background: #c9c9c9;
+
+    background-image: -webkit-linear-gradient(bottom, #d2d1d2 75%, #bebebe 95%);
+
+    background-image: linear-gradient(bottom, #d2d1d2 75%, #d2d1d2 95%);
+}
+
+#container:hover .front .square{
+    margin-top: 0.5rem;
+    background-color: #8c8c8c 95%;
+    background-position: 0 0;
+}

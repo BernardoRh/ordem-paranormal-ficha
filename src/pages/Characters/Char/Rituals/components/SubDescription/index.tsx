@@ -1,6 +1,6 @@
 import { X } from "phosphor-react"
 import { ChangeEvent, useContext, useEffect, useState } from "react"
-import { CharactersContext } from "../../../../../../contexts/CaractersContexts/CharactersContext"
+import { CharactersContext } from "../../../../../../contexts/CharactersContexts/CharactersContext"
 import { RitualSubDescription } from "../../../../../../reducers/CharactersReducer/charactersSheet"
 import styles from "./subDescription.module.css"
 

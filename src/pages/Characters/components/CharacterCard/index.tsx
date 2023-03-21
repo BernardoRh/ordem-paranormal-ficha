@@ -1,7 +1,7 @@
 import { ArrowFatLineUp, Copy, Pencil, X } from "phosphor-react"
 import { ChangeEvent, useContext, useState } from "react"
 import { NavLink } from "react-router-dom"
-import { CharactersContext } from "../../../../contexts/CaractersContexts/CharactersContext"
+import { CharactersContext } from "../../../../contexts/CharactersContexts/CharactersContext"
 import styles from "./characterCard.module.css"
 
 import PlaceholderAvatar from "../../../../img/silhuetaSenhorVerissimo.webp"

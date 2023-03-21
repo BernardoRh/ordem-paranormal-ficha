@@ -6,7 +6,7 @@ import RitualsSimbol from "../../../img/RitualsSimbol.webp"
 import CharacterSheetIcon from "../../../img/CharacterSheetIcon.webp"
 import Knowledge from "../../../img/KnowledgeSimbol.webp"
 import { ChangeEvent, useContext } from "react"
-import { CharactersContext } from "../../../contexts/CaractersContexts/CharactersContext"
+import { CharactersContext } from "../../../contexts/CharactersContexts/CharactersContext"
 
 export function Char() {
     return(

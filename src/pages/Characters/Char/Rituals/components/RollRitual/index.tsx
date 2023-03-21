@@ -4,7 +4,7 @@ import { Plus, X } from 'phosphor-react'
 import { RowRollRitual } from '../RowRollRitual'
 import { Rolls } from '../../../../../../components/Rolldice'
 import { ChangeEvent, useContext } from 'react'
-import { CharactersContext } from '../../../../../../contexts/CaractersContexts/CharactersContext'
+import { CharactersContext } from '../../../../../../contexts/CharactersContexts/CharactersContext'
 
 interface RollRitualProps {
     rolls: Rolls[]

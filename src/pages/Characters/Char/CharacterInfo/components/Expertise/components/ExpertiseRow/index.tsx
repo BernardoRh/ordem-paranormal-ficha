@@ -3,7 +3,7 @@ import { Barbell, FirstAidKit, Sparkle, StarFour } from 'phosphor-react'
 
 import styles from "./expertise.module.css"
 import { Expertise } from "../../../../../../../../reducers/CharactersReducer/charactersSheet";
-import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext";
+import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext";
 
 
 export function ExpertiseRow({

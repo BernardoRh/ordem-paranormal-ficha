@@ -3,7 +3,7 @@ import { ChangeEvent, useContext, useState } from "react"
 import styles from "./characters.module.css"
 
 
-import { CharactersContext } from "../../contexts/CaractersContexts/CharactersContext"
+import { CharactersContext } from "../../contexts/CharactersContexts/CharactersContext"
 import { CharacterCard } from "./components/CharacterCard"
 
 export function Characters() {

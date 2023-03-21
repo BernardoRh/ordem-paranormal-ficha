@@ -450,7 +450,7 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
             rituals: [],
             inventory: {
                 prestige: "",
-                itemsLimit: ["0", "0", "0", "0"],
+                itemsLimit: ["", "", "", ""],
                 creditLimit: "none",
                 patent: "",
                 loadout: {

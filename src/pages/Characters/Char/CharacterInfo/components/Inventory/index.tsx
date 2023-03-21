@@ -1,6 +1,6 @@
 import { Info, Plus } from 'phosphor-react'
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
-import { CharactersContext } from '../../../../../../contexts/CaractersContexts/CharactersContext'
+import { CharactersContext } from '../../../../../../contexts/CharactersContexts/CharactersContext'
 import { Inventory } from '../../../../../../reducers/CharactersReducer/charactersSheet'
 import { ItemsRow } from './components/ItemsRow'
 import styles from './inventory.module.css'

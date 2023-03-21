@@ -3,7 +3,7 @@ import { Trash } from "phosphor-react";
 import RollDice from "../../../../../../../../img/rollDice.png"
 import { Attack } from "../../../../../../../../reducers/CharactersReducer/charactersSheet";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
-import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext";
+import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext";
 import { Rolls } from "../../../../../../../../components/Rolldice";
 
 interface AttackRowProps {

@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext } from 'react'
-import { CharactersContext } from '../../../../../../contexts/CaractersContexts/CharactersContext'
+import { CharactersContext } from '../../../../../../contexts/CharactersContexts/CharactersContext'
 import { CharactersSheet } from '../../../../../../reducers/CharactersReducer/charactersSheet'
 import styles from './status.module.css'
 

@@ -15,10 +15,11 @@
     border: 0;
     gap: 0.25rem;
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .expertise button:hover {
-    filter: drop-shadow(0px 4px 4px var(--gray-700));
+    filter: drop-shadow(0px 2px 2px var(--gray-700));
 }
 
 .expertise span{

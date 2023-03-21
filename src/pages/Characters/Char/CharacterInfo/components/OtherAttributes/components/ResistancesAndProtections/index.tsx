@@ -1,6 +1,6 @@
 import { X } from "phosphor-react"
 import { ChangeEvent, KeyboardEventHandler, ReactNode, useContext, useState } from "react"
-import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext"
+import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext"
 import styles from "./resiAndProtec.module.css"
 
 interface ResistancesAndProtectionsProps {

@@ -1,6 +1,6 @@
 import { ArrowFatLineDown, ArrowFatLineUp, CaretDown, CaretRight, CaretUp, Plus } from 'phosphor-react'
 import { ChangeEvent, useContext, useEffect, useState } from 'react'
-import { CharactersContext } from '../../../../contexts/CaractersContexts/CharactersContext'
+import { CharactersContext } from '../../../../contexts/CharactersContexts/CharactersContext'
 import { Ritual } from '../../../../reducers/CharactersReducer/charactersSheet'
 import { RitualCard } from './components/RitualCard'
 import styles from './rituals.module.css'

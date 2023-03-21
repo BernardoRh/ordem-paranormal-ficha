@@ -1,6 +1,6 @@
 import { Trash } from "phosphor-react"
 import { ChangeEvent, useContext } from "react"
-import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext"
+import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext"
 import { Item } from "../../../../../../../../reducers/CharactersReducer/charactersSheet"
 import styles from "./itemsRow.module.css"
 

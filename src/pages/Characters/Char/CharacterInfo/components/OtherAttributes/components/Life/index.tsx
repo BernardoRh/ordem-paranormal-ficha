@@ -1,5 +1,5 @@
 import { ChangeEvent, useContext } from "react"
-import { CharactersContext } from "../../../../../../../../contexts/CaractersContexts/CharactersContext";
+import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext";
 import { BarContainer } from "../BarContainer";
 import styles from "./life.module.css"
 

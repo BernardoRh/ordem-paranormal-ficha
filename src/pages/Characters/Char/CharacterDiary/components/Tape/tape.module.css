@@ -1,0 +1,78 @@
+.containerTape {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 5rem;
+    height: 5rem;
+    background: transparent;
+    border: 0;
+}
+
+.animation{
+    transition: all 750ms ease-in-out;
+}
+
+#container{
+    position: relative;
+    width: 1.5rem;
+    height: 5rem;
+    opacity: 0.8;
+    
+    backface-visibility: hidden;
+    background: transparent;
+    border: 0;
+}
+
+#container .sticky{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1.5rem;
+    height: 5rem;
+}
+
+#container .tape_wrapper{
+    position: absolute;
+    width: 1.5rem;
+    height: 5rem;
+    left: 0px;
+    top: 0px;
+    overflow: hidden;
+    background-color: #d2d1d2;
+}
+
+#container .square{
+    position: absolute;
+    width: 1.5rem;
+    height: 5rem;
+}
+
+#container .back{
+    height: 0.25rem;
+    top: 0rem;
+}
+
+#container .back .square{
+    margin-top: 0rem;
+    background-color: transparent;
+
+    background-image: -webkit-linear-gradient(bottom, #d2d1d2 45%, #bebebe 65%);
+}
+
+#container .front{
+    height: 5rem;
+    bottom: 0;
+    top: auto;
+    
+    box-shadow: 0px 0px 1px #34343476;
+}
+
+#container .front .square{
+    margin-top: 0px;
+    background: #c9c9c9;
+
+    background-image: -webkit-linear-gradient(bottom, #d2d1d2 75%, #bebebe 95%);
+
+    background-image: linear-gradient(bottom, #d2d1d2 75%, #d2d1d2 95%);
+}

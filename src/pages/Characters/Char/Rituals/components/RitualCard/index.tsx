@@ -4,7 +4,7 @@ import { ChangeEvent, useContext } from 'react'
 import { RitualCheckBox } from '../RitualCheckBox';
 import styles from './ritualCard.module.css'
 import { Ritual } from '../../../../../../reducers/CharactersReducer/charactersSheet';
-import { CharactersContext } from '../../../../../../contexts/CaractersContexts/CharactersContext';
+import { CharactersContext } from '../../../../../../contexts/CharactersContexts/CharactersContext';
 import { SubDescription } from '../SubDescription';
 import { RitualRolls } from '../RitualRolls';
 

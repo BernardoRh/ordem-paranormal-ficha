@@ -97,7 +97,9 @@ export interface Inventory {
 export interface Objectives {
     id: string,
     title: string,
-    description: string,
+    info: string,
+    isImage: boolean,
+    rotation: string,
 }
 
 interface Pages {
