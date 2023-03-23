@@ -1,7 +1,7 @@
 import produce from "immer"
 import { Rolls } from "../../components/Rolldice"
 import { ActionsType } from "./actions"
-import { Attack, CharactersSheet, Item, MultipleRolls, Ritual, RitualSubDescription, Skill } from "./charactersSheet"
+import { Attack, CharactersSheet, Item, MultipleRolls, Objectives, Pages, Personality, Ritual, RitualSubDescription, Skill } from "./charactersSheet"
 
 interface CharactersState {
     characters: CharactersSheet[]
@@ -676,6 +676,160 @@ export function charactersReducer(state: CharactersState, action: any) {
                 })
             })
         }
+
+        case ActionsType.CHANGE_DIARY: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id){
+                        switch(action.payload.block){
+                            case "personality": {
+                                switch(action.payload.type){
+                                    case "addPersonality": {
+                                        const newPersonality: Personality = {
+                                            id: String(new Date) + String(Math.random()),
+                                            personality: action.payload.value
+                                        }
+                                        return character.diary.personality.push(newPersonality)
+                                    }
+                                    case "deletePersonality": {
+                                        const personalities: Personality[] = []
+                                        character.diary.personality.map((personality) => {
+                                            if(personality.id != action.payload.personalityId){
+                                                personalities.push(personality)
+                                            }
+                                        })
+                                        return character.diary.personality = personalities
+                                    }
+                                }
+                            }
+                            case "history": {
+                                return character.diary.history = action.payload.value
+                            }
+                            case "objectives": {
+                                switch(action.payload.type){
+                                    case "addObjectiveNote": {
+                                        const newObjective: Objectives = {
+                                            id: String(new Date) + String(Math.random()),
+                                            title: "",
+                                            info: "",
+                                            isImage: false,
+                                            rotation: String((Math.random() * 2.5 + 1.5) * (Math.random() > 0.5 ? 1 : -1)),
+                                            image: ""
+                                        }
+                                        return character.diary.objectives.push(newObjective)
+                                    }
+                                    case "addObjectiveNoteImage": {
+                                        const newObjective: Objectives = {
+                                            id: String(new Date) + String(Math.random()),
+                                            title: "",
+                                            info: "",
+                                            isImage: true,
+                                            rotation: String((Math.random() * 2.5 + 1.5) * (Math.random() > 0.5 ? 1 : -1)),
+                                            image: action.payload.value
+                                        }
+                                        return character.diary.objectives.push(newObjective)
+                                    }
+                                    case "deleteObjective" : {
+                                        const objectives: Objectives[] = []
+                                        character.diary.objectives.map((objective) => {
+                                            if(objective.id != action.payload.objectiveId){
+                                                objectives.push(objective)
+                                            }
+                                        })
+                                        return character.diary.objectives = objectives
+                                    }
+                                    default: {
+                                        character.diary.objectives.map((objective) => {
+                                            if(objective.id != action.payload.objectiveId){
+                                                switch(action.payload.type){
+                                                    case "changeObjectiveTitle": {
+                                                        console.log("title")
+                                                        return objective.title = action.payload.value
+                                                    }
+                                                    case "changeObjectiveInfo": {
+                                                        console.log("info")
+                                                        return objective.info = action.payload.value
+                                                    }
+                                                }
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                            case "pages": {
+                                switch(action.payload.type){
+                                    case "addPage": {
+                                        const newPage: Pages = {
+                                            id: String(new Date) + String(Math.random()),
+                                            title: "",
+                                            notes: []
+                                        }
+                                        return character.diary.pages.push(newPage)
+                                    }
+                                    default: {
+                                        character.diary.pages.map((page) => {
+                                            if(page.id == action.payload.pageId){
+                                                switch(action.payload.type){
+                                                    case "pageTitle": {
+                                                        return page.title = action.payload.value
+                                                    }
+                                                    case "addNote": {
+                                                        const newNote: Objectives = {
+                                                            id: String(new Date) + String(Math.random()),
+                                                            title: "",
+                                                            info: "",
+                                                            isImage: false,
+                                                            rotation: String((Math.random() * 2.5 + 1.5) * (Math.random() > 0.5 ? 1 : -1)),
+                                                            image: ""
+                                                        }
+                                                        return page.notes.push(newNote)
+                                                    }
+                                                    case "addNoteImage": {
+                                                        const newNote: Objectives = {
+                                                            id: String(new Date) + String(Math.random()),
+                                                            title: "",
+                                                            info: "",
+                                                            isImage: true,
+                                                            rotation: String((Math.random() * 2.5 + 1.5) * (Math.random() > 0.5 ? 1 : -1)),
+                                                            image: action.payload.value
+                                                        }
+                                                        return page.notes.push(newNote)
+                                                    }
+                                                    case "deleteNote": {
+                                                        const notes: Objectives[] = []
+                                                        page.notes.map((note) => {
+                                                            if(note.id != action.payload.noteId) {
+                                                                notes.push(note)
+                                                            }
+                                                        })
+                                                        return page.notes = notes
+                                                    }
+                                                    default: {
+                                                        page.notes.map((note) => {
+                                                            if(note.id == action.payload.noteId){
+                                                                switch(action.payload.type){
+                                                                    case "changeNoteTitle": {
+                                                                        return note.title = action.payload.value
+                                                                    }
+                                                                    case "changeNoteInfo": {
+                                                                        return note.info = action.payload.value
+                                                                    }
+                                                                }
+                                                            }
+                                                        })
+                                                    }
+                                                }
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+            })
+        }
+
         default:
             return state
     }

@@ -7,31 +7,40 @@ import { Page } from "../Page"
 import styles from "./characterObjectives.module.css"
 
 import line from "./../../../../../../img/line.png"
-import { TapeButton } from "../TapeButton"
-import { Tape } from "../Tape"
+import { Objectives } from "../../../../../../reducers/CharactersReducer/charactersSheet"
+import { Note } from "../Note"
 
 interface CharacterObjectivesProps extends HtmlHTMLAttributes<HTMLDivElement> {
-    children: ReactNode
+    children: ReactNode,
+    objectives?: Objectives[]
 }
 
-export function CharacterObjectives({children, ...props}: CharacterObjectivesProps) {
+export function CharacterObjectives({children, objectives, ...props}: CharacterObjectivesProps) {
+
+    const { characterToDisplayId, changeDiary } = useContext(CharactersContext)
 
     const {getRootProps, getInputProps} = useDropzone({
         accept: {
             "image/png": ['.png']
         },
         onDrop: acceptFiles => {
+            const newAvatar = new Promise((resolve, reject) => {
+                const fileReader = new FileReader();
+                fileReader.onload = () => resolve(fileReader.result);
+                fileReader.readAsDataURL(acceptFiles[0]);
+            });
+            if(characterToDisplayId != null){
+                newAvatar.then(base64 => changeDiary(characterToDisplayId, "", "", "", "", "addObjectiveNoteImage", "objectives", base64))
+            }
             restKey()
         }
     })
 
-    const { characterToDisplayId, characters } = useContext(CharactersContext)
-
-    const characterToDisplay = characters.find((character) => {
-        if(character.id == characterToDisplayId){
-            return character
+    function addObjective() {
+        if(characterToDisplayId != null) {
+            changeDiary(characterToDisplayId, "", "", "", "", "addObjectiveNote", "objectives", "")
         }
-    })
+    }
 
     const [key, setKey] = useState(String(new Date()) + String(Math.random()))
     function restKey() {
@@ -45,13 +54,11 @@ export function CharacterObjectives({children, ...props}: CharacterObjectivesPro
                     <h4>OBJETIVOS</h4>
                     <img src={line}/>
                 </span>
-                <div className={styles.annotationImage} style={{rotate: `${Math.floor((Math.random() * 3) + (Math.random() * -3))}deg`}}>
-                    <img src="https://images.unsplash.com/photo-1575936123452-b67c3203c357?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80" alt="" />
-                    <TapeButton rotation="-45deg" className={`${styles.tapeOne}`}/>
-                    <Tape rotation="-45deg" className={`${styles.tapeTwo}`}/>
-                </div>
+                {objectives?.map((objective) => {
+                    return(<Note key={objective.id} note={objective} pageId="" isAnObjective/>)
+                })}
                 <div className={styles.inputOptions}>
-                    <button>
+                    <button onClick={addObjective}>
                         ANOTAR
                     </button>
                     <div {...getRootProps()}>

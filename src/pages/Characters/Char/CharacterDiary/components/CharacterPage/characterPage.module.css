@@ -142,7 +142,7 @@
     background-position: center;
     margin-top: 7rem;
     padding: 0 0.5rem;
-    rotate: 1deg;
+    rotate: 1.5deg;
 } .characterPersonality::before {
     content: "";
     position: absolute;
@@ -174,12 +174,19 @@
     gap: 0.25rem;
     padding: 0.15rem 0.25rem;
     border: 1px solid black;
+    float: left;
+    margin: 0.25rem;
 } .characterPersonality > .personalityContent > span > button {
     display: flex;
     justify-content: center;
     align-items: center;
     background: transparent;
     border: 0;
+    cursor: pointer;
+} .personalityContent > span > button > svg {
+    transition: 0.2s;
+} .personalityContent > span > button:hover > svg {
+    fill: var(--red);
 }
 
 .characterPersonality > .tapeOne {

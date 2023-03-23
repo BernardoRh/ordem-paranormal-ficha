@@ -1,75 +1,31 @@
-import { CaretDoubleLeft, CaretDoubleRight } from "phosphor-react"
-import { useRef } from "react"
+import { CaretDoubleLeft, CaretDoubleRight, Plus } from "phosphor-react"
+import { useContext, useRef, useState } from "react"
 import HTMLFlipBook from "react-pageflip"
+import { CharactersContext } from "../../../../contexts/CharactersContexts/CharactersContext"
 import styles from "./characterDiary.module.css"
+import { CharacterNotes } from "./components/CharacterNotes"
 import { CharacterObjectives } from "./components/CharacterObjectives"
 import { CharacterPage } from "./components/CharacterPage"
-import { Page } from "./components/Page"
-
-const RandomInfo = [
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-    {
-        name: "afawfasa",
-        note: "fiodmaoifmas"
-    },
-]
 
 export function CharacterDiary() {
 
-    let toDisplayContent: any[] = []
-    let infoCount = 0
-    let infoPerPage: any[] = []
-    RandomInfo.map((info) => {
-        if(infoCount > 4) {
-            infoCount = 0
-            toDisplayContent.push(infoPerPage)
-            infoPerPage = []
+    const { characterToDisplayId, characters, changeDiary } = useContext(CharactersContext)
+
+    const characterToDisplay = characters.find((character) => {
+        if(character.id == characterToDisplayId){
+            return character
         }
-        infoPerPage.push(info)
-        infoCount = infoCount + 1
     })
 
-    infoCount = 0
-    toDisplayContent.push(infoPerPage)
-    infoPerPage = []
+    const [addButtonPage, setAddButtonPage] = useState(false)
+
+    function handelAddPage() {
+        if(characterToDisplayId != null) {
+            changeDiary(characterToDisplayId, "", "", "", "", "addPage", "pages", "")
+        }
+    }
 
     let pageCount = 0
-
     const diary = useRef()
 
     return(
@@ -78,7 +34,7 @@ export function CharacterDiary() {
                 <button
                     className={styles.prevPage}
                     // @ts-ignore
-                    onClick={() => {diary.current.pageFlip().flipPrev()}}
+                    onClick={() => {diary.current.pageFlip().flipPrev(); setAddButtonPage(false)}}
                 >
                     <CaretDoubleLeft size={32} weight="fill" />
                 </button>
@@ -86,6 +42,11 @@ export function CharacterDiary() {
                     <div className={`${styles.page} ${styles.pageLeft}`}>
                         <CharacterPage
                             className={styles.pageContent}
+                            characterName={characterToDisplay?.name}
+                            characterAge={characterToDisplay?.age}
+                            characterHistory={characterToDisplay?.diary.history}
+                            characterAvatar={characterToDisplay?.avatar}
+                            characterPersonality={characterToDisplay?.diary.personality}
                         >
                             <span className={styles.pageNumber}>
                                 {pageCount = pageCount + 1}
@@ -95,39 +56,48 @@ export function CharacterDiary() {
                     <div className={`${styles.page} ${styles.pageRight}`}>
                         <CharacterObjectives
                             className={styles.pageContent}
+                            objectives={characterToDisplay?.diary.objectives}
                         >
                             <span className={styles.pageNumber}>
                                 {pageCount = pageCount + 1}
                             </span>
                         </CharacterObjectives>
                     </div>
-                    {toDisplayContent.map((page) => {
+                    {characterToDisplay?.diary.pages.map((page) => {
                         pageCount = pageCount + 1
                         return(
-                            <div key={String(new Date()) + String(Math.random())} className={`${styles.page} ${pageCount % 2 != 0 ? styles.pageLeft : styles.pageRight}`} >
-                                <Page className={styles.pageContent}>
-                                    {page.map((content: {name: string, note: string}) => {
-                                        return(
-                                            <div key={String(new Date()) + String(Math.random())}>
-                                                <h4>{content.name}</h4>
-                                                <p>{content.note}</p>
-                                            </div>
-                                        )
-                                    })}
-                                    <span className={styles.pageNumber}>
-                                        {pageCount}
-                                    </span>
-                                </Page>
-                            </div>
+                        <div key={page.id} className={`${styles.page} ${pageCount % 2 == 0 ? styles.pageRight : styles.pageLeft}`}>
+                            <CharacterNotes page={page} className={styles.pageContent}>
+                                <span className={styles.pageNumber}>
+                                    {pageCount}
+                                </span>
+                            </CharacterNotes>
+                        </div>
                         )
                     })}
                 </HTMLFlipBook>
                 <button
-                    className={styles.nexPage}
-                    // @ts-ignore
-                    onClick={() => {diary.current.pageFlip().flipNext()}}
+                    className={`${addButtonPage || pageCount < 3 ? styles.addPageButton : styles.nexPage}`}
+                    onClick={() => {
+                        // @ts-ignore
+                        diary.current.pageFlip().getCurrentPageIndex() + 2 == pageCount ||
+                        // @ts-ignore
+                        diary.current.pageFlip().getCurrentPageIndex() + 1 == pageCount ?
+                        handelAddPage() :
+                        // @ts-ignore
+                        diary.current.pageFlip().flipNext();
+                        // @ts-ignore
+                        diary.current.pageFlip().getCurrentPageIndex() + 3 == pageCount ||
+                        // @ts-ignore
+                        diary.current.pageFlip().getCurrentPageIndex() + 1 == pageCount ? setAddButtonPage(true) 
+                        : setAddButtonPage(false);
+                    }}
                 >
-                    <CaretDoubleRight size={32} weight="fill" />
+                    {
+                        addButtonPage || pageCount < 3 ? 
+                        <Plus size={32} weight="fill"/> :
+                        <CaretDoubleRight size={32} weight="fill" /> 
+                    }
                 </button>
             </div>
         </div>

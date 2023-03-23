@@ -1,5 +1,5 @@
 import { Rolls } from './../../components/Rolldice/index';
-import { Attack, CharactersSheet, Skill, Ritual } from './charactersSheet';
+import { Attack, CharactersSheet, Skill, Ritual, Personality, Objectives } from './charactersSheet';
 
 export enum ActionsType{
     IMPORT_EXPORT_CHARACTER = 'IMPORT_EXPORT_CHARACTER',
@@ -23,10 +23,10 @@ export enum ActionsType{
     CHANGE_EXPERTISE = 'CHANGE_EXPERTISE',
     CHANGE_ATTACKS = 'CHANGE_ATTACKS', 
     CHANGE_SKILLS = 'CHANGE_SKILLS',
-    CHANGE_RITUALS = 'CHANGE_RITUALS', /* */
-    IMPORT_EXPORT_RITUALS = 'IMPORT_EXPORT_RITUALS', /* */
+    CHANGE_RITUALS = 'CHANGE_RITUALS',
+    IMPORT_EXPORT_RITUALS = 'IMPORT_EXPORT_RITUALS',
     CHANGE_INVENTORY = 'CHANGE_INVENTORY',
-    CHANGE_DESCRIPTION = 'CHANGE_DESCRIPTION', /* */
+    CHANGE_DIARY = 'CHANGE_DIARY', /* */
 }
 
 export function createNewCharacterAction(newCharacter: CharactersSheet) {
@@ -297,4 +297,31 @@ export function changeRitualsAction(
             block
         }
     }
+}
+
+export function changeDiaryAction(
+    id: string,
+    personalityId: string,
+    objectiveId: string,
+    pageId: string,
+    noteId: string, 
+    type: "addPersonality" | "deletePersonality" | "addObjectiveNote" | "addObjectiveNoteImage" | "deleteObjective" |
+    "changeObjectiveTitle" | "changeObjectiveInfo" | "addPage" | "pageTitle" | "addNote" | "addNoteImage" | "deleteNote" |
+    "changeNoteTitle" | "changeNoteInfo" | "history",
+    block: "personality" | "history" | "objectives" | "pages",
+    value: string | unknown,
+) {
+return {
+    type: ActionsType.CHANGE_DIARY,
+    payload: {
+        id,
+        personalityId,
+        objectiveId,
+        pageId,
+        noteId,
+        block,
+        type,
+        value,
+    }
+}
 }

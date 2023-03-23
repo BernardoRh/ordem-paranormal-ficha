@@ -14,6 +14,7 @@ import {
     changeCharacterSkillsAction,
     changeInventoryAction,
     changeRitualsAction,
+    changeDiaryAction,
 } from "../../reducers/CharactersReducer/actions";
 import { Attack, CharactersSheet, Ritual, Skill } from "../../reducers/CharactersReducer/charactersSheet";
 import { charactersReducer } from "../../reducers/CharactersReducer/reducer";
@@ -92,7 +93,24 @@ interface CharactersContextType {
         block: "subDescription" | "multipleRolls" | "rolls" | "",
         value: string | boolean | Ritual
     ) => void
-    exportImportRituals: (id: string, ritualId: string, type: "exportAllRituals" | "exportRitual" | "importRitual", event?: ChangeEvent<HTMLInputElement>) => void
+    exportImportRituals: (
+        id: string,
+        ritualId: string,
+        type: "exportAllRituals" | "exportRitual" | "importRitual",
+        event?: ChangeEvent<HTMLInputElement>
+    ) => void
+    changeDiary: (
+        id: string,
+        personalityId: string,
+        objectiveId: string,
+        pageId: string,
+        noteId: string, 
+        type: "addPersonality" | "deletePersonality" | "addObjectiveNote" | "addObjectiveNoteImage" | "deleteObjective" |
+        "changeObjectiveTitle" | "changeObjectiveInfo" | "addPage" | "pageTitle" | "addNote" | "addNoteImage" | "deleteNote" |
+        "changeNoteTitle" | "changeNoteInfo" | "history",
+        block: "personality" | "history" | "objectives" | "pages",
+        value: string | unknown,
+    ) => void
 }
 
 export const CharactersContext = createContext({} as CharactersContextType)
@@ -124,8 +142,6 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
             }
         },
     )
-
-
 
 
 
@@ -727,6 +743,21 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         
     }
 
+    function changeDiary(
+        id: string,
+        personalityId: string,
+        objectiveId: string,
+        pageId: string,
+        noteId: string, 
+        type: "addPersonality" | "deletePersonality" | "addObjectiveNote" | "addObjectiveNoteImage" | "deleteObjective" |
+        "changeObjectiveTitle" | "changeObjectiveInfo" | "addPage" | "pageTitle" | "addNote" | "addNoteImage" | "deleteNote" |
+        "changeNoteTitle" | "changeNoteInfo" | "history",
+        block: "personality" | "history" | "objectives" | "pages",
+        value: string | unknown,
+    ){
+        dispatch(changeDiaryAction(id, personalityId, objectiveId, pageId, noteId, type, block, value))
+    }
+
     const {characters, characterToDisplayId} = charactersState
 
     useEffect(() => {
@@ -762,7 +793,8 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                 exportImportCharacter,
                 changeInventory,
                 changeRituals,
-                exportImportRituals
+                exportImportRituals,
+                changeDiary
             }}
         >
             {children}

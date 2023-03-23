@@ -1,4 +1,4 @@
-.objectivesPage {
+.notesContainer {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -7,50 +7,27 @@
     gap: 1rem;
 }
 
-.title {
+.notesTitle {
     width: 100%;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 2rem;
-} .title > h4 {
-    font-size: 1.75rem;
+    flex-direction: column;
+} .notesTitle > input {
+    width: 34rem;
+    background: transparent;
+    border: 0;
     font-family: 'Special Elite', cursive;
-} .title > img {
+    font-size: 1.75rem;
+    font-weight: bold;
+    text-align: center;
+} .notesTitle > img {
+    rotate: 180deg;
+    margin-top: 2rem;
     position: absolute;
     width: 36rem;
     height: 0.5rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2rem;
-    rotate: 180deg;
-}
-
-.annotationImage {
-    position: relative;
-    max-width: 32rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-} .annotationImage > img {
-    max-width: 32rem;
-    box-shadow: 0 2px 4px black;
-}
-
-.tapeOne {
-    top: 0;
-    right: 0;
-    margin-top: -1.5rem;
-    margin-right: -1.5rem;
-}
-
-.tapeTwo {
-    bottom: 0;
-    left: 0;
-    margin-bottom: -1.5rem;
-    margin-left: -1.5rem;
 }
 
 .inputOptions {

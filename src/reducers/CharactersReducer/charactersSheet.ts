@@ -98,16 +98,21 @@ export interface Objectives {
     id: string,
     title: string,
     info: string,
+    image: string,
     isImage: boolean,
     rotation: string,
 }
 
-interface Pages {
+export interface Pages {
     id: string,
     title: string,
     notes: Objectives[]
 }
 
+export interface Personality {
+    id: string,
+    personality: string,
+}
 export interface CharactersSheet {
     id: string,
     avatar?: string,
@@ -142,7 +147,7 @@ export interface CharactersSheet {
     rituals: Ritual[],
     inventory: Inventory,
     diary: {
-        personality: string[],
+        personality: Personality[],
         history: string,
         objectives: Objectives[],
         pages: Pages[]

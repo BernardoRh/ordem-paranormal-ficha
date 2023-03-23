@@ -25,8 +25,9 @@
 } .diary:hover::before {
     box-shadow: 0 0 7px black;
 } .diary > button {
+    position: absolute;
     background: transparent;
-    width: 2.25rem;
+    width: 2.5rem;
     height: 6rem;
     cursor: pointer;
     display: flex;
@@ -39,10 +40,26 @@
 } .diary > .nexPage {
     border: 1px solid var(--white);
     border-left: 0;
+    right: 0;
+    margin-right: -2.5rem;
 } .diary > .prevPage {
     border: 1px solid var(--white);
     border-right: 0;
-} 
+    left: 0;
+    margin-left: -2.5rem;
+} .diary > .addPageButton {
+    border: 1px solid var(--white);
+    border-left: 0;
+    right: 0;
+    margin-right: -2.5rem;
+} .diary > .addPageButton:hover {
+    border: 1px solid var(--green);
+    border-left: 0;
+} .diary > .addPageButton > svg {
+    transition: 0.2s;
+} .diary > .addPageButton:hover > svg {
+    fill: var(--green);
+}
 
 .cover {
     width: 100%;

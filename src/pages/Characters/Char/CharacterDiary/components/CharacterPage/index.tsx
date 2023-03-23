@@ -10,22 +10,41 @@ import styles from "./characterPage.module.css"
 import line from "./../../../../../../img/line.png"
 import avatarPlaceHolder from "./../../../../../../img/silhuetaSenhorVerissimo.webp"
 import pin from "./../../../../../../img/pin.png"
-import tape from "./../../../../../../img/tape.png"
 import { Tape } from "../Tape"
-
+import { Personality } from "../../../../../../reducers/CharactersReducer/charactersSheet"
 interface CharacterPageProps extends HtmlHTMLAttributes<HTMLDivElement>{
     children?: ReactNode,
+    characterName?: string,
+    characterAge?: string,
+    characterHistory?: string,
+    characterPersonality?: Personality[]
+    characterAvatar?: unknown,
 }
 
-export function CharacterPage({children, ...props}: CharacterPageProps) {
+export function CharacterPage({children, characterName, characterAge, characterHistory, characterAvatar, characterPersonality, ...props}: CharacterPageProps) {
 
-    const { changeCharacterName, changeCharacterAge, changeAvatar, characterToDisplayId, characters } = useContext(CharactersContext)
+    const { changeCharacterName, changeCharacterAge, changeAvatar, changeDiary, characterToDisplayId } = useContext(CharactersContext)
 
-    const characterToDisplay = characters.find((character) => {
-        if(character.id == characterToDisplayId){
-            return character
-        }
-    })
+
+
+    const [name, setName] = useState(characterName ? characterName : "")
+    const [age, setAge] = useState(characterAge ? characterAge : "")
+    const [history, setHistory] = useState(characterHistory ? characterHistory : "" )
+    const [newPersonality, setNewPersonality] = useState("")
+
+    function ChangeCharacterName(event: ChangeEvent<HTMLTextAreaElement>){
+        setName(event.target.value)
+    }
+    function ChangeCharacterAge(event: ChangeEvent<HTMLInputElement>){
+        setAge(event.target.value)
+    }
+    function ChangeCharacterHistory(event: ChangeEvent<HTMLTextAreaElement>) {
+        setHistory(event.target.value)
+    }
+    function handleChangePersonality(event: ChangeEvent<HTMLInputElement>) {
+        setNewPersonality(event.target.value)
+    }
+
 
     const {getRootProps, getInputProps} = useDropzone({
         accept: {
@@ -45,17 +64,36 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
         }
     }
 
-    function handleChangeCharacterName(event: ChangeEvent<HTMLTextAreaElement>){
-        const name = event.target.value
+    function handleChangeCharacterName(){
         if(characterToDisplayId != null){
             changeCharacterName(characterToDisplayId, name)
         }
     }
 
-    function handleChangeCharacterAge(event: ChangeEvent<HTMLInputElement>){
-        const age = event.target.value
+    function handleChangeCharacterAge(){
         if(characterToDisplayId != null){
             changeCharacterAge(characterToDisplayId, age)
+        }
+    }
+
+    function handleChangeCharacterHistory() {
+        if(characterToDisplayId != null){
+            changeDiary(characterToDisplayId, "", "", "", "", "history", "history", history)
+        }
+    }
+
+    function handleDeleteCharacterPersonality(id: string) {
+        if(characterToDisplayId != null){
+            changeDiary(characterToDisplayId, id, "", "", "", "deletePersonality", "personality", "")
+        }
+    }
+
+    function handleAddPersonality(event: { key: string }) {
+        if(event.key === 'Enter'){
+            if(characterToDisplayId != null) {
+                changeDiary(characterToDisplayId, "", "", "", "", "addPersonality", "personality", newPersonality)
+                setNewPersonality("")
+            }
         }
     }
 
@@ -69,22 +107,27 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
             <div className={`${styles.characterInfo}`}>
                 <span className={styles.age}>
                     <h4>IDADE:</h4>
-                    <input type="number" value={characterToDisplay?.age} onChange={handleChangeCharacterAge}/>
+                    <input type="number"
+                        value={age}
+                        onChange={ChangeCharacterAge}
+                        onBlur={handleChangeCharacterAge}
+                    />
                     <img src={line}/>
                 </span>
                 {
-                characterToDisplay?.avatar ?
+                characterAvatar ?
                 <div className={styles.characterPolaroid}>
                     <button className={styles.pinButton} onClick={handleRemoveAvatar}>
                         <img className={styles.pin} src={pin}/>
                     </button>
-                    <img src={`${characterToDisplay?.avatar}`}/>
+                    <img src={`${characterAvatar}`}/>
                     <textarea
                         maxLength={40}
                         rows={2}
                         placeholder="Nome"
-                        onChange={handleChangeCharacterName}
-                        value={characterToDisplay?.name}
+                        onChange={ChangeCharacterName}
+                        onBlur={handleChangeCharacterName}
+                        value={name}
                     />
                 </div>
                 :
@@ -97,9 +140,22 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
                 }
                 <div className={styles.characterPersonality}>
                     <h4>PERSONALIDADE</h4>
-                    <input type="text" />
+                    <input type="text"
+                        value={newPersonality}
+                        onChange={handleChangePersonality}
+                        onKeyDown={handleAddPersonality}
+                    />
                     <div className={styles.personalityContent}>
-                        <span>Gayzão <button><X size={16}/></button></span>
+                        {characterPersonality?.map((personality) => {
+                            return(
+                                <span key={personality.id}>
+                                    {personality.personality}
+                                    <button onClick={() => {handleDeleteCharacterPersonality(personality.id)}}>
+                                        <X size={18} weight="fill"/>
+                                    </button>
+                                </span>
+                            )
+                        })}
                     </div>
                     <Tape rotation="-45deg" className={`${styles.tape} ${styles.tapeOne}`}/>
                     <Tape rotation="-45deg" className={`${styles.tape} ${styles.tapeTwo}`}/>
@@ -108,7 +164,12 @@ export function CharacterPage({children, ...props}: CharacterPageProps) {
             <div className={styles.containerHistory}>
                 <div className={styles.history}>
                     <h4>HISTÓRIA<img src={line}/></h4>
-                    <textarea rows={15}/>
+                    <textarea
+                        rows={15}
+                        value={history}
+                        onChange={ChangeCharacterHistory}
+                        onBlur={handleChangeCharacterHistory}
+                    />
                     <Tape rotation="45deg" className={`${styles.tape} ${styles.tapeOne}`}/>
                     <Tape rotation="45deg" className={`${styles.tape} ${styles.tapeTwo}`}/>
                 </div>
