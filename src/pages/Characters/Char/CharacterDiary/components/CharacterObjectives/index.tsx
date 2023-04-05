@@ -21,7 +21,7 @@ export function CharacterObjectives({children, objectives, ...props}: CharacterO
 
     const {getRootProps, getInputProps} = useDropzone({
         accept: {
-            "image/png": ['.png']
+            "image/png": ['.png', '.jpeg', '.webp']
         },
         onDrop: acceptFiles => {
             const newObjective = new Promise((resolve, reject) => {
@@ -63,7 +63,7 @@ export function CharacterObjectives({children, objectives, ...props}: CharacterO
                     </button>
                     <div {...getRootProps()}>
                         ADICIONE UMA IMAGEM
-                        <input key={key} id="objectivesImages" accept=".png" type="file" {...getInputProps()}/>
+                        <input key={key} id="objectivesImages" accept=".png, .jpeg, .webp" type="file" {...getInputProps()}/>
                     </div>
                 </div>
             </div>
