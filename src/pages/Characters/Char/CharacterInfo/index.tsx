@@ -25,7 +25,7 @@ export function CharacterInfo() {
                 <BaseAttributes character={characterToDisplay}/>
                 <OtherAttributes character={characterToDisplay}/>
             </div>
-            <AllExpertises expertises={characterToDisplay?.expertise}/>
+            <AllExpertises expertises={characterToDisplay?.expertise} baseAttributes={characterToDisplay?.attributes}/>
             <Attacks attacks={characterToDisplay?.attacks}/>
             <Skills skills={characterToDisplay?.skills}/>
             <InventoryComponent inventory={characterToDisplay?.inventory}/>

@@ -67,6 +67,8 @@
     opacity: 0.3;
     transition: 0.2s;
     cursor: pointer;
+    align-self: center;
+    justify-self: center;
 } .skillsTable > .addSkills:hover {
     opacity: 1;
     border: 1px solid var(--green);

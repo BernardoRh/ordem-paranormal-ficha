@@ -69,6 +69,8 @@
     opacity: 0.3;
     transition: 0.2s;
     cursor: pointer;
+    justify-self: center;
+    align-self: center;
 } .attacksTable > .addAtacks:hover {
     border: 1px solid var(--green);
     opacity: 1;

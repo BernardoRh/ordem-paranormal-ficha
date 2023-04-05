@@ -45,10 +45,12 @@
 }
 
 .rolls {
-    display: grid;
-    grid-template-columns: 13.25rem 13.25rem;
-    gap: 0.25rem;
     margin-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
 }
 
 .rolls > button {

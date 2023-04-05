@@ -75,14 +75,14 @@
 } .characterPolaroid::before {
     content: "";
     position: absolute;
-    background-image: url("https://images4.alphacoders.com/627/627122.jpg");
+    background: var(--polaroid);
     background-size: cover;
     background-position: center;
     width: 100%;
     height: 100%;
     z-index: -1;
 } .characterPolaroid > img {
-    height: 17rem;
+    height: 18rem;
     max-width: 16rem;
 } .characterPolaroid > textarea {
     font-family: 'Special Elite', cursive;

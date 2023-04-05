@@ -1,5 +1,5 @@
 import { CaretDown, CaretRight, CaretUp, Pencil, Plus, Trash } from "phosphor-react"
-import { ChangeEvent, useContext, useState } from "react"
+import { useContext, useState } from "react"
 import { CharactersContext } from "../../../../../../contexts/CharactersContexts/CharactersContext"
 import { Skill } from "../../../../../../reducers/CharactersReducer/charactersSheet"
 import { SkillTableRow } from "./components/SkillTableRow"

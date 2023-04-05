@@ -1,4 +1,5 @@
-import { Rolls } from "../../components/Rolldice"
+import { RollDiceProps, Rolls } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice"
+import { rollsForLastRollsResults } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/LastRolls"
 
 
 export interface Attributes {
@@ -113,6 +114,12 @@ export interface Personality {
     id: string,
     personality: string,
 }
+
+export interface lastRollsProps {
+    wrapperId: string;
+    rollsForLastRolls: rollsForLastRollsResults[];
+    name: string;
+}
 export interface CharactersSheet {
     id: string,
     avatar?: string,
@@ -151,5 +158,7 @@ export interface CharactersSheet {
         history: string,
         objectives: Objectives[],
         pages: Pages[]
-    }
+    },
+    roll: RollDiceProps,
+    lastRolls: lastRollsProps[],
 }

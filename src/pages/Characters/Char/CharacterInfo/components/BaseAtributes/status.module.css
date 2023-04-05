@@ -25,11 +25,20 @@
 }
 
 .statusBox {
+    position: relative;
     height: 6rem;
     width: 100%;
     display: flex;
     justify-content: center;
     overflow: visible;
+} .statusBox > button {
+    position: absolute;
+    bottom: 0;
+    width: 4.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
 }
 
 .dexterity {
@@ -37,6 +46,8 @@
     grid-column-end: 4;
 } .dexterity input {
     padding-top: 2rem;
+} .dexterity button {
+    margin-bottom: -1.75rem;
 }
 
 
@@ -44,7 +55,10 @@
     grid-column-start: 1;
     grid-column-end: 2;
 } .strength input {
-    padding-left: 2.95rem;
+    padding-left: 3.05rem;
+} .strength button {
+    margin-bottom: -0.75rem;
+    margin-right: -3.05rem;
 }
 
 .intellect {
@@ -52,6 +66,9 @@
     grid-column-end: 5;
 } .intellect input {
     padding-right: 3.05rem;
+} .intellect button {
+    margin-bottom: -0.75rem;
+    margin-left: -3.05rem;
 }
 
 .presence {
@@ -62,6 +79,9 @@
 } .presence input {
     padding-top: 0.20rem;
     padding-left: 1.15rem;
+} .presence button {
+    margin-bottom: -0.85rem;
+    margin-right: -1.15rem;
 }
 
 .vigor {
@@ -72,6 +92,9 @@
 } .vigor input {
     padding-top: 0.20rem;
     padding-right: 1.40rem;
+} .vigor button {
+    margin-bottom: -0.85rem;
+    margin-left: -1.15rem;
 }
 
 .statusBox input {

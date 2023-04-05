@@ -2,7 +2,7 @@
     position: relative;
     width: 84rem;
     display: grid;
-    grid-template-columns: 2rem 16rem 9rem 9rem 7rem 5rem 7rem 22.5rem;
+    grid-template-columns: 2rem 16rem 9rem 9rem 7rem 5rem 7rem 24.25rem;
     column-gap: 0.5rem;
     align-items: end;
 }
@@ -20,6 +20,8 @@
     opacity: 0.3;
     transition: 0.2s;
     cursor: pointer;
+    background: transparent;
+    border: 0;
 } .attacksTableColum > .buttonRollForAttack:hover {
     opacity: 1;
 } .attacksTableColum > .buttonRollForAttack > img {
@@ -87,39 +89,56 @@
 } 
 
 .damageType > option[value="knowledge"] {
-    color: var(--knowledge);
-    border-bottom: 1px solid var(--knowledge);
+    color: var(--knowledge-light);
+    border-bottom: 1px solid var(--knowledge-light);
 }
 .damageType > option[value="energy"] {
-    color: var(--energy);
-    border-bottom: 1px solid var(--energy);
+    color: var(--energy-light);
+    border-bottom: 1px solid var(--energy-light);
 }
 .damageType > option[value="death"] {
-    color: var(--death);
-    border-bottom: 1px solid var(--death);
+    color: var(--death-light);
+    border-bottom: 1px solid var(--death-light);
 }
 .damageType > option[value="blood"] {
-    color: var(--blood);
-    border-bottom: 1px solid var(--blood);
+    color: var(--blood-light);
+    border-bottom: 1px solid var(--blood-light);
 }
 .damageType > option[value="fear"] {
-    color: var(--fear);
-    border-bottom: 1px solid var(--fear);
+    color: var(--fear-light);
+    border-bottom: 1px solid var(--fear-light);
+}
+.damageType > option[value="fire"] {
+    color: var(--fire-light);
+    border-bottom: 1px solid var(--fire-light);
+}
+.damageType > option[value="cold"] {
+    color: var(--cold-light);
+    border-bottom: 1px solid var(--cold-light);
+}
+.damageType > option[value="chemical"] {
+    color: var(--chemical-light);
+    border-bottom: 1px solid var(--chemical-light);
+}
+.damageType > option[value="mental"] {
+    color: var(--mental-light);
+    border-bottom: 1px solid var(--mental-light);
 }
 
-.attacksTableColum  > button {
+.attacksTableColum > .trash {
+    margin-top: 0.2rem;
     position: absolute;
     right: 0;
     top: 0;
     margin-right: -0.5rem;
     width: 1.5rem;
     border: 0;
-    background: var(--gray-100);
+    background: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
-} .attacksTableColum > button:hover > .trash {
+} .attacksTableColum > .trash:hover > svg {
     fill: var(--red);
     transition: 0.2s;
 }

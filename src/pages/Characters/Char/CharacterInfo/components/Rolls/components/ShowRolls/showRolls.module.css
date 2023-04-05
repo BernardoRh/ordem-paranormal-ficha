@@ -1,0 +1,164 @@
+.rollsContainer {
+    margin: 0 0.5rem;
+}
+
+.onHistory {
+    height: auto;
+    max-width: 22rem;
+    width: auto;
+}
+
+.onHistory h4 {
+    font-size: 100% !important;
+    text-shadow: -1px -1px 1px var(--gray-400), 1px -1px 1px var(--gray-400), -1px 1px 1px var(--gray-400), 1px 1px 1px var(--gray-400) !important;
+} .onHistory .dice {
+    width: 2rem;
+    height: 2rem;
+    font-size: 100% !important;
+    margin: 0.25rem;
+    text-shadow: -1px -1px 1px var(--gray-400), 1px -1px 1px var(--gray-400), -1px 1px 1px var(--gray-400), 1px 1px 1px var(--gray-400);
+} .onHistory .dice h4 {
+    margin-top: 0.25rem;
+    text-shadow: -1px -1px 1px var(--gray-400), 1px -1px 1px var(--gray-400), -1px 1px 1px var(--gray-400), 1px 1px 1px var(--gray-400);
+} .onHistory .dice p {
+    margin-top: 1.85rem;
+    font-size: 60% !important;
+} .onHistory .dice img{
+    width: 2rem;
+    height: 2rem;
+} .onHistory .rollsRow .dicesEnd {
+    height: 2rem;
+    margin: 0.25rem;
+} .onHistory .rollsRow .dicesEnd .dice{
+    height: 2rem;
+} .onHistory .rollsRow .dicesEnd .damageType {
+    width: fit-content;
+    font-size: 80% !important;
+}
+
+.headerRoll {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.headerRoll > h4 {
+    font-size: 1.5rem;
+    font-family: 'Special Elite', cursive;
+    text-shadow: -2px -2px 2px var(--gray-400), 2px -2px 2px var(--gray-400), -2px 2px 2px var(--gray-400), 2px 2px 2px var(--gray-400);
+}
+
+.rollsContainer > span {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 0 0 2rem;
+}
+
+.rollsContainer > span > h4{
+    font-size: 1.25rem;
+    font-family: 'Special Elite', cursive;
+    font-weight: 400;
+    width: 8rem;
+    text-align: center;
+}
+
+.rollsContainer > span > input{
+    font-size: 1.25rem;
+    font-family: 'Special Elite', cursive;
+    border: 0;
+    background: transparent;
+    border-bottom: 1px solid var(--white);
+    width: 2rem;
+    text-align: center;
+}
+
+.rollsContainer > span > span{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: help;
+    filter: opacity(50%);
+    transition: 0.2s;
+    z-index: 3;
+} .rollsContainer > span > span:hover {
+    filter: opacity(100%);
+} .rollsContainer > span > span > svg {
+    fill: var(--white);
+} .rollsContainer > span > span > p {
+    display: none;
+} .rollsContainer > span > span:hover > p {
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    margin-top: 0.85rem;
+    margin-left: 0.85rem;
+    width: 12rem;
+    padding: 0.25rem;
+    border: 1px solid var(--gray-200);
+    background: var(--gray-100);
+    z-index: 3;
+}
+
+.rollsRow {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+.dice {
+    width: 3rem;
+    height: 3rem;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin: 0.5rem;
+} .dice > img {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    filter: brightness(35%);
+    z-index: -1;
+} .dice > h4 {
+    font-size: 1.5rem;
+    font-family: 'Special Elite', cursive;
+    margin-top: 0.75rem;
+    text-shadow: -1px -1px 1px var(--gray-400), 1px -1px 1px var(--gray-400), -1px 1px 1px var(--gray-400), 1px 1px 1px var(--gray-400);
+} .dice > p {
+    position: absolute;
+    font-size: 0.75rem;
+    font-family: 'Special Elite', cursive;
+    margin-top: 2.75rem;
+}
+
+.dicesEnd {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    margin: 0.5rem;
+    height: 3rem;
+}
+.dicesEnd > .dice{
+    float: none;
+}
+
+.damageType {
+    padding-top: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    font-family: 'Special Elite', cursive;
+    width: auto;
+    justify-content: left;
+    text-shadow: -2px -2px 2px var(--gray-400), 2px -2px 2px var(--gray-400), -2px 2px 2px var(--gray-400), 2px 2px 2px var(--gray-400);
+}

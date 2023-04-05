@@ -1,4 +1,4 @@
-import { ChangeEvent, useContext, useState } from "react"
+import { ChangeEvent, useContext } from "react"
 import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext";
 import { BarContainer } from "../BarContainer";
 import styles from "./effortPoints.module.css"

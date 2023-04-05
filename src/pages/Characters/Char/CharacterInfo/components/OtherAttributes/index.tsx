@@ -1,4 +1,3 @@
-import { ChangeEvent, useState } from "react"
 import { CharactersSheet } from "../../../../../../reducers/CharactersReducer/charactersSheet";
 import { Class } from "./components/Class";
 import { Defenses } from "./components/Defences";

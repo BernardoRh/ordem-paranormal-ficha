@@ -2,7 +2,7 @@ import styles from './rollRitual.module.css'
 import rollDiceIcon from "../../../../../../img/rollDice.png"
 import { Plus, X } from 'phosphor-react'
 import { RowRollRitual } from '../RowRollRitual'
-import { Rolls } from '../../../../../../components/Rolldice'
+import { Rolls } from '../../../CharacterInfo/components/Rolls/components/Rolldice'
 import { ChangeEvent, useContext } from 'react'
 import { CharactersContext } from '../../../../../../contexts/CharactersContexts/CharactersContext'
 
@@ -13,13 +13,9 @@ interface RollRitualProps {
     multipleRollsId: string
 }
 
-// id: string, ritualId: string, subDescriptionId: string, multipleRollId: string, rollId: string,
-// type: "deleteMultipleRolls" | "addRoll" | "deleteRoll" | 
-// "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage",
-
 export function RollRitual({rolls, name, ritualId, multipleRollsId}: RollRitualProps) {
 
-    const {characterToDisplayId, changeRituals} = useContext(CharactersContext)
+    const {characterToDisplayId, changeRituals, rollingDices} = useContext(CharactersContext)
 
     function handleDeleteMultipleRolls() {
         if(characterToDisplayId != null) {
@@ -43,7 +39,14 @@ export function RollRitual({rolls, name, ritualId, multipleRollsId}: RollRitualP
     return(
         <div className={styles.rollsContainer}>
             <div className={styles.rollsHeader}>
-                <button><img src={rollDiceIcon}/>:</button>
+                <button onClick={() => {
+                rollingDices(characterToDisplayId as string, {
+                    name: name ? name : "Rolagem De Ritual",
+                    rolls: rolls,
+                    showRoll: true,
+                    wrapperId: String(new Date()) + String(Math.random())
+                })
+            }}><img src={rollDiceIcon}/>:</button>
                 <input type="text" value={name} onChange={handleChangeNameMultipleRolls}/>
                 <button onClick={handleDeleteMultipleRolls} className={styles.deleteRoll}><X size={24} weight="fill"/></button>
             </div>

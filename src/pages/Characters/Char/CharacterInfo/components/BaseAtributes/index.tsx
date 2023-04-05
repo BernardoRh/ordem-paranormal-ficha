@@ -9,7 +9,7 @@ interface BaseAttributesProps{
 
 export function BaseAttributes({character}: BaseAttributesProps) {
 
-    const { changeCharacterAttributes, characterToDisplayId } = useContext(CharactersContext)
+    const { characterToDisplayId, changeCharacterAttributes, rollingDices } = useContext(CharactersContext)
 
     function handleChangeAttribute(event: ChangeEvent<HTMLInputElement>) {
         const attribute = event.target.name
@@ -30,6 +30,19 @@ export function BaseAttributes({character}: BaseAttributesProps) {
                     maxLength={2}
                     onChange={handleChangeAttribute}
                 />
+                <button onClick={() => {
+                rollingDices(characterToDisplayId as string, {
+                    name: "Agilidade",
+                    rolls: [{
+                        diceType: "20",
+                        id: String(new Date()) + String(Math.random()),
+                        isDamage: false,
+                        quantity: character?.attributes?.agility ? character?.attributes?.agility : "0",
+                    }],
+                    showRoll: true,
+                    wrapperId: String(new Date()) + String(Math.random())
+                })
+            }}></button>
             </div>
             <div className={`${styles.statusBox} ${styles.strength}`}>
                 <input
@@ -40,6 +53,19 @@ export function BaseAttributes({character}: BaseAttributesProps) {
                     maxLength={2}
                     onChange={handleChangeAttribute}
                 />
+                <button onClick={() => {
+                rollingDices(characterToDisplayId as string, {
+                    name: "Força",
+                    rolls: [{
+                        diceType: "20",
+                        id: String(new Date()) + String(Math.random()),
+                        isDamage: false,
+                        quantity: character?.attributes?.strength ? character?.attributes?.strength : "0",
+                    }],
+                    showRoll: true,
+                    wrapperId: String(new Date()) + String(Math.random())
+                })
+            }}></button>
             </div>
             <div className={`${styles.statusBox} ${styles.intellect}`}>
                 <input
@@ -50,6 +76,19 @@ export function BaseAttributes({character}: BaseAttributesProps) {
                     maxLength={2}
                     onChange={handleChangeAttribute}
                 />
+                <button onClick={() => {
+                rollingDices(characterToDisplayId as string, {
+                    name: "Intelecto",
+                    rolls: [{
+                        diceType: "20",
+                        id: String(new Date()) + String(Math.random()),
+                        isDamage: false,
+                        quantity: character?.attributes?.intellect ? character?.attributes?.intellect : "0",
+                    }],
+                    showRoll: true,
+                    wrapperId: String(new Date()) + String(Math.random())
+                })
+            }}></button>
             </div>
             <div className={`${styles.statusBox} ${styles.presence}`}>
                 <input
@@ -60,6 +99,19 @@ export function BaseAttributes({character}: BaseAttributesProps) {
                     maxLength={2}
                     onChange={handleChangeAttribute}
                 />
+                <button onClick={() => {
+                rollingDices(characterToDisplayId as string, {
+                    name: "Presença",
+                    rolls: [{
+                        diceType: "20",
+                        id: String(new Date()) + String(Math.random()),
+                        isDamage: false,
+                        quantity: character?.attributes?.presence ? character?.attributes?.presence : "0",
+                    }],
+                    showRoll: true,
+                    wrapperId: String(new Date()) + String(Math.random())
+                })
+            }}></button>
             </div>
             <div className={`${styles.statusBox} ${styles.vigor}`}>
                 <input
@@ -70,6 +122,19 @@ export function BaseAttributes({character}: BaseAttributesProps) {
                     maxLength={2}
                     onChange={handleChangeAttribute}
                 />
+                <button onClick={() => {
+                rollingDices(characterToDisplayId as string, {
+                    name: "Vigor",
+                    rolls: [{
+                        diceType: "20",
+                        id: String(new Date()) + String(Math.random()),
+                        isDamage: false,
+                        quantity: character?.attributes?.vigor ? character?.attributes?.vigor : "0",
+                    }],
+                    showRoll: true,
+                    wrapperId: String(new Date()) + String(Math.random())
+                })
+            }}></button>
             </div>
         </div>
     )

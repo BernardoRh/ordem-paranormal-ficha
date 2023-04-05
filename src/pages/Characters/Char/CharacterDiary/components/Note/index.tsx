@@ -44,7 +44,7 @@ export function Note({note, pageId, isAnObjective}: NoteProps) {
             if(isAnObjective) {
                 changeDiary(characterToDisplayId, "", note.id, "", "", "changeObjectiveTitle", "objectives", title)
             } else {
-                changeDiary(characterToDisplayId, "", "", pageId, note.id, "changeNoteInfo", "pages", title)
+                changeDiary(characterToDisplayId, "", "", pageId, note.id, "changeNoteTitle", "pages", title)
             }
         }
     }
@@ -89,7 +89,7 @@ export function Note({note, pageId, isAnObjective}: NoteProps) {
                     <input type="text" value={title} onChange={changeTitle} onBlur={handleChangeTitleNote}/>
                     <img src={line}/>
                 </div>
-                <textarea maxLength={280} value={info} onChange={changeInfo} onBlur={handleChangeInfoNote}/>
+                <textarea maxLength={280} rows={info.length / 36 + 1} value={info} onChange={changeInfo} onBlur={handleChangeInfoNote}/>
             </div>
         )
     }

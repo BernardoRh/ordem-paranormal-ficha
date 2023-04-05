@@ -2,13 +2,14 @@ import { Barbell, FirstAidKit, Sparkle, StarFour } from "phosphor-react";
 import { ExpertiseRow } from "./components/ExpertiseRow";
 
 import styles from "./allExpertises.module.css"
-import { Expertise } from "../../../../../../reducers/CharactersReducer/charactersSheet";
+import { Attributes, Expertise } from "../../../../../../reducers/CharactersReducer/charactersSheet";
 
 interface AllExpertisesProps {
     expertises?: Expertise[]
+    baseAttributes?: Attributes
 }
 
-export function AllExpertises({expertises}: AllExpertisesProps) {
+export function AllExpertises({expertises, baseAttributes}: AllExpertisesProps) {
     return(
         <div className={styles.expertiseTable}>
             <div>
@@ -31,6 +32,7 @@ export function AllExpertises({expertises}: AllExpertisesProps) {
                             name={expertise.name}
                             trainedLevel={expertise.trainedLevel}
                             others={expertise.others}
+                            baseAttributes={baseAttributes}
                         />
                     )
                 })}

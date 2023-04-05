@@ -1,10 +1,9 @@
-import { CaretDown, CaretRight, CaretUp, Plus, Trash } from "phosphor-react"
+import { CaretDown, CaretRight, CaretUp, Plus } from "phosphor-react"
 import styles from "./attacks.module.css"
 import { Attack } from "../../../../../../reducers/CharactersReducer/charactersSheet"
 import { AttackRow } from "./components/Attack"
-import { useContext, useEffect, useState } from "react"
+import { useContext, useState } from "react"
 import { CharactersContext } from "../../../../../../contexts/CharactersContexts/CharactersContext"
-import { string } from "zod"
 
 interface AttacksProps {
     attacks?: Attack[]
@@ -22,14 +21,14 @@ export function Attacks({attacks}: AttacksProps) {
                 diceType: "20",
                 quantity: "",
                 bonus: "",
-                id: "",
+                id: String(new Date()) + String(Math.random()),
                 isDamage: false
             },
             damage: {
                 diceType: "4",
                 quantity: "",
                 bonus: "",
-                id: "",
+                id: String(new Date()) + String(Math.random()),
                 isDamage: true,
                 damageType: 'ballistic'
             },

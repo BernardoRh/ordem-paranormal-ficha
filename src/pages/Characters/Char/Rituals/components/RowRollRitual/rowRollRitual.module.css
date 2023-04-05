@@ -1,8 +1,6 @@
 .roll {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
 }
 
 .roll > * {
@@ -15,7 +13,6 @@
     height: 1.5rem;
     background: transparent;
     border: 0;
-    float: left;
     font-size: 0.75rem;
 } .roll > * > * {
     display: flex;
@@ -37,10 +34,12 @@
 } .roll > .testOrdDamage {
     width: 4rem;
 } .roll > select {
-    width: 2rem;
+    width: 3rem;
 } .roll > input, .roll > span > input { 
     height: 1.5rem;
-    width: 1.5rem;
+    width: 2rem;
+} .roll > .damageType {
+    width: 8rem;
 } .roll > button {
     filter: brightness(70%);
     cursor: pointer;
@@ -50,4 +49,42 @@
     transition: 0.2s;
 } .roll > button:hover > svg {
     fill: var(--red);
+}
+
+
+.damageType > option[value="knowledge"] {
+    color: var(--knowledge-light);
+    border-bottom: 1px solid var(--knowledge-light);
+}
+.damageType > option[value="energy"] {
+    color: var(--energy-light);
+    border-bottom: 1px solid var(--energy-light);
+}
+.damageType > option[value="death"] {
+    color: var(--death-light);
+    border-bottom: 1px solid var(--death-light);
+}
+.damageType > option[value="blood"] {
+    color: var(--blood-light);
+    border-bottom: 1px solid var(--blood-light);
+}
+.damageType > option[value="fear"] {
+    color: var(--fear-light);
+    border-bottom: 1px solid var(--fear-light);
+}
+.damageType > option[value="fire"] {
+    color: var(--fire-light);
+    border-bottom: 1px solid var(--fire-light);
+}
+.damageType > option[value="cold"] {
+    color: var(--cold-light);
+    border-bottom: 1px solid var(--cold-light);
+}
+.damageType > option[value="chemical"] {
+    color: var(--chemical-light);
+    border-bottom: 1px solid var(--chemical-light);
+}
+.damageType > option[value="mental"] {
+    color: var(--mental-light);
+    border-bottom: 1px solid var(--mental-light);
 }

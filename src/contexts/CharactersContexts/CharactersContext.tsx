@@ -1,23 +1,20 @@
 import { ReactNode, createContext, useEffect, useReducer, useState, ChangeEvent } from "react";
-import { Rolls } from "../../components/Rolldice";
+import { RollDiceProps, Rolls } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice";
 import {
     ActionsType, createNewCharacterAction, changeCharacterAgeAction,
     changeCharacterNameAction, deleteCharacterAction, displayCharacterAction,
     changeAvatarAction, changeCharacterAttributesAction, changeCharacterOriginAction,
     changeCharacterClassAction, changeCharacterNexAction, changeCharacterPePerRoundAction,
     changeCharacterMovementAction, changeCharacterHealthAction, changeCharacterPeAction,
-    changeCharacterSanityAction,
-    changeCharacterDefensesAction,
-    changeCharacterProtectionAndResistancesAction,
-    changeCharacterExpertiseAction,
-    changeCharacterAttacksAction,
-    changeCharacterSkillsAction,
-    changeInventoryAction,
-    changeRitualsAction,
-    changeDiaryAction,
+    changeCharacterSanityAction, changeCharacterDefensesAction, changeCharacterProtectionAndResistancesAction,
+    changeCharacterExpertiseAction, changeCharacterAttacksAction, changeCharacterSkillsAction,
+    changeInventoryAction, changeRitualsAction, changeDiaryAction, rollingDicesAction, clearHistoryRollsAction,
+    addLastRollAction, addResultsToLastRollsAction, changeResultsToLastRollsAction,
 } from "../../reducers/CharactersReducer/actions";
 import { Attack, CharactersSheet, Ritual, Skill } from "../../reducers/CharactersReducer/charactersSheet";
 import { charactersReducer } from "../../reducers/CharactersReducer/reducer";
+import { rollsForLastRollsResults } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/LastRolls";
+import { resultType } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice/components/RollRow";
 interface AlertProps {
     alert: "NONE" | "BAD" | "GOOD",
     value: string
@@ -111,6 +108,27 @@ interface CharactersContextType {
         block: "personality" | "history" | "objectives" | "pages",
         value: string | unknown,
     ) => void
+    rollingDices: (id: string, dicesToRoll: RollDiceProps) => void
+    addLastRoll: (
+        id: string,
+        wrapperId: string,
+        name: string,
+    ) => void
+    addResultsToLastRolls: (
+        id: string,
+        wrapperId: string,
+        value: rollsForLastRollsResults,
+    ) => void
+    changeResultsToLastRolls: (
+        id: string,
+        wrapperId: string,
+        rollId: string,
+        value: string | boolean | resultType | resultType[] | number,
+        typeChange: "results" | "vantageDisadvantage" | "vantageDisadvantageDices" | "isCritical" | "bestResult"
+    ) => void
+    clearHistoryRolls: (id: string) => void
+    copyCharacter: (id: string) => void
+    copyRitual: (id: string) => void
 }
 
 export const CharactersContext = createContext({} as CharactersContextType)
@@ -481,7 +499,14 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                 objectives: [],
                 pages: []
             },
-            avatar: ""
+            avatar: "",
+            roll: {
+                wrapperId: "",
+                showRoll: false,
+                name: "",
+                rolls: []
+            },
+            lastRolls: []
         }
         dispatch(createNewCharacterAction(character ? character : newCharacter))
     }
@@ -758,6 +783,74 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         dispatch(changeDiaryAction(id, personalityId, objectiveId, pageId, noteId, type, block, value))
     }
 
+    function rollingDices(id: string, dicesToRoll: RollDiceProps){
+        if(dicesToRoll.showRoll == true) {
+        }
+        dispatch(rollingDicesAction(id, dicesToRoll))
+    }
+
+    function addLastRoll(
+        id: string,
+        wrapperId: string,
+        name: string,
+    ){
+        dispatch(addLastRollAction(id, wrapperId, name))
+    }
+
+    function addResultsToLastRolls (
+        id: string,
+        wrapperId: string,
+        value: rollsForLastRollsResults,
+    ) {
+        dispatch(addResultsToLastRollsAction(id, wrapperId, value))
+    }
+
+    function changeResultsToLastRolls(
+        id: string,
+        wrapperId: string,
+        rollId: string,
+        value: string | boolean | resultType | resultType[]  | number,
+        typeChange: "results" | "vantageDisadvantage" | "vantageDisadvantageDices" | "isCritical" | "bestResult"
+    ) {
+        dispatch(changeResultsToLastRollsAction(id, wrapperId, rollId, value, typeChange))
+    }
+
+    function clearHistoryRolls(id: string){
+        dispatch(clearHistoryRollsAction(id))
+    }
+
+    function copyCharacter(idCharacter: string) {
+        const characterToCopy = (characters.find((character) => {
+            if(character.id == idCharacter){
+                return character
+            }
+        }))
+        if(characterToCopy != undefined) {
+            const {id, ...newCharacter} = characterToCopy
+            createNewCharacter({...newCharacter, id: String(new Date()) + String(Math.random())})
+        }
+    }
+
+    function copyRitual(id: string) {
+        const character = characters.find((character) => {
+            if(character.id == characterToDisplayId){
+                return character
+            }
+        })
+
+        if(character != undefined){
+            const ritualToCopy = character.rituals.find((ritual) => {
+                if(ritual.id == id){
+                    return ritual
+                }
+            })
+            if(characterToDisplayId != null && ritualToCopy != undefined){
+                const {id, ...newRitual} = ritualToCopy
+                changeRituals(characterToDisplayId, "", "", "", "", "addRitual", "", {...newRitual, id: String(new Date()) + String(Math.random())})
+            }
+        }
+    }
+
     const {characters, characterToDisplayId} = charactersState
 
     useEffect(() => {
@@ -794,7 +887,14 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                 changeInventory,
                 changeRituals,
                 exportImportRituals,
-                changeDiary
+                changeDiary,
+                rollingDices,
+                addLastRoll,
+                clearHistoryRolls,
+                addResultsToLastRolls,
+                changeResultsToLastRolls,
+                copyCharacter,
+                copyRitual,
             }}
         >
             {children}

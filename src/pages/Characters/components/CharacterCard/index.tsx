@@ -1,5 +1,5 @@
-import { ArrowFatLineUp, Copy, Pencil, X } from "phosphor-react"
-import { ChangeEvent, useContext, useState } from "react"
+import { ArrowFatLineUp, Copy, X } from "phosphor-react"
+import { useContext } from "react"
 import { NavLink } from "react-router-dom"
 import { CharactersContext } from "../../../../contexts/CharactersContexts/CharactersContext"
 import styles from "./characterCard.module.css"
@@ -15,7 +15,11 @@ interface CharacterCardProps {
 
 export function CharacterCard({id, avatar, name, handleExportCharacter}: CharacterCardProps) {
     
-    const { deleteCharacter, displayCharacter } = useContext(CharactersContext)
+    const { deleteCharacter, displayCharacter, copyCharacter } = useContext(CharactersContext)
+    
+    function handleCopyCHaracter() {
+        copyCharacter(id)
+    }
 
     return(
         <div>
@@ -29,7 +33,7 @@ export function CharacterCard({id, avatar, name, handleExportCharacter}: Charact
             }}>
                 <ArrowFatLineUp size={32} weight="fill" />
             </button>
-            <button className={styles.duplicateCharacter}>
+            <button className={styles.duplicateCharacter} onClick={handleCopyCHaracter}>
                 <Copy size={32} weight="fill"/>
             </button>
             <NavLink to="/Char" onClick={() => {

@@ -1,5 +1,5 @@
 import { CheckedState } from '@radix-ui/react-checkbox';
-import { Plus, X, ArrowFatLineDown, ArrowFatLineUp, Copy } from 'phosphor-react';
+import { Plus, X, ArrowFatLineUp, Copy } from 'phosphor-react';
 import { ChangeEvent, useContext } from 'react'
 import { RitualCheckBox } from '../RitualCheckBox';
 import styles from './ritualCard.module.css'
@@ -23,7 +23,7 @@ interface RitualCardProps {
 
 export function RitualCard({ritual}: RitualCardProps) {
 
-    const {characterToDisplayId, changeRituals} = useContext(CharactersContext)
+    const {characterToDisplayId, changeRituals, exportImportRituals, copyRitual} = useContext(CharactersContext)
 
     function handleChangeCardType(event: ChangeEvent<HTMLSelectElement>) {
         const newCardType = event.target.value as "none" | "death" | "knowledge" | "blood" | "energy" | "fear";
@@ -137,18 +137,27 @@ export function RitualCard({ritual}: RitualCardProps) {
             changeRituals(characterToDisplayId, ritual.id, "", "", "", "resistance", "", newResistances)
         }
     }
+    function handleExportRitual(){
+        if(characterToDisplayId != null){
+            exportImportRituals(characterToDisplayId, ritual.id, "exportRitual")
+        }
+    }
+
+    function handleCopyRitual(){
+        copyRitual(ritual.id)
+    }
     
     return(
         <div
             style={{
                 backgroundImage: `url(${Cards[ritual.type]})`,
-                boxShadow: `4px 4px 6px 
+                boxShadow: `0px 0px 12px 
                 ${ritual.type == "none" ? "black" : ""}
                 ${ritual.type == "blood" ? "var(--blood-light)" : ""}
-                ${ritual.type == "death" ? "var(--death-light)" : ""}
+                ${ritual.type == "death" ? "var(--death)" : ""}
                 ${ritual.type == "energy" ? "var(--energy-light)" : ""}
                 ${ritual.type == "knowledge" ? "var(--knowledge-light)" : ""}
-                ${ritual.type == "fear" ? "var(--fear-light)" : ""}
+                ${ritual.type == "fear" ? "var(--fear)" : ""}
             `}}
             className={styles.ritualCard}
         >
@@ -261,8 +270,8 @@ export function RitualCard({ritual}: RitualCardProps) {
                     <RitualRolls multipleRolls={ritual.multipleRolls} ritualId={ritual.id}/>
                 </div>
                 <button className={`${styles.buttonsRitualCard} ${styles.deleteRitualCard}`} onClick={handleDeleteRitual}><X size={24} weight="fill"/></button> 
-                <button className={`${styles.buttonsRitualCard} ${styles.exportRitualCard}`}><ArrowFatLineUp size={24} weight="fill"/></button>
-                <button className={`${styles.buttonsRitualCard} ${styles.duplicateRitualCard}`}><Copy size={24} weight="fill"/></button>
+                <button className={`${styles.buttonsRitualCard} ${styles.exportRitualCard}`} onClick={handleExportRitual}><ArrowFatLineUp size={24} weight="fill"/></button>
+                <button className={`${styles.buttonsRitualCard} ${styles.duplicateRitualCard}`} onClick={handleCopyRitual}><Copy size={24} weight="fill"/></button>
             </div>
         </div>
     )

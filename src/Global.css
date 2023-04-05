@@ -1,6 +1,7 @@
 :root {
     --white: #FFF;
     --black: #000;
+    --gray-10: #1b1b1b;
     --gray-100: #222222;
     --gray-100-33: #222222a7;
     --gray-200: #2c2c2c;
@@ -8,6 +9,7 @@
     --gray-400: #424242;
     --gray-700: #8e8e8e;
     --polaroid: #ddd5c9;
+    --polaroid-darker: #cfc8bd;
     --black-10-percent: #0000007a;
     --black-70-percent: #000000f2;
     --blue: #255bff;
@@ -20,19 +22,28 @@
     --blood: #200001;
     --knowledge: #bf9100;
     --energy: #9a00fd;
-    --death: #000;
+    --death: #393939;
     --fear: #adadadbe;
 
-    --blood-light: #5e2729;
-    --knowledge-light: #685823;
-    --energy-light: #4b2463;
-    --death-light: #0f0f0f;
-    --fear-light: #ffffff26;
+    --blood-light: #9e5154;
+    --knowledge-light: #9a8a54;
+    --energy-light: #7f4b9f;
+    --death-light: #a5a5a5;
+    --fear-light: #d7d7d7cb;
 
-    --bludgeoning: #FFF;
-    --slash: #FFF;
-    --piercing: #FFF;
-    --ballistic: #FFF;
+    --fire-light: #b4763c;
+    --cold-light: #8ab5c6;
+    --chemical-light: #91c172;
+    --mental-light: #7d85ca;
+
+    --bludgeoning-light: #FFF;
+    --slash-light: #FFF;
+    --piercing-light: #FFF;
+    --ballistic-light: #FFF;
+
+    --undefined-light: #FFF;
+    --undefined: #FFF;
+    --none-light: #FFF;
 }
 
 * {

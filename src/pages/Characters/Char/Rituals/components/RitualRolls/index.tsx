@@ -1,4 +1,4 @@
-import { Plus, X } from "phosphor-react"
+import { Plus } from "phosphor-react"
 import styles from "./ritualRolls.module.css"
 import { RollRitual } from "../RollRitual"
 import { MultipleRolls } from "../../../../../../reducers/CharactersReducer/charactersSheet"

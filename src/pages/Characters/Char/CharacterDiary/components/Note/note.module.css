@@ -48,8 +48,9 @@
     width: 24rem;
     background: transparent;
     border: 0;
-    padding: 0 0.5rem;
+    padding: 0 1.5rem 0 0.5rem;
     font-size: 1.25rem;
+    font-weight: bold;
 } .noteText > .noteTextHeader > img{
     width: 24rem;
     height: 0.25rem;
@@ -71,4 +72,9 @@
     align-items: center;
     background: transparent;
     border: 0;
+    cursor: pointer;
+} .noteText > button > svg {
+    transition: 0.2s;
+} .noteText > button:hover > svg {
+    fill: var(--red);
 }

@@ -2,7 +2,7 @@
     position: relative;
     width: 84rem;
     display: grid;
-    grid-template-columns: 26rem 6rem 6rem 42rem;
+    grid-template-columns: 26rem 6rem 6rem 42.75rem;
     column-gap: 0.5rem;
     align-items: end;
     padding: 0 0.5rem;
@@ -32,6 +32,7 @@
 }
 
 .skillsTableColum  > button {
+    margin-top: 0.2rem;
     position: absolute;
     right: 0;
     top: 0;

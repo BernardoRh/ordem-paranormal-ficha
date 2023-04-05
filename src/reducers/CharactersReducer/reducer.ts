@@ -1,7 +1,9 @@
 import produce from "immer"
-import { Rolls } from "../../components/Rolldice"
+import { Rolls } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice"
 import { ActionsType } from "./actions"
 import { Attack, CharactersSheet, Item, MultipleRolls, Objectives, Pages, Personality, Ritual, RitualSubDescription, Skill } from "./charactersSheet"
+import { rollsForLastRollsResults } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/LastRolls"
+import { resultType } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice/components/RollRow"
 
 interface CharactersState {
     characters: CharactersSheet[]
@@ -545,10 +547,11 @@ export function charactersReducer(state: CharactersState, action: any) {
                                                                     diceType: "4",
                                                                     isDamage: false,
                                                                     bonus: "",
-                                                                    quantity: ""
+                                                                    quantity: "",
+                                                                    damageType: ritual.type == "none" ? undefined : ritual.type,
                                                                 }
                                                             ],
-                                                            name: ""
+                                                            name: ritual.name
                                                         }
                                                         return ritual.multipleRolls.push(newRoll)
                                                     }
@@ -569,7 +572,8 @@ export function charactersReducer(state: CharactersState, action: any) {
                                                                     id: String(new Date) + String(Math.random()),
                                                                     diceType: "4",
                                                                     quantity: "",
-                                                                    isDamage: false
+                                                                    isDamage: false,
+                                                                    damageType: ritual.type == "none" ? "slash" : ritual.type,
                                                                 }
                                                                 multipleRoll.rolls.push(newRoll)
                                                             }
@@ -825,6 +829,112 @@ export function charactersReducer(state: CharactersState, action: any) {
                                 }
                             }
                         }
+                    }
+                })
+            })
+        }
+
+        case ActionsType.CHANGE_ROLL: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id){
+                        return character.roll = action.payload.dicesToRoll
+                    }
+                })
+            })
+        }
+        
+        case ActionsType.ADD_LAST_ROLLS: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id){
+                        const alreadyExists = character.lastRolls.find((lastRoll) => {
+                            if(lastRoll?.wrapperId == action.payload.wrapperId){
+                                return true
+                            } else {
+                                return false
+                            }
+                        })
+                        if(alreadyExists){
+                            character.lastRolls.map((rolls) => {
+                                return rolls.rollsForLastRolls = []
+                            })
+                        } else {
+                            return character.lastRolls.push({
+                                wrapperId: action.payload.wrapperId,
+                                rollsForLastRolls: [],
+                                name: action.payload.name,
+                            })
+                        }
+                    }
+                })
+            })
+        }
+
+        case ActionsType.ADD_RESULTS_TO_LAST_ROLLS: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id){
+                        character.lastRolls.map((lastRoll) => {
+                            if(lastRoll.wrapperId == action.payload.wrapperId){
+                                const alreadyExists = lastRoll.rollsForLastRolls.find((results) => {
+                                    if(results.id == action.payload.value.id){
+                                        return results
+                                    } else {
+                                        return undefined
+                                    }
+                                })
+                                if(alreadyExists != undefined){
+                                    
+                                } else {
+                                    return lastRoll.rollsForLastRolls.push(action.payload.value)
+                                }
+                            }
+                        })
+                    }
+                })
+            })
+        }
+
+        case ActionsType.CHANGE_RESULTS_TO_LAST_ROLLS: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id){
+                        character.lastRolls.map((lastRoll) => {
+                            if(lastRoll.wrapperId == action.payload.wrapperId){
+                                lastRoll.rollsForLastRolls.map((results) => {
+                                    if(results.id == action.payload.rollId){
+                                        switch(action.payload.type){
+                                            case "results": {
+                                                return results.results = action.payload.value
+                                            }
+                                            case "vantageDisadvantage": {
+                                                return results.vantage = action.payload.value
+                                            }
+                                            case "vantageDisadvantageDices": {
+                                                return results.vantageDisadvantage = action.payload.value
+                                            }
+                                            case "isCritical": {
+                                                return results.isCritical = action.payload.value
+                                            }
+                                            case "bestResult": {
+                                                return results.bestResult = action.payload.value
+                                            }
+                                        }
+                                    }
+                                })
+                            }
+                        })
+                    }
+                })
+            })
+        }
+
+        case ActionsType.CLEAN_ROLLS_HISTORIC: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.id == action.payload.id){
+                        return character.lastRolls = []
                     }
                 })
             })

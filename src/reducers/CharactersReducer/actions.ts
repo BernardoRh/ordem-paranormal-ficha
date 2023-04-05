@@ -1,5 +1,8 @@
-import { Rolls } from './../../components/Rolldice/index';
-import { Attack, CharactersSheet, Skill, Ritual, Personality, Objectives } from './charactersSheet';
+import { ReactNode } from 'react';
+import { RollDiceProps, Rolls } from '../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice/index';
+import { Attack, CharactersSheet, Skill, Ritual, Personality, Objectives, lastRollsProps } from './charactersSheet';
+import { rollsForLastRollsResults } from '../../pages/Characters/Char/CharacterInfo/components/Rolls/components/LastRolls';
+import { resultType } from '../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice/components/RollRow';
 
 export enum ActionsType{
     IMPORT_EXPORT_CHARACTER = 'IMPORT_EXPORT_CHARACTER',
@@ -26,7 +29,12 @@ export enum ActionsType{
     CHANGE_RITUALS = 'CHANGE_RITUALS',
     IMPORT_EXPORT_RITUALS = 'IMPORT_EXPORT_RITUALS',
     CHANGE_INVENTORY = 'CHANGE_INVENTORY',
-    CHANGE_DIARY = 'CHANGE_DIARY', /* */
+    CHANGE_DIARY = 'CHANGE_DIARY',
+    CHANGE_ROLL = 'CHANGE_ROLL',
+    ADD_LAST_ROLLS = 'ADD_LAST_ROLLS',
+    CLEAN_ROLLS_HISTORIC = 'CLEAN_ROLLS_HISTORIC',
+    ADD_RESULTS_TO_LAST_ROLLS = 'ADD_RESULTS_TO_LAST_ROLLS',
+    CHANGE_RESULTS_TO_LAST_ROLLS = 'CHANGE_RESULTS_TO_LAST_ROLLS'
 }
 
 export function createNewCharacterAction(newCharacter: CharactersSheet) {
@@ -324,4 +332,75 @@ return {
         value,
     }
 }
+}
+
+export function rollingDicesAction(
+    id: string,
+    dicesToRoll: RollDiceProps,
+) {
+    return {
+        type: ActionsType.CHANGE_ROLL,
+        payload: {
+            id,
+            dicesToRoll
+        }
+    }
+}
+
+export function addLastRollAction(
+    id: string,
+    wrapperId: string,
+    name: string,
+) {
+    return {
+        type: ActionsType.ADD_LAST_ROLLS,
+        payload: {
+            id,
+            wrapperId,
+            name
+        }
+    }
+}
+
+export function addResultsToLastRollsAction(
+    id: string,
+    wrapperId: string,
+    value: rollsForLastRollsResults,
+){
+    return{
+        type: ActionsType.ADD_RESULTS_TO_LAST_ROLLS,
+        payload: {
+            id,
+            wrapperId,
+            value
+        }
+    }
+}
+
+export function changeResultsToLastRollsAction(
+    id: string,
+    wrapperId: string,
+    rollId: string,
+    value: string | boolean | resultType[] | resultType | number,
+    type: "results" | "vantageDisadvantage" | "vantageDisadvantageDices" | "isCritical" | "bestResult"
+) {
+    return{
+        type: ActionsType.CHANGE_RESULTS_TO_LAST_ROLLS,
+        payload: {
+            id,
+            wrapperId,
+            rollId,
+            value,
+            type
+        }
+    }
+}
+
+export function clearHistoryRollsAction(id: string){
+    return {
+        type: ActionsType.CLEAN_ROLLS_HISTORIC,
+        payload: {
+            id
+        }
+    }
 }

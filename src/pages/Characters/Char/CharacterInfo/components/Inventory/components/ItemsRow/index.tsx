@@ -1,4 +1,4 @@
-import { Trash } from "phosphor-react"
+import { X } from "phosphor-react"
 import { ChangeEvent, useContext } from "react"
 import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext"
 import { Item } from "../../../../../../../../reducers/CharactersReducer/charactersSheet"
@@ -46,7 +46,7 @@ export function ItemsRow({item}: ItemsRowProps) {
             <input className={styles.center} type="number" value={item.category} onChange={handleChangeCategory}/>
             <input className={styles.center} type="number" value={item.spaces} onChange={handleChangeSpaces}/>
             <button onClick={handleDeleteItem}>
-                <Trash size={18} weight="fill" className={styles.trash} />
+                <X size={18} weight="fill" className={styles.trash} />
             </button>
         </div>
     )

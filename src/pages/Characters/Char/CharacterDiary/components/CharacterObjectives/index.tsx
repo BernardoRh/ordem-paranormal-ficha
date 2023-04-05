@@ -24,13 +24,13 @@ export function CharacterObjectives({children, objectives, ...props}: CharacterO
             "image/png": ['.png']
         },
         onDrop: acceptFiles => {
-            const newAvatar = new Promise((resolve, reject) => {
+            const newObjective = new Promise((resolve, reject) => {
                 const fileReader = new FileReader();
                 fileReader.onload = () => resolve(fileReader.result);
                 fileReader.readAsDataURL(acceptFiles[0]);
             });
             if(characterToDisplayId != null){
-                newAvatar.then(base64 => changeDiary(characterToDisplayId, "", "", "", "", "addObjectiveNoteImage", "objectives", base64))
+                newObjective.then(base64 => changeDiary(characterToDisplayId, "", "", "", "", "addObjectiveNoteImage", "objectives", base64))
             }
             restKey()
         }

@@ -1,10 +1,10 @@
 import styles from "./attack.module.css"
-import { Trash } from "phosphor-react";
+import { X } from "phosphor-react";
 import RollDice from "../../../../../../../../img/rollDice.png"
 import { Attack } from "../../../../../../../../reducers/CharactersReducer/charactersSheet";
 import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext";
-import { Rolls } from "../../../../../../../../components/Rolldice";
+import { Rolls } from "../../../Rolls/components/Rolldice";
 
 interface AttackRowProps {
     attack?: Attack
@@ -12,7 +12,7 @@ interface AttackRowProps {
 
 export function AttackRow({attack}: AttackRowProps) {
 
-    const {characterToDisplayId, changeCharacterAttacks} = useContext(CharactersContext)
+    const {characterToDisplayId, changeCharacterAttacks, rollingDices} = useContext(CharactersContext)
 
     function handleDeleteAttack(){
         if(characterToDisplayId != null) {
@@ -100,7 +100,33 @@ export function AttackRow({attack}: AttackRowProps) {
 
     return(
         <div className={styles.attacksTableColum}>
-            <button className={styles.buttonRollForAttack}>
+            <button
+                className={styles.buttonRollForAttack}
+                onClick={() => {
+                rollingDices(characterToDisplayId as string, {
+                    name: attack?.name ? attack?.name : "Rolagem De Ataque",
+                    rolls: [
+                        {
+                            diceType: "20",
+                            id: String(new Date()) + String(Math.random()),
+                            isDamage: false,
+                            quantity: attack?.rollTest.quantity ? attack?.rollTest.quantity : "0",
+                            bonus: attack?.rollTest.bonus,
+                        },
+                        {
+                            diceType: attack?.damage.diceType ? attack?.damage.diceType : "4",
+                            id: String(new Date()) + String(Math.random()),
+                            isDamage: true,
+                            quantity: attack?.damage.quantity ? attack?.damage.quantity : "1",
+                            damageType: attack?.damage.damageType ? attack?.damage.damageType : "ballistic",
+                            bonus: attack?.damage.bonus
+                        }
+                    ],
+                    critical: attack?.critical,
+                    showRoll: true,
+                    wrapperId: String(new Date()) + String(Math.random())
+                })
+            }}>
                 <img src={RollDice} alt="Rolling dices" />
             </button>
             <input type="text" value={attack?.name} onChange={handleChangeName}/>
@@ -111,30 +137,34 @@ export function AttackRow({attack}: AttackRowProps) {
                 <input type="number" value={attack?.rollTest.bonus} onChange={handleChangeTestBonus}/>
             </div>
             <div className={styles.rollsForAttack}>
-                <input type="number" value={attack?.damage.quantity} onChange={handleChangeDamageDiceQuantity}/>
-                <select value={attack?.damage.diceType} onChange={handleChangeDamageDiceType}>
-                    <option value="4">d4</option>
-                    <option value="6">d6</option>
-                    <option value="8">d8</option>
-                    <option value="10">d10</option>
-                    <option value="12">d12</option>
-                    <option value="20">d20</option>
-                    <option value="100">d100</option>
+                <input type="number" value={attack?.damage.quantity} onChange={handleChangeDamageDiceQuantity} style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}/>
+                <select value={attack?.damage.diceType} onChange={handleChangeDamageDiceType} style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}>
+                    <option value="4" style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}>d4</option>
+                    <option value="6" style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}>d6</option>
+                    <option value="8" style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}>d8</option>
+                    <option value="10" style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}>d10</option>
+                    <option value="12" style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}>d12</option>
+                    <option value="20" style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}>d20</option>
+                    <option value="100" style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}>d100</option>
                 </select>
-                <span>+</span>
-                <input type="number" value={attack?.damage.bonus} onChange={handleChangeDamageBonus}/>
+                <span style={{ color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}>+</span>
+                <input type="number" value={attack?.damage.bonus} onChange={handleChangeDamageBonus} style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}/>
             </div>
             <div className={styles.rollsForAttack}>
                 <select
                     className={styles.damageType}
                     value={attack?.damage.damageType}
-                    style={{borderBottom: `1px solid var(--${attack?.damage.damageType})`, color: `var(--${attack?.damage.damageType})`}}
+                    style={{borderBottom: `1px solid var(--${attack?.damage.damageType}-light)`, color: `var(--${attack?.damage.damageType}-light)`, filter: `blur(${attack?.damage.damageType == "fear" ? '0.05rem' : ""})`}}
                     onChange={handleChangeDamageType}
                 >
                     <option value="slash">Cortante</option>
                     <option value="piercing">Perfurante</option>
                     <option value="bludgeoning">Contundente</option>
                     <option value="ballistic">Balistico</option>
+                    <option value="fire">Fogo</option>
+                    <option value="cold">Frio</option>
+                    <option value="chemical">Químico</option>
+                    <option value="mental">Mental</option>
                     <option value="knowledge">Conhecimento</option>
                     <option value="energy">Energia</option>
                     <option value="death">Morte</option>
@@ -150,8 +180,8 @@ export function AttackRow({attack}: AttackRowProps) {
                 onChange={handleChangeSpecial}
             >
             </textarea>
-            <button onClick={handleDeleteAttack}>
-                <Trash size={18} weight="fill" className={styles.trash} />
+            <button onClick={handleDeleteAttack} className={styles.trash}>
+                <X size={18} weight="fill" />
             </button>
         </div>
     )

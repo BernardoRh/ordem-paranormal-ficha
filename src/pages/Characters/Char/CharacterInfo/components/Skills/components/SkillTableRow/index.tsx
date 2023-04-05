@@ -1,5 +1,5 @@
-import { Trash } from "phosphor-react";
-import { ChangeEvent, useContext, useState } from "react";
+import { X } from "phosphor-react";
+import { ChangeEvent, useContext } from "react";
 import styles from "./skillTableRow.module.css"
 import { Skill } from "../../../../../../../../reducers/CharactersReducer/charactersSheet";
 import { CharactersContext } from "../../../../../../../../contexts/CharactersContexts/CharactersContext";
@@ -61,7 +61,7 @@ export function SkillTableRow({skill}: SkillTableRow) {
                 }
             />
             <button onClick={handleDeleteSkill}>
-                <Trash size={18} weight="fill" className={styles.trash} />
+                <X size={18} weight="fill" className={styles.trash} />
             </button>
         </div>
     )

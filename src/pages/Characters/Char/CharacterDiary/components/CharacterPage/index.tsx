@@ -25,8 +25,6 @@ export function CharacterPage({children, characterName, characterAge, characterH
 
     const { changeCharacterName, changeCharacterAge, changeAvatar, changeDiary, characterToDisplayId } = useContext(CharactersContext)
 
-
-
     const [name, setName] = useState(characterName ? characterName : "")
     const [age, setAge] = useState(characterAge ? characterAge : "")
     const [history, setHistory] = useState(characterHistory ? characterHistory : "" )
@@ -45,10 +43,9 @@ export function CharacterPage({children, characterName, characterAge, characterH
         setNewPersonality(event.target.value)
     }
 
-
     const {getRootProps, getInputProps} = useDropzone({
         accept: {
-            "image/png": ['.png']
+            "image/png": ['.png', '.jpeg', '.webp']
         },
         onDrop: acceptFiles => {
             if(characterToDisplayId != null){
@@ -134,7 +131,7 @@ export function CharacterPage({children, characterName, characterAge, characterH
                 <div {...getRootProps({className: styles.avatarInput})}>
                     <img src={avatarPlaceHolder} />
                     SOLTE UMA IMAGEM OU CLIQUE
-                    <input key={key} id="avatar" accept=".png" type="file" style={{ display: "none" }} {...getInputProps()}/>
+                    <input key={key} id="avatar" accept=".png, .jpeg, .webp" type="file" style={{ display: "none" }} {...getInputProps()}/>
                 </div>
                 
                 }
