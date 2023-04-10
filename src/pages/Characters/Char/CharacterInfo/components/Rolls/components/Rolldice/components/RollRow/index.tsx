@@ -60,37 +60,40 @@ export function RollRow({roll, IsCritical, rollsWrappId, changeTestResult}: Roll
 
     if(roll.isDamage){
         handleResetDices()
-        for(let i = 0; i < Number(roll.quantity); i++){
+        for(let i = 0; i < Number(roll.quantity) * Number(roll.multiplier); i++){
             const damage = Math.floor(Math.random() * Number(roll.diceType)) + 1
             handleChangeDicesResults(damage, "normal", true)
         }
+
     } else {
         handleResetDices()
-        if(Number(roll.quantity) + Number(dicesQuantity) == 0) {
-            for(let i = 0; i < 2 ; i++){
-                const result = Math.floor(Math.random() * Number(roll.diceType)) + 1
-                handleChangeDicesResults(result, "disadvantage", false)
+        if(roll.quantity != ""){
+            if(Number(roll.quantity) + Number(dicesQuantity) == 0) {
+                for(let i = 0; i < 2 ; i++){
+                    const result = Math.floor(Math.random() * Number(roll.diceType)) + 1
+                    handleChangeDicesResults(result, "disadvantage", false)
+                }
             }
-        }
-        else if(Number(roll.quantity) + Number(dicesQuantity) < 0){
-            for(let i = Number(roll.quantity) + Number(dicesQuantity); i < 2 ; i++){
-                const result = Math.floor(Math.random() * Number(roll.diceType)) + 1
-                handleChangeDicesResults(result, "disadvantage", false)
+            else if(Number(roll.quantity) + Number(dicesQuantity) < 0){
+                for(let i = Number(roll.quantity) + Number(dicesQuantity); i < 2 ; i++){
+                    const result = Math.floor(Math.random() * Number(roll.diceType)) + 1
+                    handleChangeDicesResults(result, "disadvantage", false)
+                }
             }
-        }
-        else if(Number(roll.quantity) + Number(dicesQuantity) > 0 && Number(dicesQuantity) <= 0){
-            for(let i = 0; i < Number(roll.quantity) + Number(dicesQuantity) ; i++){
-                const result = Math.floor(Math.random() * Number(roll.diceType)) + 1
-                handleChangeDicesResults(result, "normal", true)
-            }
-        }
-        else if(Number(roll.quantity) + Number(dicesQuantity) > 0 && Number(dicesQuantity) > 0){
-            for(let i = 0; i < Number(roll.quantity) + Number(dicesQuantity) ; i++){
-                const result = Math.floor(Math.random() * Number(roll.diceType)) + 1
-                if(Number(roll.quantity) > i){
+            else if(Number(roll.quantity) + Number(dicesQuantity) > 0 && Number(dicesQuantity) <= 0){
+                for(let i = 0; i < Number(roll.quantity) + Number(dicesQuantity) ; i++){
+                    const result = Math.floor(Math.random() * Number(roll.diceType)) + 1
                     handleChangeDicesResults(result, "normal", true)
-                } else {
-                    handleChangeDicesResults(result, "vantage", true)
+                }
+            }
+            else if(Number(roll.quantity) + Number(dicesQuantity) > 0 && Number(dicesQuantity) > 0){
+                for(let i = 0; i < Number(roll.quantity) + Number(dicesQuantity) ; i++){
+                    const result = Math.floor(Math.random() * Number(roll.diceType)) + 1
+                    if(Number(roll.quantity) > i){
+                        handleChangeDicesResults(result, "normal", true)
+                    } else {
+                        handleChangeDicesResults(result, "vantage", true)
+                    }
                 }
             }
         }
@@ -106,8 +109,10 @@ export function RollRow({roll, IsCritical, rollsWrappId, changeTestResult}: Roll
         results.bestResult = theBestResult[0]
     }
 
+    console.log(roll.critical)
+
     if(roll.isDamage == false) {
-        if(roll.bestResult.result >= Number(roll.critical)){
+        if(roll?.bestResult?.result >= Number(roll.critical)){
             changeTestResult(true)
         } else {
             changeTestResult(false)

@@ -12,6 +12,8 @@ export interface Rolls {
     bonus?: string,
     critical?: string,
     isDamage: boolean,
+    dicesOrTotal?: "dice" | "total",
+    multiplier?: "2" | "3" | "4",
     damageType?: "knowledge" | "energy" | "death" | "blood" | "fear" | "bludgeoning" | "slash" | "piercing" | "ballistic" | "fire" |
     "cold" | "chemical" | "mental"
 }
@@ -23,6 +25,8 @@ export interface RollDiceProps {
     name?: string;
     rollsToUse?: rollsForLastRollsResults[];
     critical?: string,
+    dicesOrTotal?: "dice" | "total",
+    multiplier?: "2" | "3" | "4",
 }
 
 export function RollDice({ wrapperId, showRoll, name, rollsToUse }: RollDiceProps) {
@@ -36,7 +40,7 @@ export function RollDice({ wrapperId, showRoll, name, rollsToUse }: RollDiceProp
             name: "",
             rolls: [],
             showRoll: false,
-            wrapperId: String(new Date()) + String(Math.random())
+            wrapperId: String(new Date()) + String(Math.random()),
         })
     }
 

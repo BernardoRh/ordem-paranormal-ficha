@@ -34,7 +34,9 @@ export enum ActionsType{
     ADD_LAST_ROLLS = 'ADD_LAST_ROLLS',
     CLEAN_ROLLS_HISTORIC = 'CLEAN_ROLLS_HISTORIC',
     ADD_RESULTS_TO_LAST_ROLLS = 'ADD_RESULTS_TO_LAST_ROLLS',
-    CHANGE_RESULTS_TO_LAST_ROLLS = 'CHANGE_RESULTS_TO_LAST_ROLLS'
+    CHANGE_RESULTS_TO_LAST_ROLLS = 'CHANGE_RESULTS_TO_LAST_ROLLS',
+    UPDATE_CHARACTER_TO_VERSION_CHANGER = 'UPDATE_CHARACTER_TO_VERSION_CHANGER',
+    UPDATE_VERSION = 'UPDATE_VERSION'
 }
 
 export function createNewCharacterAction(newCharacter: CharactersSheet) {
@@ -240,7 +242,8 @@ export function changeCharacterAttacksAction(
         id: string,
         attackId: string,
         type: "delete" | "changeName" | "changeTestDiceQuantity" | "changeTestBonus" | "changeDamageDiceQuantity" | 
-        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack" | "changeDamageType",
+        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack" |
+        "changeDamageType" | "changeMultiplier" | "changeDicesOrTotal",
         value: string | Rolls | Attack
     ) {
         return {
@@ -293,8 +296,9 @@ export function changeRitualsAction(
     "execution" | "range" | "resistance" | "target" | "studiedShow" | "studiedCost" | "studiedEffect" | "trulyShow" |
     "trulyCost" | "trulyEffect" | "description" | "addSubDescription" | "deleteSubDescription" | "subDescriptionName" |
     "DescriptionDescriptionSub" | "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" |
-    "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage" | "multipleRollsName",
-    block: "subDescription" | "multipleRolls" | "rolls" | "",
+    "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage" | "multipleRollsName" |
+    "changeMultiplier" | "changeDicesOrTotal" | "changeCritical",
+    block: "subDescription" | "multipleRolls" | "rolls" |  "",
     value: string | boolean | Ritual
 ) {
     return {
@@ -401,6 +405,24 @@ export function clearHistoryRollsAction(id: string){
         type: ActionsType.CLEAN_ROLLS_HISTORIC,
         payload: {
             id
+        }
+    }
+}
+
+export function updateCharacterToVersion(version: "1.1"){
+    return {
+        type: ActionsType.UPDATE_CHARACTER_TO_VERSION_CHANGER,
+        payload: {
+            version
+        }
+    }
+}
+
+export function updateVersion(version: "1.1"){
+    return {
+        type: ActionsType.UPDATE_VERSION,
+        payload: {
+            version
         }
     }
 }

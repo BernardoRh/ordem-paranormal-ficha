@@ -31,6 +31,8 @@ export function RollsComponents() {
                     bonus: roll.bonus,
                     damageType: roll.damageType,
                     critical: characterToDisplay?.roll.critical ? characterToDisplay?.roll.critical : roll.critical ? roll.critical : roll.diceType,
+                    dicesOrTotal: characterToDisplay?.roll.dicesOrTotal,
+                    multiplier: characterToDisplay?.roll.multiplier,
                     bestResult: {
                         result: 0,
                         type: "normal"

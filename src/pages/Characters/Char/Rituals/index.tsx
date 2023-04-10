@@ -127,6 +127,12 @@ export function Rituals() {
         <div className={styles.ritualsContainer}>
             <div className={styles.ritualsTable}>
                 <div className={styles.ritualHeader}>
+                    <div className={styles.ritualsDT}>
+                        <p>DT :</p>
+                        <span>
+                            {Number(characterToDisplay?.attributes.presence) + 10 + (characterToDisplay?.pePerRound ? Number(characterToDisplay?.pePerRound) : Number(characterToDisplay?.nex) < 95 ? Math.floor(Number(characterToDisplay?.nex) / 5) : Math.round(Number(characterToDisplay?.nex) / 5 ))}
+                        </span>
+                    </div>
                     <div>
                         <button onClick={handleChangeSortPerLevel}>
                             CÍRCULO

@@ -1,6 +1,7 @@
 .roll {
     display: flex;
     flex-direction: row;
+    height: 1.75rem;
 }
 
 .roll > * {
@@ -49,6 +50,42 @@
     transition: 0.2s;
 } .roll > button:hover > svg {
     fill: var(--red);
+}
+
+.roll > .critical {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 8rem;
+    position: relative;
+} .critical > select {
+    min-width: 1.5rem;
+    appearance: none;
+    border: 0;
+    border-bottom: 1px solid var(--white);
+    text-align: center;
+} .critical > select > option {
+    appearance: none;
+    font-size: 0.75rem;
+    background: var(--gray-100);
+    border: 0;
+    text-align: center;
+} .critical > .dicesOrTotal {
+    width: 2.5rem;
+} .critical > input {
+    max-width: 1.5rem;
+    appearance: none;
+    border: 0;
+    border-bottom: 1px solid var(--white);
+    text-align: center;
+} .critical > p {
+    position: absolute;
+    margin-bottom: -2.45rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.25rem;
+    justify-content: center;
+    align-items: center;
 }
 
 

@@ -45,7 +45,7 @@ export function CharacterPage({children, characterName, characterAge, characterH
 
     const {getRootProps, getInputProps} = useDropzone({
         accept: {
-            "image/png": ['.png', '.jpeg', '.webp']
+            "image/png": ['.png', '.jpeg', '.webp', '.jpg']
         },
         onDrop: acceptFiles => {
             if(characterToDisplayId != null){
@@ -131,7 +131,7 @@ export function CharacterPage({children, characterName, characterAge, characterH
                 <div {...getRootProps({className: styles.avatarInput})}>
                     <img src={avatarPlaceHolder} />
                     SOLTE UMA IMAGEM OU CLIQUE
-                    <input key={key} id="avatar" accept=".png, .jpeg, .webp" type="file" style={{ display: "none" }} {...getInputProps()}/>
+                    <input key={key} id="avatar" accept=".png, .jpeg, .webp, .jpg" type="file" style={{ display: "none" }} {...getInputProps()}/>
                 </div>
                 
                 }

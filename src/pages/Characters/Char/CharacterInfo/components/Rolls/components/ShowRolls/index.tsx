@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react"
+import { ChangeEvent, ReactNode } from "react"
 import { rollsForLastRollsResults } from "../LastRolls"
 import { Info } from "phosphor-react"
 
@@ -67,10 +67,24 @@ export function ShowRolls({roll, dicesQuantity, onHistory, diceQuantityChange}: 
 
     function SumResults() {
         let sum: number = 0 + Number(roll.bonus ? roll.bonus : 0);
-        roll.results.map((result) => {
-            sum = sum + result.result
-        })
-        roll.isCritical ? sum = sum * 2 : ""
+        if(roll.isCritical){
+            if(roll.dicesOrTotal == 'dice'){
+                for(let i = 0; i < Number(roll.quantity) * Number(roll.multiplier); i++){
+                    sum = sum + roll.results[i].result
+                }
+            }
+            else {
+                for(let i = 0; i < Number(roll.quantity); i++){
+                    sum = sum + roll.results[i].result
+                }
+                sum = sum * Number(roll.multiplier)
+            }
+        } else {
+            for(let i = 0; i < Number(roll.quantity); i++){
+                sum = sum + roll.results[i].result
+            }
+        }
+        
         return (
             <>
                 <h4
@@ -85,6 +99,68 @@ export function ShowRolls({roll, dicesQuantity, onHistory, diceQuantityChange}: 
                     filter: `blur(${roll?.damageType == "fear" ? '0.05rem' : ""})`}}>CRÍTICO</p> : ""}
             </>
         )
+    }
+
+    const showResults = (): ReactNode[] => {
+        const results: ReactNode[] = []
+        if(roll.isDamage){
+            if(roll.isCritical) {
+                if(roll.dicesOrTotal == "dice"){
+                    for(let i = 0; i < Number(roll.quantity) * Number(roll.multiplier); i++){
+                        results.push(
+                            <span className={styles.dice} key={String(new Date()) + String(Math.random())}>
+                                {roll.isDamage ?
+                                    <h4 style={{ color: `var(--${roll?.damageType}-light)`, filter: `blur(${roll?.damageType == "fear" ? '0.05rem' : ""})`}}>{roll.results[i].result}</h4>
+                                :
+                                    <h4>{roll.results[i].result}</h4>
+                                }                                
+                                <img src={ roll.results[i].type == "normal" ? dicesType[roll.diceType] : roll.results[i].type == "vantage" ? dicesTypeVantage[roll.diceType] : dicesTypeDisadvantaged[roll.diceType]}/> 
+                            </span>
+                        )
+                    }
+                } else {
+                    for(let i = 0; i < Number(roll.quantity); i++){
+                        results.push(
+                            <span className={styles.dice} key={String(new Date()) + String(Math.random())}>
+                                {roll.isDamage ?
+                                    <h4 style={{ color: `var(--${roll?.damageType}-light)`, filter: `blur(${roll?.damageType == "fear" ? '0.05rem' : ""})`}}>{roll.results[i].result}</h4>
+                                :
+                                    <h4>{roll.results[i].result}</h4>
+                                }                                
+                                <img src={ roll.results[i].type == "normal" ? dicesType[roll.diceType] : roll.results[i].type == "vantage" ? dicesTypeVantage[roll.diceType] : dicesTypeDisadvantaged[roll.diceType]}/> 
+                            </span>
+                        )
+                    }
+                }
+            } else {
+                for(let i = 0; i < Number(roll.quantity); i++){
+                    results.push(
+                        <span className={styles.dice} key={String(new Date()) + String(Math.random())}>
+                            {roll.isDamage ?
+                                <h4 style={{ color: `var(--${roll?.damageType}-light)`, filter: `blur(${roll?.damageType == "fear" ? '0.05rem' : ""})`}}>{roll.results[i].result}</h4>
+                            :
+                                <h4>{roll.results[i].result}</h4>
+                            }                                
+                            <img src={ roll.results[i].type == "normal" ? dicesType[roll.diceType] : roll.results[i].type == "vantage" ? dicesTypeVantage[roll.diceType] : dicesTypeDisadvantaged[roll.diceType]}/> 
+                        </span>
+                    )
+                }
+            }
+        } else {
+            for(let i = 0; i < roll.results.length; i++){
+                results.push(
+                    <span className={styles.dice} key={String(new Date()) + String(Math.random())}>
+                        {roll.isDamage ?
+                            <h4 style={{ color: `var(--${roll?.damageType}-light)`, filter: `blur(${roll?.damageType == "fear" ? '0.05rem' : ""})`}}>{roll.results[i].result}</h4>
+                        :
+                            <h4>{roll.results[i].result}</h4>
+                        }                                
+                        <img src={ roll.results[i].type == "normal" ? dicesType[roll.diceType] : roll.results[i].type == "vantage" ? dicesTypeVantage[roll.diceType] : dicesTypeDisadvantaged[roll.diceType]}/> 
+                    </span>
+                )
+            }
+        }
+        return results
     }
 
     if(roll.results.length == 0){
@@ -116,23 +192,14 @@ export function ShowRolls({roll, dicesQuantity, onHistory, diceQuantityChange}: 
                 }
                 <div className={styles.rollsRow}>
                     {
-                        roll.results.map((dice) => {
-                            return(
-                                <span className={styles.dice} key={String(new Date()) + String(Math.random())}>
-                                    {roll.isDamage ?
-                                        <h4 style={{ color: `var(--${roll?.damageType}-light)`, filter: `blur(${roll?.damageType == "fear" ? '0.05rem' : ""})`}}>{dice.result}</h4>
-                                    :
-                                        <h4>{dice.result}</h4>
-                                    }                                
-                                    <img src={ dice.type == "normal" ? dicesType[roll.diceType] : dice.type == "vantage" ? dicesTypeVantage[roll.diceType] : dicesTypeDisadvantaged[roll.diceType]}/> 
-                                </span>
-                            )
+                        showResults().map((dice) => {
+                            return(dice)
                         })
                     }
                     <div className={styles.dicesEnd}>
-                        {roll.bonus ? 
+                        {roll.bonus && Number(roll.bonus) != 0 ? 
                             <span className={styles.dice} style={ roll.isDamage ? { color: `var(--${roll?.damageType}-light)`, filter: `blur(${roll?.damageType == "fear" ? '0.05rem' : ""})`}: {}}>
-                                <h4 style={ roll.isDamage ? { color: `var(--${roll?.damageType}-light)`, filter: `blur(${roll?.damageType == "fear" ? '0.05rem' : ""})`}: {}}>+ {roll.bonus}</h4>
+                                <h4 style={ roll.isDamage ? { color: `var(--${roll?.damageType}-light)`, filter: `blur(${roll?.damageType == "fear" ? '0.05rem' : ""})`}: {}}>{Number(roll.bonus) > 0 ? "+" : ""} {Number(roll.bonus)}</h4>
                             </span>
                         : <></>}
                         <span className={styles.dice}>

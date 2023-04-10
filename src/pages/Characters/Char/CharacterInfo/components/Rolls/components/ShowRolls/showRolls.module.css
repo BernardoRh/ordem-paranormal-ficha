@@ -11,6 +11,9 @@
 .onHistory h4 {
     font-size: 100% !important;
     text-shadow: -1px -1px 1px var(--gray-400), 1px -1px 1px var(--gray-400), -1px 1px 1px var(--gray-400), 1px 1px 1px var(--gray-400) !important;
+} .onHistory .headerRoll h4 {
+    margin-top: 0.5rem;
+    margin-left: 0.5rem;
 } .onHistory .dice {
     width: 2rem;
     height: 2rem;
@@ -40,13 +43,14 @@
     position: relative;
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-    margin-top: 0.5rem;
 }
 
 .headerRoll > h4 {
     font-size: 1.5rem;
+    margin-left: 2rem;
+    margin-bottom: 0.25rem;
     font-family: 'Special Elite', cursive;
     text-shadow: -2px -2px 2px var(--gray-400), 2px -2px 2px var(--gray-400), -2px 2px 2px var(--gray-400), 2px 2px 2px var(--gray-400);
 }
@@ -64,7 +68,7 @@
     font-size: 1.25rem;
     font-family: 'Special Elite', cursive;
     font-weight: 400;
-    width: 8rem;
+    width: min-content;
     text-align: center;
 }
 

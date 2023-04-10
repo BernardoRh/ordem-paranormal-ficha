@@ -2,15 +2,42 @@ import produce from "immer"
 import { Rolls } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice"
 import { ActionsType } from "./actions"
 import { Attack, CharactersSheet, Item, MultipleRolls, Objectives, Pages, Personality, Ritual, RitualSubDescription, Skill } from "./charactersSheet"
-import { rollsForLastRollsResults } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/LastRolls"
-import { resultType } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice/components/RollRow"
 
 interface CharactersState {
     characters: CharactersSheet[]
     characterToDisplayId: string | null
+    version: "1.1"
 }
 
 export function charactersReducer(state: CharactersState, action: any) {
+
+    function updatesToVersion1_1(character: CharactersSheet){
+        let modifiedCharacter: CharactersSheet = produce(character, (draft) => {
+            draft.attacks.map((attack) => {
+                const modifiedAttack: Attack = {
+                    ...attack,
+                    dicesOrTotal: 'total',
+                    multiplier: "2",
+                }
+                return modifiedAttack
+            })
+        })
+        modifiedCharacter = produce(modifiedCharacter, (draft) => {
+            draft.rituals.map((ritual) => {
+                ritual.multipleRolls.map((multipleRoll) => {
+                    const modifiedMultipleRoll: MultipleRolls = {
+                        ...multipleRoll,
+                        dicesOrTotal: "total",
+                        multiplier: "2",
+                        critical: ""
+                    } 
+                    return modifiedMultipleRoll
+                })
+            })
+        })
+        return modifiedCharacter
+    }
+
     switch(action.type) {
         case ActionsType.DISPLAY_CHARACTER: {
             return produce(state, (draft) => {
@@ -351,6 +378,12 @@ export function charactersReducer(state: CharactersState, action: any) {
                                             case "changeDamageType": {
                                                 return attack.damage.damageType = action.payload.value
                                             }
+                                            case "changeMultiplier": {
+                                                return attack.multiplier = action.payload.value
+                                            }
+                                            case "changeDicesOrTotal": {
+                                                return attack.dicesOrTotal = action.payload.value
+                                            }
                                         }
                                     }
                                 })
@@ -545,13 +578,16 @@ export function charactersReducer(state: CharactersState, action: any) {
                                                                 {
                                                                     id: String(new Date) + String(Math.random()),
                                                                     diceType: "4",
-                                                                    isDamage: false,
+                                                                    isDamage: true,
                                                                     bonus: "",
                                                                     quantity: "",
                                                                     damageType: ritual.type == "none" ? undefined : ritual.type,
                                                                 }
                                                             ],
-                                                            name: ritual.name
+                                                            name: ritual.name,
+                                                            dicesOrTotal: "total",
+                                                            multiplier: "2",
+                                                            critical: "",
                                                         }
                                                         return ritual.multipleRolls.push(newRoll)
                                                     }
@@ -567,12 +603,22 @@ export function charactersReducer(state: CharactersState, action: any) {
                                                             case "multipleRollsName": {
                                                                 return multipleRoll.name = action.payload.value
                                                             }
+                                                            case "changeMultiplier": {
+                                                                return multipleRoll.multiplier = action.payload.value
+                                                            }
+                                                            case "changeDicesOrTotal": {
+                                                                return multipleRoll.dicesOrTotal = action.payload.value
+                                                            }
+                                                            case "changeCritical": {
+                                                                return multipleRoll.critical = action.payload.value
+                                                            }
                                                             case "addRoll": {
                                                                 const newRoll: Rolls = {
                                                                     id: String(new Date) + String(Math.random()),
                                                                     diceType: "4",
                                                                     quantity: "",
-                                                                    isDamage: false,
+                                                                    bonus: "",
+                                                                    isDamage: true,
                                                                     damageType: ritual.type == "none" ? "slash" : ritual.type,
                                                                 }
                                                                 multipleRoll.rolls.push(newRoll)
@@ -938,6 +984,26 @@ export function charactersReducer(state: CharactersState, action: any) {
                     }
                 })
             })
+        }
+
+        case ActionsType.UPDATE_CHARACTER_TO_VERSION_CHANGER: {
+            return produce(state, (draft) => {
+                draft.characters.map((character) => {
+                    if(character.version != action.payload.version){
+                        switch(character.version){
+                            case undefined: {
+                                return updatesToVersion1_1(character)
+                            }
+                        }
+                    }
+                })
+            }) 
+        }
+
+        case ActionsType.UPDATE_VERSION: {
+            return produce(state, (draft) => {
+                draft.version = action.payload.version
+            }) 
         }
 
         default:

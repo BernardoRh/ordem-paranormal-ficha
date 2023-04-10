@@ -11,7 +11,7 @@
     position: relative;
     width: 84rem;
     display: grid;
-    grid-template-columns: 2rem 16rem 9rem 9rem 7rem 5rem 7rem 22.5rem;
+    grid-template-columns: 2rem 16rem 8rem 9rem 7rem 8rem 6rem 22.5rem;
     column-gap: 0.5rem;
     justify-items: center;
     align-items: center;

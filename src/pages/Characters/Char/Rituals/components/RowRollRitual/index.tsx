@@ -8,9 +8,13 @@ interface RowRollRitualProps {
     roll: Rolls
     ritualId: string
     multipleRollsId: string
+    critical?: string
+    multiplier?: string
+    dicesOrTotal?: string
+    alreadyHasTest: boolean
 }
 
-export function RowRollRitual({roll, ritualId, multipleRollsId}: RowRollRitualProps) {
+export function RowRollRitual({roll, ritualId, multipleRollsId, critical, multiplier, dicesOrTotal, alreadyHasTest}: RowRollRitualProps) {
 
     const {characterToDisplayId, changeRituals} = useContext(CharactersContext)
 
@@ -56,9 +60,28 @@ export function RowRollRitual({roll, ritualId, multipleRollsId}: RowRollRitualPr
         }
     }
 
+    function handleChangeCritical(event: ChangeEvent<HTMLInputElement>) {
+        const newCritical = event.target.value
+        if(characterToDisplayId != null) {
+            changeRituals(characterToDisplayId, ritualId, "", multipleRollsId, roll.id, "changeCritical", "rolls", newCritical)
+        }
+    }
+    function handleChangeMultiplier(event: ChangeEvent<HTMLSelectElement>) {
+        const newMultiplier = event.target.value
+        if(characterToDisplayId != null) {
+            changeRituals(characterToDisplayId, ritualId, "", multipleRollsId, roll.id, "changeMultiplier", "rolls", newMultiplier)
+        }
+    }
+    function handleChangeDicesOrTotal(event: ChangeEvent<HTMLSelectElement>) {
+        const newDicesOrTotal = event.target.value
+        if(characterToDisplayId != null) {
+            changeRituals(characterToDisplayId, ritualId, "", multipleRollsId, roll.id, "changeDicesOrTotal", "rolls", newDicesOrTotal)
+        }
+    }
+
     return (
         <div className={styles.roll}>
-            <select onChange={handleChangeRollType} className={styles.testOrdDamage} value={roll.isDamage ?  "damage" : "test"} style={roll.isDamage ? {borderBottom: `1px solid var(--${roll.damageType}-light)`, color: `var(--${roll.damageType}-light)`, filter: `blur(${roll.damageType == "fear" ? '0.05rem' : ""})`} : {}}>
+            <select disabled={roll.isDamage == false ? false : alreadyHasTest} onChange={handleChangeRollType} className={styles.testOrdDamage} value={roll.isDamage ?  "damage" : "test"} style={roll.isDamage ? {borderBottom: `1px solid var(--${roll.damageType}-light)`, color: `var(--${roll.damageType}-light)`, filter: `blur(${roll.damageType == "fear" ? '0.05rem' : ""})`} : {}}>
                 <option value="test" style={roll.isDamage ? {borderBottom: `1px solid var(--${roll.damageType}-light)`, color: `var(--${roll.damageType}-light)`, filter: `blur(${roll.damageType == "fear" ? '0.05rem' : ""})`} : {}}>Teste</option>
                 <option value="damage" style={roll.isDamage ? {borderBottom: `1px solid var(--${roll.damageType}-light)`, color: `var(--${roll.damageType}-light)`, filter: `blur(${roll.damageType == "fear" ? '0.05rem' : ""})`} : {}}>Dano</option>
             </select>
@@ -105,7 +128,19 @@ export function RowRollRitual({roll, ritualId, multipleRollsId}: RowRollRitualPr
                     <option value="death">Morte</option>
                     <option value="blood">Sangue</option>
                     <option value="fear">Medo</option>
-                </select> : ""
+                </select> : <div className={styles.critical}>
+                    <input type="number" value={critical} onChange={handleChangeCritical}/>
+                    <select value={multiplier} onChange={handleChangeMultiplier}>
+                        <option value="2">x2</option>
+                        <option value="3">x3</option>
+                        <option value="4">x4</option>
+                    </select>
+                    <select value={dicesOrTotal} className={styles.dicesOrTotal} onChange={handleChangeDicesOrTotal}>
+                        <option value="total">Total</option>
+                        <option value="dice">Dados</option>
+                    </select>
+                    <p>CRITÍCO</p>
+                </div>
             }
             <button onClick={handleDeleteRoll}><X size={16} weight="fill"/></button>
         </div>

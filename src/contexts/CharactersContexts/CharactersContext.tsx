@@ -9,16 +9,13 @@ import {
     changeCharacterSanityAction, changeCharacterDefensesAction, changeCharacterProtectionAndResistancesAction,
     changeCharacterExpertiseAction, changeCharacterAttacksAction, changeCharacterSkillsAction,
     changeInventoryAction, changeRitualsAction, changeDiaryAction, rollingDicesAction, clearHistoryRollsAction,
-    addLastRollAction, addResultsToLastRollsAction, changeResultsToLastRollsAction,
+    addLastRollAction, addResultsToLastRollsAction, changeResultsToLastRollsAction, updateCharacterToVersion, updateVersion,
 } from "../../reducers/CharactersReducer/actions";
 import { Attack, CharactersSheet, Ritual, Skill } from "../../reducers/CharactersReducer/charactersSheet";
 import { charactersReducer } from "../../reducers/CharactersReducer/reducer";
 import { rollsForLastRollsResults } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/LastRolls";
 import { resultType } from "../../pages/Characters/Char/CharacterInfo/components/Rolls/components/Rolldice/components/RollRow";
-interface AlertProps {
-    alert: "NONE" | "BAD" | "GOOD",
-    value: string
-}
+
 interface CharactersContextType {
     characters: CharactersSheet[],
     characterToDisplayId: string | null,
@@ -55,7 +52,8 @@ interface CharactersContextType {
         id: string,
         attackId: string,
         type: "delete" | "changeName" | "changeTestDiceQuantity" | "changeTestBonus" | "changeDamageDiceQuantity" | 
-        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack" | "changeDamageType",
+        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack" |
+        "changeDamageType" | "changeMultiplier" | "changeDicesOrTotal",
         value: string | Rolls | Attack
     ) => void
     changeCharacterSkills: (
@@ -86,7 +84,8 @@ interface CharactersContextType {
         "execution" | "range" | "resistance" | "target" | "studiedShow" | "studiedCost" | "studiedEffect" | "trulyShow" |
         "trulyCost" | "trulyEffect" | "description" | "addSubDescription" | "deleteSubDescription" | "subDescriptionName" |
         "DescriptionDescriptionSub" | "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" |
-        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage" | "multipleRollsName",
+        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage" | "multipleRollsName" |
+        "changeMultiplier" | "changeDicesOrTotal" | "changeCritical",
         block: "subDescription" | "multipleRolls" | "rolls" | "",
         value: string | boolean | Ritual
     ) => void
@@ -143,7 +142,8 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         charactersReducer,
         {
             characters: [],
-            characterToDisplay: null
+            characterToDisplay: null,
+            version: "1.1"
         },
         () => {
             const StoarageJSON = localStorage.getItem(
@@ -156,15 +156,15 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
 
             return {
                 characters: [],
-                characterToDisplay: null
+                characterToDisplay: null,
+                version: "1.1"
             }
         },
     )
 
-
-
     function createNewCharacter(character?: CharactersSheet) {
         const newCharacter: CharactersSheet = {
+            version: "1.1",
             id: String(new Date()) + String(Math.random()),
             expertise: [
                 {
@@ -599,7 +599,8 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         id: string,
         attackId: string,
         type: "delete" | "changeName" | "changeTestDiceQuantity" | "changeTestBonus" | "changeDamageDiceQuantity" | 
-        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack" | "changeDamageType",
+        "changeDamageDiceType" | "changeDamageBonus" | "changeCritical" | "changeRange" | "changeSpecial" | "addAttack" |
+        "changeDamageType" | "changeMultiplier" | "changeDicesOrTotal",
         value: string | Rolls | Attack
     ) {
         dispatch(changeCharacterAttacksAction(id, attackId, type, value))
@@ -702,7 +703,8 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         "execution" | "range" | "resistance" | "target" | "studiedShow" | "studiedCost" | "studiedEffect" | "trulyShow" |
         "trulyCost" | "trulyEffect" | "description" | "addSubDescription" | "deleteSubDescription" | "subDescriptionName" |
         "DescriptionDescriptionSub" | "addMultipleRolls" | "deleteMultipleRolls" | "addRoll" | "deleteRoll" |
-        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage" | "multipleRollsName",
+        "rollBonus" | "rollCritical" | "rollDamageType" | "rollDiceType" | "rollDiceQuantity" | "rollIsDamage" | "multipleRollsName" |
+        "changeMultiplier" | "changeDicesOrTotal" | "changeCritical",
         block: "subDescription" | "multipleRolls" | "rolls" | "",
         value: string | boolean | Ritual
     ){
@@ -851,12 +853,20 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
         }
     }
 
-    const {characters, characterToDisplayId} = charactersState
+    const {characters, characterToDisplayId, version} = charactersState
 
     useEffect(() => {
         const StateJSON = JSON.stringify(charactersState)
         localStorage.setItem('@ficha-ordem:characters-state-1.0.0', StateJSON)
     }, [charactersState])
+
+    switch(version){
+        case undefined: {
+            dispatch(updateCharacterToVersion("1.1"))
+            dispatch(updateVersion("1.1"))
+        }
+    }
+    
 
     return(
         <CharactersContext.Provider

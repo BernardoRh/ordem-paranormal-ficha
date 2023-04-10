@@ -25,6 +25,8 @@ export interface Attack {
     name: string,
     rollTest: Rolls,
     damage: Rolls,
+    dicesOrTotal: "dice" | "total",
+    multiplier: "2" | "3" | "4",
     critical: string,
     range: string,
     especial: string,
@@ -47,6 +49,9 @@ export interface RitualSubDescription {
 export interface MultipleRolls {
     id: string
     name: string
+    critical?: string,
+    dicesOrTotal: "dice" | "total",
+    multiplier: "2" | "3" | "4",
     rolls: Rolls[]
 }
 export interface Ritual {
@@ -121,6 +126,7 @@ export interface lastRollsProps {
     name: string;
 }
 export interface CharactersSheet {
+    version: "1.1",
     id: string,
     avatar?: string,
     name: string,

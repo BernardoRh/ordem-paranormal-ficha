@@ -11,9 +11,12 @@ interface RollRitualProps {
     name: string
     ritualId: string
     multipleRollsId: string
+    critical?: string
+    multiplier?: "2" | "3" | "4"
+    dicesOrTotal?: "total" | "dice"
 }
 
-export function RollRitual({rolls, name, ritualId, multipleRollsId}: RollRitualProps) {
+export function RollRitual({rolls, name, ritualId, multipleRollsId, critical, multiplier, dicesOrTotal}: RollRitualProps) {
 
     const {characterToDisplayId, changeRituals, rollingDices} = useContext(CharactersContext)
 
@@ -36,6 +39,15 @@ export function RollRitual({rolls, name, ritualId, multipleRollsId}: RollRitualP
         }
     }
 
+    const alreadyHasTest = rolls.find((roll) => {
+        if(roll.isDamage == false){
+            return roll
+        }
+    })
+
+    const rollsToShow = rolls.slice()
+    rollsToShow.sort((a, b) => (a.isDamage ? -1 : 1) < (b.isDamage ? -1 : 1) ? 1 : -1 )
+
     return(
         <div className={styles.rollsContainer}>
             <div className={styles.rollsHeader}>
@@ -44,15 +56,28 @@ export function RollRitual({rolls, name, ritualId, multipleRollsId}: RollRitualP
                     name: name ? name : "Rolagem De Ritual",
                     rolls: rolls,
                     showRoll: true,
-                    wrapperId: String(new Date()) + String(Math.random())
+                    wrapperId: String(new Date()) + String(Math.random()),
+                    critical: critical,
+                    dicesOrTotal: dicesOrTotal,
+                    multiplier: multiplier
                 })
             }}><img src={rollDiceIcon}/>:</button>
                 <input type="text" value={name} onChange={handleChangeNameMultipleRolls}/>
                 <button onClick={handleDeleteMultipleRolls} className={styles.deleteRoll}><X size={24} weight="fill"/></button>
             </div>
             <div className={styles.rolls}>
-                {rolls.map((roll) => {
-                    return(<RowRollRitual key={roll.id} roll={roll} multipleRollsId={multipleRollsId} ritualId={ritualId}/>)
+                {rollsToShow.map((roll) => {
+                    return(
+                        <RowRollRitual
+                            alreadyHasTest={alreadyHasTest ? true : false}
+                            key={roll.id}
+                            roll={roll}
+                            multipleRollsId={multipleRollsId}
+                            ritualId={ritualId}
+                            critical={critical}
+                            dicesOrTotal={dicesOrTotal}
+                            multiplier={multiplier}
+                        />)
                 })}
                 <button onClick={handleAddRolls}><Plus size={16} weight="fill"/></button>
             </div>

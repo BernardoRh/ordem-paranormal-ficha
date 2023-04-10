@@ -60,6 +60,7 @@
     filter: none;
 } .ritualHeader > div > p {
     cursor: default;
+    width: 6rem;
 }  .ritualHeader > div > button {
     width: 7.25rem;
     justify-content: left;
@@ -76,6 +77,24 @@
 
 .ritualHeader > select:hover, .ritualHeader > div > *:hover {
     filter: drop-shadow(2px 2px 4px black);
+}
+
+.ritualsDT {
+    height: 1rem;
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem !important;
+    width: 6rem;
+    cursor: default;
+} 
+
+.ritualsDT > span {
+    padding: 0 0.5rem;
+    cursor: default;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid var(--white);
+} .ritualsDT > span:hover {
+    filter: drop-shadow(0 0 0 transparent) !important;
 }
 
 .ritualsManipulationContainer {

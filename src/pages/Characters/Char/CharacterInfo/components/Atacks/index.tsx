@@ -35,6 +35,8 @@ export function Attacks({attacks}: AttacksProps) {
             critical: "",
             range: "",
             especial: "",
+            dicesOrTotal: "total",
+            multiplier: "2"
         }
         if(characterToDisplayId != null) {
             changeCharacterAttacks(characterToDisplayId, "", "addAttack", newAttack)

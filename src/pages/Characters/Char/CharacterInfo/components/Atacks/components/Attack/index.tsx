@@ -90,6 +90,20 @@ export function AttackRow({attack}: AttackRowProps) {
         }
     }
 
+    function handleChangeMultiplier(event: ChangeEvent<HTMLSelectElement>){
+        const newMultiplier = event.target.value
+        if(characterToDisplayId != null) {
+            changeCharacterAttacks(characterToDisplayId, attack?.id as string, "changeMultiplier", newMultiplier)
+        }
+    }
+
+    function handleChangeDicesOrTotal(event: ChangeEvent<HTMLSelectElement>){
+        const newDicesOrTotal = event.target.value
+        if(characterToDisplayId != null) {
+            changeCharacterAttacks(characterToDisplayId, attack?.id as string, "changeDicesOrTotal", newDicesOrTotal)
+        }
+    }
+
     const [specialRows, setSpecialRows] = useState(1)
 
 
@@ -97,6 +111,8 @@ export function AttackRow({attack}: AttackRowProps) {
         const newRows = attack?.especial.length ? (attack?.especial.length/36 + 1) : 1
         setSpecialRows(newRows > 4 ? 4 : newRows)
     })
+
+    console.log(attack?.dicesOrTotal)
 
     return(
         <div className={styles.attacksTableColum}>
@@ -110,21 +126,23 @@ export function AttackRow({attack}: AttackRowProps) {
                             diceType: "20",
                             id: String(new Date()) + String(Math.random()),
                             isDamage: false,
-                            quantity: attack?.rollTest.quantity ? attack?.rollTest.quantity : "0",
+                            quantity: attack?.rollTest.quantity ? attack?.rollTest.quantity : "",
                             bonus: attack?.rollTest.bonus,
                         },
                         {
                             diceType: attack?.damage.diceType ? attack?.damage.diceType : "4",
                             id: String(new Date()) + String(Math.random()),
                             isDamage: true,
-                            quantity: attack?.damage.quantity ? attack?.damage.quantity : "1",
+                            quantity: attack?.damage.quantity ? attack?.damage.quantity : "",
                             damageType: attack?.damage.damageType ? attack?.damage.damageType : "ballistic",
-                            bonus: attack?.damage.bonus
+                            bonus: attack?.damage.bonus,
                         }
                     ],
                     critical: attack?.critical,
                     showRoll: true,
-                    wrapperId: String(new Date()) + String(Math.random())
+                    wrapperId: String(new Date()) + String(Math.random()),
+                    dicesOrTotal: attack?.dicesOrTotal,
+                    multiplier: attack?.multiplier
                 })
             }}>
                 <img src={RollDice} alt="Rolling dices" />
@@ -172,7 +190,18 @@ export function AttackRow({attack}: AttackRowProps) {
                     <option value="fear">Medo</option>
                 </select>
             </div>
-            <input className={styles.center} type="number" value={attack?.critical} onChange={handleChangeCritical}/>
+            <div className={styles.critical}>
+                <input className={styles.center} type="number" value={attack?.critical} onChange={handleChangeCritical}/>
+                <select value={attack?.multiplier} onChange={handleChangeMultiplier}>
+                    <option value="2">x2</option>
+                    <option value="3">x3</option>
+                    <option value="4">x4</option>
+                </select>
+                <select value={attack?.dicesOrTotal} onChange={handleChangeDicesOrTotal}>
+                    <option value="dice">Dados</option>
+                    <option value="total">Total</option>
+                </select>
+            </div>
             <input className={styles.center} type="text" value={attack?.range} onChange={handleChangeRange}/>
             <textarea
                 rows={specialRows}

@@ -24,7 +24,16 @@ export function RitualRolls({multipleRolls, ritualId}: RitualRollsProps) {
     return(
         <div className={styles.multipleRolls}>
             {multipleRolls.map((multipleRoll) => {
-                return(<RollRitual key={multipleRoll.id} multipleRollsId={multipleRoll.id} rolls={multipleRoll.rolls} name={multipleRoll.name} ritualId={ritualId}/>)
+                return(<RollRitual
+                        key={multipleRoll.id}
+                        multipleRollsId={multipleRoll.id}
+                        rolls={multipleRoll.rolls}
+                        name={multipleRoll.name}
+                        ritualId={ritualId}
+                        critical={multipleRoll.critical}
+                        dicesOrTotal={multipleRoll.dicesOrTotal}
+                        multiplier={multipleRoll.multiplier}
+                    />)
             })}
             <button onClick={handleAddMultipleRolls}><Plus size={24} weight="fill"/></button>
         </div>

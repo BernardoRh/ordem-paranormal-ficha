@@ -22,6 +22,8 @@ export interface rollsForLastRollsResults {
     isDamage: boolean,
     bonus?: string,
     critical?: string,
+    dicesOrTotal?: "dice" | "total",
+    multiplier?: "2" | "3" | "4",
     damageType?: "knowledge" | "energy" | "death" | "blood" | "fear" | "bludgeoning" | "slash" | "piercing" | "ballistic" | "fire" |
     "cold" | "chemical" | "mental",
 }
