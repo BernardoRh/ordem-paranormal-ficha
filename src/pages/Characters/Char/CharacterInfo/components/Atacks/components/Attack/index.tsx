@@ -112,8 +112,6 @@ export function AttackRow({attack}: AttackRowProps) {
         setSpecialRows(newRows > 4 ? 4 : newRows)
     })
 
-    console.log(attack?.dicesOrTotal)
-
     return(
         <div className={styles.attacksTableColum}>
             <button

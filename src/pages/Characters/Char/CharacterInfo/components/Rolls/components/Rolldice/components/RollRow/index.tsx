@@ -109,8 +109,6 @@ export function RollRow({roll, IsCritical, rollsWrappId, changeTestResult}: Roll
         results.bestResult = theBestResult[0]
     }
 
-    console.log(roll.critical)
-
     if(roll.isDamage == false) {
         if(roll?.bestResult?.result >= Number(roll.critical)){
             changeTestResult(true)
