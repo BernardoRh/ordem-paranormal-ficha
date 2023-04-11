@@ -18,6 +18,7 @@ interface CharacterObjectivesProps extends HtmlHTMLAttributes<HTMLDivElement> {
 export function CharacterObjectives({children, objectives, ...props}: CharacterObjectivesProps) {
 
     const { characterToDisplayId, changeDiary } = useContext(CharactersContext)
+    console.log(objectives)
 
     const {getRootProps, getInputProps} = useDropzone({
         accept: {

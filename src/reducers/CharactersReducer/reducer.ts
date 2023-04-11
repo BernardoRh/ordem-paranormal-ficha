@@ -793,11 +793,9 @@ export function charactersReducer(state: CharactersState, action: any) {
                                             if(objective.id != action.payload.objectiveId){
                                                 switch(action.payload.type){
                                                     case "changeObjectiveTitle": {
-                                                        console.log("title")
                                                         return objective.title = action.payload.value
                                                     }
                                                     case "changeObjectiveInfo": {
-                                                        console.log("info")
                                                         return objective.info = action.payload.value
                                                     }
                                                 }
