@@ -790,7 +790,7 @@ export function charactersReducer(state: CharactersState, action: any) {
                                     }
                                     default: {
                                         character.diary.objectives.map((objective) => {
-                                            if(objective.id != action.payload.objectiveId){
+                                            if(objective.id == action.payload.objectiveId){
                                                 switch(action.payload.type){
                                                     case "changeObjectiveTitle": {
                                                         return objective.title = action.payload.value
