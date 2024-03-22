@@ -640,6 +640,7 @@ export function CharactersContextProvider({children}: CharactersContextProps) {
                     if(importedCharacters.target != null){
                         const toImportCharacters: CharactersSheet[] = JSON.parse(importedCharacters.target.result as string)
                         toImportCharacters.map((character: CharactersSheet) => {
+                            console.log(character)
                             if(
                                 'id' in character &&
                                 'expertise' in character &&
